@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "duckyzone"
+    }
+  },
+  "defaultProject": "duckyzone",
+  "cli": {
+    "analytics": false
+  }
 }
