@@ -16,9 +16,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.httpService.getQuery('dept').subscribe( (Departamentos) => {
-      console.log(Departamentos);
       this.depts = Departamentos;
     } );
   }
-
 }
