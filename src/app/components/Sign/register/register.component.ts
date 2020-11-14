@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
       password: this.user.password,
     });
   }
-
+  //crear usuario
   createUser() {
     const newUser = {
       username: this.form.get('username').value,
