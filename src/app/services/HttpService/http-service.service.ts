@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class HttpService {
   rsl: any;
+  res: any;
 
   constructor(private Client: HttpClient) {
 
@@ -29,5 +30,10 @@ export class HttpService {
   }
   postQuery(user,url: String){
     return this.request('POST','http://localhost:3000/'+url,user);
+  }
+
+  getUserAuth(user,url: String){
+    this.res=this.request('GET','http://localhost:3000/'+url+'/'+user.email+'&'+user.password,user);
+    return this.res;
   }
 }

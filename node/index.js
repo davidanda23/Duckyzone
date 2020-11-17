@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const { promise } = require('protractor');
 const bcrypt = require('bcrypt');
 const { createToken } = require('typescript');
+const { NULL } = require('node-sass');
 
 app.use(cors({ origin: '*' }));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -45,9 +46,7 @@ app.post('/register', (req, res) => {
         [req.body.username, req.body.email, req.body.password], (error) => {
             if (error) {
                 throw error;
-            } else {
-                console.log('se pidio');
-            }
+            } 
         });
 });
 
@@ -62,29 +61,31 @@ const getByEmail = (pEmail) => {
 };
 
 //API LOGIN
-app.post('/login', function(request, response) {
-    console.log('dentro de login');
-    var email = request.body.email;
-    var password = request.body.password;
+app.get('/login/:email&:password', function(req, res) {
+    var email = req.params.email;
+    var password = req.params.password;
+    console.log(email + "__" + password);
     if (email && password) {
-        console.log('vamos a verificar');
         // check if user exists
-        connection.query('SELECT * FROM usuario WHERE correo = ? AND contraseña = ?', [email, password], function(error, results, fields) {
+        connect.query('SELECT * FROM usuario WHERE correo = ? AND contrseña = ?', [email, password], function(error, results, fields) {
             if (results.length > 0) {
-                request.session.loggedin = true;
+               console.log("Hay usuarios");
+               res.status(200).json(results);
+                /*request.session.loggedin = true;
                 request.session.username = username;
                 console.log('adentro');
-                response.redirect('/home');
+                response.redirect('/home');*/
             } else {
-                response.send('Incorrect Username and/or Password!');
-                console.log('correo o contraseña erronea');
+                console.log("No hay usuarios");
+                /*console.log("no se pudo");
+                response.send('Incorrect Username and/or Password!');*/
             }           
-            response.end();
+            res.end();
         });
     } else {
-        response.send('Please enter Username and Password!');
-        console.log('llenar todos los campos!!');
-        response.end();
+        res.send('Please enter Username and Password!');
+        //console.log('llenar todos los campos!!');
+        res.end();
     }
 });
 /*app.get("/login",function(req, res){

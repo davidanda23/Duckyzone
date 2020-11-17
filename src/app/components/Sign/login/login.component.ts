@@ -9,21 +9,27 @@ import { HttpService } from 'src/app/services/HttpService/http-service.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  email:string;
-  password:string;
   form = new FormGroup({});
+  user: any = {id: null, username: '', email: '', password: ''};
 
   constructor(private fb: FormBuilder,private httpService : HttpService,private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      email: this.user.email,
+      password: this.user.password,
+    });
+  }
 
   loginUsuario(){
-    console.log('entramos a loginUsuario');
-    this.httpService.getQuery('login').subscribe( (email,password) => {
-      email= this.form.get('correo').value;
-      password= this.form.get('contraseña').value;
-    } );
-    this.router.navigate(['/home']);
+    
+    const User = {
+      email: this.form.get('email').value,
+      password: this.form.get('password').value,
+    };
+    User.email=this.httpService.getUserAuth(User,'login');
+    console.log(User.email);
+    //this.router.navigate(['/home']);
   }
 
 }
