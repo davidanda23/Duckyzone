@@ -71,22 +71,19 @@ app.get('/login/:email&:password', function (req, res) {
             if (results.length > 0) {
                 console.log("Hay usuarios");
                 //res.status(200).json(results);
-                res.send({
-                    "code": 200,
-                    "success": "login exitoso"
-                });
+                res.send(results);
                 /*request.session.loggedin = true;
                 request.session.username = username;
                 console.log('adentro');
                 response.redirect('/home');*/
                 //return;
             } else {
-                console.log("No hay usuarios");
+                /*console.log("No hay usuarios");
                 res.send({
                     "code": 300,
                     "success": "no existen usuarios"
                 });
-                /*console.log("no se pudo");
+                console.log("no se pudo");
                 response.send('Incorrect Username and/or Password!');*/
             }
             res.end();

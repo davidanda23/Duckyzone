@@ -9,6 +9,7 @@ import { HttpService } from 'src/app/services/HttpService/http-service.service';
 })
 export class NavbarComponent implements OnInit {
   public depts = [];
+  public user = false;
 
   constructor(router: Router, private httpService : HttpService) {
       

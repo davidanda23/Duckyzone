@@ -31,12 +31,17 @@
         </form>
 
   
-        <ul class="navbar-nav ml-auto">
-            
-          <li class="nav-item my-2 my-sm-0">
-            <a class="nav-link" routerLink="/login"> <h5>Iniciar Sesión</h5> </a>
-          </li>
-  
+        <ul class="navbar-nav ml-auto" *ngIf="user;else login">
+            <li class="nav-item">
+              <a class="nav-link"><h3>Correo persona</h3></a>
+            </li>
         </ul>
+        <ng-template #login>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item my-2 my-sm-0">
+              <a class="nav-link" routerLink="/login"> <h5>Iniciar Sesión</h5> </a>
+            </li>
+          </ul>
+        </ng-template>
       </div>
     </nav>
