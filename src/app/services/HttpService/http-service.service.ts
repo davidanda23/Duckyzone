@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class HttpService {
   rsl: any;
   res: any;
+  correoUsuario:string='';
 
   constructor(private Client: HttpClient) {
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from 'src/app/services/HttpService/http-service.service';
 
@@ -10,8 +10,9 @@ import { HttpService } from 'src/app/services/HttpService/http-service.service';
 export class NavbarComponent implements OnInit {
   public depts = [];
   public user = false;
+  @Input() correo:string;
 
-  constructor(router: Router, private httpService : HttpService) {
+  constructor(router: Router, public httpService : HttpService) {
       
    }
 
@@ -19,5 +20,6 @@ export class NavbarComponent implements OnInit {
     this.httpService.getQuery('dept').subscribe( (Departamentos) => {
       this.depts = Departamentos;
     } );
+    console.log("navbar: "+this.correo);
   }
 }

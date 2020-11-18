@@ -35,6 +35,8 @@ export class LoginComponent implements OnInit {
     
     if(this.res!==null){
       console.log(User.email);
+      this.httpService.correoUsuario=User.email;
+      this.router.navigate(['/home']);
     }else{
       console.log("Ingrese correctamente sus credenciales");
     }

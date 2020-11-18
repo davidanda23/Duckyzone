@@ -29,11 +29,9 @@
             <input class="form-control mr-sm-2" style="width: 350px;" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-2" type="submit">Search</button>
         </form>
-
-  
-        <ul class="navbar-nav ml-auto" *ngIf="user;else login">
+        <ul class="navbar-nav ml-auto" *ngIf="httpService.correoUsuario!='';else login">
             <li class="nav-item">
-              <a class="nav-link"><h3>Correo persona</h3></a>
+              <a class="nav-link"><h3>Bienvenido {{httpService.correoUsuario}}</h3></a>
             </li>
         </ul>
         <ng-template #login>

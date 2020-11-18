@@ -72,6 +72,7 @@ app.get('/login/:email&:password', function (req, res) {
                 console.log("Hay usuarios");
                 //res.status(200).json(results);
                 res.send(results);
+                //response.redirect('/home');
                 /*request.session.loggedin = true;
                 request.session.username = username;
                 console.log('adentro');
@@ -94,46 +95,7 @@ app.get('/login/:email&:password', function (req, res) {
         res.end();
     }
 });
-/*app.get("/login",function(req, res){
-    console.log('entro a login');
-    var email = req.body.email;
-    var password = req.body.password;
-    connect.query('SELECT * FROM usuarios WHERE correo= ?', [email], async function (error, results, fields) {
-        if (error) {
-            res.send({
-                "code": 400,
-                "failed": "error ocurred"
-            })
-            console.log('error 400');
-        } else {
-            if (results.length > 0) {
-                const comparision = await bcrypt.compare(password, results[0].password)
-                if (comparision) {
-                    res.send({
-                        "code": 200,
-                        "success": "login sucessfull"
-                    })
-                    console.log('entro sin pedos');
-                }
-                else {
-                    res.send({
-                        "code": 204,
-                        "success": "Email and password does not match"
-                    })
-                    console.log('no coincide la contraseña o correo');
-                }
-            }
-            else {
-                res.send({
-                    "code": 206,
-                    "success": "Email does not exits"
-                });
-                console.log('correo no existe');
-            }
-        }
-    });
-});
-*/
+
 app.listen(3000, () => {
     console.log('Server puerto 3000');
 })
