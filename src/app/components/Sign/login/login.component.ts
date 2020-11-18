@@ -11,6 +11,7 @@ import { HttpService } from 'src/app/services/HttpService/http-service.service';
 export class LoginComponent implements OnInit {
   form = new FormGroup({});
   user: any = {id: null, username: '', email: '', password: ''};
+  
 
   constructor(private fb: FormBuilder,private httpService : HttpService,private router: Router) { }
 

@@ -46,7 +46,7 @@ app.post('/register', (req, res) => {
         [req.body.username, req.body.email, req.body.password], (error) => {
             if (error) {
                 throw error;
-            } 
+            }
         });
 });
 
@@ -61,25 +61,34 @@ const getByEmail = (pEmail) => {
 };
 
 //API LOGIN
-app.get('/login/:email&:password', function(req, res) {
+app.get('/login/:email&:password', function (req, res) {
     var email = req.params.email;
     var password = req.params.password;
     console.log(email + "__" + password);
     if (email && password) {
         // check if user exists
-        connect.query('SELECT * FROM usuario WHERE correo = ? AND contrseña = ?', [email, password], function(error, results, fields) {
+        connect.query('SELECT * FROM usuario WHERE correo = ? AND contrseña = ?', [email, password], function (error, results, fields) {
             if (results.length > 0) {
-               console.log("Hay usuarios");
-               res.status(200).json(results);
+                console.log("Hay usuarios");
+                //res.status(200).json(results);
+                res.send({
+                    "code": 200,
+                    "success": "login exitoso"
+                });
                 /*request.session.loggedin = true;
                 request.session.username = username;
                 console.log('adentro');
                 response.redirect('/home');*/
+                //return;
             } else {
                 console.log("No hay usuarios");
+                res.send({
+                    "code": 300,
+                    "success": "no existen usuarios"
+                });
                 /*console.log("no se pudo");
                 response.send('Incorrect Username and/or Password!');*/
-            }           
+            }
             res.end();
         });
     } else {

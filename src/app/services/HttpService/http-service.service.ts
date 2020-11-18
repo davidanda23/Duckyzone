@@ -23,7 +23,7 @@ export class HttpService {
       result.subscribe(resolve, reject);
     });
   }
-
+  
   getQuery(url: String) { 
     this.rsl = this.Client.get('http://localhost:3000/' + url);
     return this.rsl;
@@ -34,6 +34,8 @@ export class HttpService {
 
   getUserAuth(user,url: String){
     this.res=this.request('GET','http://localhost:3000/'+url+'/'+user.email+'&'+user.password,user);
+    console.log('servicio respuesta \n');
+    console.log(this.res);
     return this.res;
   }
 }
