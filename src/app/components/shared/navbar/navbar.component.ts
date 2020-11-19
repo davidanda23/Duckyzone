@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
   public user = false;
   @Input() correo:string;
 
-  constructor(router: Router, public httpService : HttpService) {
+  constructor(private router: Router, public httpService : HttpService) {
       
    }
 
@@ -20,6 +20,9 @@ export class NavbarComponent implements OnInit {
     this.httpService.getQuery('dept').subscribe( (Departamentos) => {
       this.depts = Departamentos;
     } );
-    console.log("navbar: "+this.correo);
+  }
+  logout(){
+    this.httpService.correoUsuario='';
+    this.router.navigate(['/']);
   }
 }

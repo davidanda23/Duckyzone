@@ -30,8 +30,15 @@
             <button class="btn btn-outline-success my-2 my-sm-2" type="submit">Search</button>
         </form>
         <ul class="navbar-nav ml-auto" *ngIf="httpService.correoUsuario!='';else login">
-            <li class="nav-item">
-              <a class="nav-link"><h3>Bienvenido {{httpService.correoUsuario}}</h3></a>
+            <li ngbDropdown class="nav-item dropdown">
+              <a ngbDropdownToggle class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <h5>Bienvenido {{httpService.correoUsuario}}</h5>
+              </a>
+              <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" >
+                <a class="dropdown-item" href="#">Panel de control</a>
+                <a class="dropdown-item" href="#">Configuración</a>
+                <a class="dropdown-item" href="#" (click)="logout()">Cerrar sesión</a>
+              </div>
             </li>
         </ul>
         <ng-template #login>

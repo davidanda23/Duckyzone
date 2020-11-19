@@ -32,9 +32,8 @@ export class LoginComponent implements OnInit {
     this.httpService.getUserAuth(User,'login').subscribe((respuesta)=>{
       this.res=respuesta;
     });
-    
+    console.log(this.res.nombreusuario);
     if(this.res!==null){
-      console.log(User.email);
       this.httpService.correoUsuario=User.email;
       this.router.navigate(['/home']);
     }else{
