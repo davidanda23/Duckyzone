@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
     } );
   }
   logout(){
-    this.httpService.correoUsuario='';
+    this.httpService.nombreUsuario='';
     this.router.navigate(['/']);
   }
 }

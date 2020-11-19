@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  async loginUsuario(){
+  loginUsuario(){
     
     const User = {
       email: this.form.get('email').value,
@@ -32,15 +32,12 @@ export class LoginComponent implements OnInit {
     this.httpService.getUserAuth(User,'login').subscribe((respuesta)=>{
       this.res=respuesta;
       console.log(this.res[0].nombreusuario);
+      if(this.res!==null){
+        this.httpService.nombreUsuario=this.res[0].nombreusuario;
+        this.router.navigate(['/home']);
+      }else{
+        console.log("Ingrese correctamente sus credenciales");
+      }
     });
-    if(this.res!==null){
-      this.httpService.correoUsuario=this.res[0].nombreusuario;
-      this.router.navigate(['/home']);
-    }else{
-      console.log("Ingrese correctamente sus credenciales");
-    }
-    
-    //this.router.navigate(['/home']);
   }
-
 }

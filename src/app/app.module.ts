@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginModule } from './components/Sign/login/login.module';
 import { RegisterModule } from './components/Sign/register/register.module';
+import { SearchComponent } from './components/search/search.component';
 
 
 @NgModule({
