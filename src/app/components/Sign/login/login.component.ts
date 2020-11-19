@@ -11,7 +11,7 @@ import { HttpService } from 'src/app/services/HttpService/http-service.service';
 export class LoginComponent implements OnInit {
   form = new FormGroup({});
   user: any = {id: null, username: '', email: '', password: ''};
-  public res: any=null;
+  public res = [];
   
 
   constructor(private fb: FormBuilder,private httpService : HttpService,private router: Router) { }
@@ -31,10 +31,10 @@ export class LoginComponent implements OnInit {
     };
     this.httpService.getUserAuth(User,'login').subscribe((respuesta)=>{
       this.res=respuesta;
+      console.log(this.res[0].nombreusuario);
     });
-    console.log(this.res.nombreusuario);
     if(this.res!==null){
-      this.httpService.correoUsuario=User.email;
+      this.httpService.correoUsuario=this.res[0].nombreusuario;
       this.router.navigate(['/home']);
     }else{
       console.log("Ingrese correctamente sus credenciales");
