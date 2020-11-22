@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+<<<<<<< HEAD
 import { HttpClientModule } from '@angular/common/http';
 import { DeportesComponent } from './departamentos/deportes/deportes.component';
 import { ModaComponent } from './departamentos/moda/moda.component';
@@ -15,8 +16,14 @@ import { HogarComponent } from './departamentos/hogar/hogar.component';
 import { NinosComponent } from './departamentos/ninos/ninos.component';
 import { ComidaComponent } from './departamentos/comida/comida.component';
 import { LibrosComponent } from './departamentos/libros/libros.component'
+=======
+import { HttpClientModule } from '@angular/common/http'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginModule } from './components/Sign/login/login.module';
+import { RegisterModule } from './components/Sign/register/register.module';
+import { SearchComponent } from './components/search/search.component';
+>>>>>>> a60da903721890f71d86b0eca8e9ebe78cf6bfae
 
-//import { HttpService } from './services/HttpService/http-service.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +33,11 @@ import { LibrosComponent } from './departamentos/libros/libros.component'
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    LoginModule,
+    RegisterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

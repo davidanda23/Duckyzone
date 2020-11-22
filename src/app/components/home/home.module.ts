@@ -13,7 +13,6 @@ import {MatTabsModule} from '@angular/material/tabs';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    CommonModule,
     MatCardModule,
     MatGridListModule,
     MatTabsModule

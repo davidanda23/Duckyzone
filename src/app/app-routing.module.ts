@@ -9,7 +9,8 @@ const routes: Routes = [
   },
   { path: 'home', loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule) },
   { path: 'login', loadChildren: () => import('./components/Sign/login/login.module').then(m => m.LoginModule)},
-  { path: 'register', loadChildren: () => import('./components/Sign/register/register.module').then(m => m.RegisterModule) }
+  { path: 'register', loadChildren: () => import('./components/Sign/register/register.module').then(m => m.RegisterModule) },
+  { path: 'search', loadChildren: () => import('./components/search/search.module').then(m => m.SearchModule) }
 ];
 
 @NgModule({

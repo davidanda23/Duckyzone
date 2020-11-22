@@ -14,6 +14,7 @@
             <a ngbDropdownToggle class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Departamentos
             </a>
+<<<<<<< HEAD
             <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="#" routerLink="/Deportes"> {{ this.depts[0].nombre }} </a>
               <a class="dropdown-item" href="#" routerLink="/Moda"> {{ this.depts[1].nombre }} </a>
@@ -24,27 +25,40 @@
               <a class="dropdown-item" href="#" routerLink="/Niños"> {{ this.depts[6].nombre }} </a>
               <a class="dropdown-item" href="#" routerLink="/Comida"> {{ this.depts[7].nombre }} </a>
               <a class="dropdown-item" href="#" routerLink="/Libros"> {{ this.depts[8].nombre }} </a>
+=======
+            <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" >
+              <a class="dropdown-item" href="#" *ngFor="let dept of depts"> {{ this.dept.nombre }} </a>
+>>>>>>> a60da903721890f71d86b0eca8e9ebe78cf6bfae
             </div>
           </li>
-          
           <li class="nav-item">
             <a class="nav-link"  routerLink="/contacto">Contacto</a>
           </li>
 
         </ul>
         
-        <form class="form-inline my-2 my-lg-0" style="width: auto;">
+        <form class="form-inline my-2 my-lg-0" style="width: auto;" >
             <input class="form-control mr-sm-2" style="width: 350px;" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-2" type="submit">Search</button>
+            <button class="btn btn-outline-success my-2 my-sm-2" routerLink="/search" type="submit">Search</button>
         </form>
-
-  
-        <ul class="navbar-nav ml-auto">
-            
-          <li class="nav-item my-2 my-sm-0">
-            <a class="nav-link" routerLink="/login"> <h5>Iniciar Sesión</h5> </a>
-          </li>
-  
+        <ul class="navbar-nav ml-auto" *ngIf="httpService.nombreUsuario!='';else login">
+            <li ngbDropdown class="nav-item dropdown">
+              <a ngbDropdownToggle class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <h5>Bienvenido {{httpService.nombreUsuario}}</h5>
+              </a>
+              <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" >
+                <a class="dropdown-item" href="#">Panel de control</a>
+                <a class="dropdown-item" href="#">Configuración</a>
+                <a class="dropdown-item" href="#" (click)="logout()">Cerrar sesión</a>
+              </div>
+            </li>
         </ul>
+        <ng-template #login>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item my-2 my-sm-0">
+              <a class="nav-link" routerLink="/login"> <h5>Iniciar Sesión</h5> </a>
+            </li>
+          </ul>
+        </ng-template>
       </div>
     </nav>
