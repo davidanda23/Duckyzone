@@ -72,6 +72,25 @@ app.get('/login/:email&:password', function (req, res) {
     }
 });
 
+//API ROl
+app.get('/role/:id', function (req, res) {
+    var id = req.params.id;
+    if (id) {
+        // check if user exists
+        connect.query('SELECT * FROM empleado WHERE id_usuario=?', [id], function (error, results, fields) {
+            if (results.length > 0) {
+                res.send(results);
+            }else{
+                res.end();
+            }
+        });
+    } else {
+        res.send('Please enter Username and Password!');
+        //console.log('llenar todos los campos!!');
+        res.end();
+    }
+});
+
 app.listen(3000, () => {
     console.log('Server puerto 3000');
 })
