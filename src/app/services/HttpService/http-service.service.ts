@@ -35,7 +35,6 @@ export class HttpService {
 
   getUserAuth(user,url: String){
     this.res=this.Client.get('http://localhost:3000/'+url+'/'+user.email+'&'+user.password,user);
-    //console.log(this.res);
     return this.res;
   }
 }

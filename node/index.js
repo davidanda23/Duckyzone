@@ -29,6 +29,7 @@ app.get("/", (req, res) => {
     res.send('Conectado!');
 });
 
+//API PARA RETORNAR DEPAS
 app.get("/dept", (req, res) => {
     connect.query('SELECT id, nombre FROM departamentos', (err, rows) => {
         if (err) {
@@ -50,42 +51,17 @@ app.post('/register', (req, res) => {
         });
 });
 
-//obtener email de usuarios
-const getByEmail = (pEmail) => {
-    return new promise((resolve, reject) => {
-        connect.query('select * from usuario where correo=?', pEmail, (error, rows) => {
-            if (error) reject(error)
-            resolve(rows[0])
-        });
-    });
-};
-
 //API LOGIN
 app.get('/login/:email&:password', function (req, res) {
     var email = req.params.email;
     var password = req.params.password;
-    console.log(email + "__" + password);
     if (email && password) {
         // check if user exists
         connect.query('SELECT * FROM usuario WHERE correo = ? AND contrseña = ?', [email, password], function (error, results, fields) {
             if (results.length > 0) {
-                console.log("Hay usuarios");
-                //res.status(200).json(results);
                 res.send(results);
-                //response.redirect('/home');
-                /*request.session.loggedin = true;
-                request.session.username = username;
-                console.log('adentro');
-                response.redirect('/home');*/
-                //return;
             } else {
-                /*console.log("No hay usuarios");
-                res.send({
-                    "code": 300,
-                    "success": "no existen usuarios"
-                });
-                console.log("no se pudo");
-                response.send('Incorrect Username and/or Password!');*/
+                //CREAR UN ERROR AL TENER CREDENCIALES INCORRECTAS
             }
             res.end();
         });
