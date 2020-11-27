@@ -9,7 +9,8 @@ import { HttpService } from 'src/app/services/HttpService/http-service.service';
 })
 export class NavbarComponent implements OnInit {
   public depts = [];
-  public user = false;
+  public user: String;
+  public role: String;
   @Input() correo:string;
 
   constructor(private router: Router, public httpService : HttpService) {
@@ -17,12 +18,21 @@ export class NavbarComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    //OBTENEMOS DEPARTAMENTOS
     this.httpService.getQuery('dept').subscribe( (Departamentos) => {
       this.depts = Departamentos;
     } );
+    //COMPROBAMOS SI EL USUARIO ES ADMIN
+
+  }
+  checkStorage(){
+    this.user=sessionStorage.getItem('nombreUsuario');
+    this.role=sessionStorage.getItem('Admin');
+    return sessionStorage.getItem('nombreUsuario');
   }
   logout(){
-    this.httpService.nombreUsuario='';
+    sessionStorage.removeItem('nombreUsuario');
+    sessionStorage.removeItem('Admin');
     this.router.navigate(['/']);
   }
 }

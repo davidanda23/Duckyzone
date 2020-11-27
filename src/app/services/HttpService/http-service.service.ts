@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +7,6 @@ import { Observable } from 'rxjs';
 export class HttpService {
   rsl: any;
   res: any;
-  nombreUsuario:string='';
 
   constructor(private Client: HttpClient) {
 
@@ -41,7 +39,9 @@ export class HttpService {
 
   getUserAuth(user,url: String){
     this.res=this.Client.get('http://localhost:3000/'+url+'/'+user.email+'&'+user.password,user);
-    //console.log(this.res);
     return this.res;
+  }
+  getRole(user,url:String){
+    return this.Client.get('http://localhost:3000/'+url+'/'+user,user);
   }
 }

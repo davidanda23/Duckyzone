@@ -37,16 +37,24 @@
             <input class="form-control mr-sm-2" style="width: 350px;" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-2" routerLink="/search" type="submit">Search</button>
         </form>
-        <ul class="navbar-nav ml-auto" *ngIf="httpService.nombreUsuario!='';else login">
+        <ul class="navbar-nav ml-auto" *ngIf="checkStorage()!=null;else login">
             <li ngbDropdown class="nav-item dropdown">
               <a ngbDropdownToggle class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <h5>Bienvenido {{httpService.nombreUsuario}}</h5>
+                <h5>Bienvenido {{user}}</h5>
               </a>
-              <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" >
+              <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" *ngIf="this.role==='Yes';else cliente" >
                 <a class="dropdown-item" href="#">Panel de control</a>
                 <a class="dropdown-item" href="#">Configuración</a>
                 <a class="dropdown-item" href="#" (click)="logout()">Cerrar sesión</a>
               </div>
+
+              <ng-template #cliente>
+                <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">Configuración</a>
+                  <a class="dropdown-item" href="#" (click)="logout()">Cerrar sesión</a>
+                </div>
+              </ng-template>
+              
             </li>
         </ul>
         <ng-template #login>
