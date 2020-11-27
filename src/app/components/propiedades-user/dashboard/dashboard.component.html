@@ -1,0 +1,37 @@
+<div class="dashboard-box">   
+    <div class="sidebar">
+        <header>Panel de control</header>
+        <ul>
+            <li><a (click)="toggleConfig('employees')"><i class="fas fa-user-shield"></i>Empleados</a></li>
+            <li><a (click)="toggleConfig('depts')"><i class="fas fa-building"></i>Departamentos</a></li>
+            <li><a (click)="toggleConfig('providers')"><i class="fas fa-shopping-bag"></i>Proveedores</a></li>
+            <li><a (click)="toggleConfig('products')"><i class="fas fa-cart-arrow-down"></i>Productos</a></li>
+            <li><a (click)="toggleConfig('sales')"><i class="fas fa-piggy-bank"></i>Ventas</a></li>
+            <li><a (click)="toggleConfig('users')"><i class="fas fa-users"></i>Usuarios</a></li>
+        </ul>
+    </div>
+    <div class="dashboard-employees" *ngIf="isEmployees===true">
+        <h2>Empleados</h2>
+        <button>+</button>
+    </div>
+    <div class="dashboard-depts" *ngIf="isDepts===true">
+        <h2>Departamentos</h2>
+        <button>+</button>
+    </div>
+    <div class="dashboard-providers" *ngIf="isProviders===true">
+        <h2>Proveedores</h2>
+        <button>+</button>
+    </div>
+    <div class="dashboard-products" *ngIf="isProducts===true">
+        <h2>Productos</h2>
+        <button>+</button>
+    </div>
+    <div class="dashboard-sales" *ngIf="isSales===true">
+        <h2>Ventas</h2>
+        <button>+</button>
+    </div>
+    <div class="dashboard-users" *ngIf="isUsers===true">
+        <h2>Usuarios</h2>
+        <button>+</button>
+    </div>
+</div> 

@@ -10,6 +10,8 @@ import { NinosComponent } from './components/departamentos/ninos/ninos.component
 import { ComidaComponent } from './components/departamentos/comida/comida.component';
 import { LibrosComponent } from './components/departamentos/libros/libros.component';
 import { VideojuegosComponent } from './components/departamentos/videojuegos/videojuegos.component';
+import { ConfiguracionComponent } from './components/propiedades-user/configuracion/configuracion.component';
+import { DashboardComponent } from './components/propiedades-user/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -30,7 +32,10 @@ const routes: Routes = [
   { path: 'niños', component: NinosComponent },
   { path: 'comida', component: ComidaComponent },
   { path: 'libros', component: LibrosComponent },
-  { path: 'videojuegos', component: VideojuegosComponent }
+  { path: 'videojuegos', component: VideojuegosComponent },
+  { path: 'configuracion', component: ConfiguracionComponent },
+  { path: 'dashboard', component: DashboardComponent }
+  
 
 ];
 

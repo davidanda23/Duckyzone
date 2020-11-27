@@ -20,11 +20,26 @@ import { LoginModule } from './components/Sign/login/login.module';
 import { RegisterModule } from './components/Sign/register/register.module';
 import { SearchComponent } from './components/search/search.component';
 import { VideojuegosComponent } from './components/departamentos/videojuegos/videojuegos.component';
+import { ConfiguracionComponent } from './components/propiedades-user/configuracion/configuracion.component';
+import { DashboardComponent } from './components/propiedades-user/dashboard/dashboard.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,NavbarComponent, DeportesComponent, ModaComponent, ElectronicosComponent, MusicaComponent, BellezaComponent, HogarComponent, NinosComponent, ComidaComponent, LibrosComponent, VideojuegosComponent
+    AppComponent,
+    NavbarComponent,
+    DeportesComponent,
+    ModaComponent,
+    ElectronicosComponent,
+    MusicaComponent,
+    BellezaComponent,
+    HogarComponent,
+    NinosComponent,
+    ComidaComponent,
+    LibrosComponent,
+    VideojuegosComponent,
+    ConfiguracionComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

@@ -34,14 +34,14 @@
                 <h5>Bienvenido {{user}}</h5>
               </a>
               <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" *ngIf="this.role==='Yes';else cliente" >
-                <a class="dropdown-item" href="#">Panel de control</a>
-                <a class="dropdown-item" href="#">Configuración</a>
+                <a class="dropdown-item" href="#" routerLink="/dashboard">Panel de control</a>
+                <a class="dropdown-item" href="#" routerLink="/configuracion">Configuración</a>
                 <a class="dropdown-item" href="#" (click)="logout()">Cerrar sesión</a>
               </div>
 
               <ng-template #cliente>
                 <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Configuración</a>
+                  <a class="dropdown-item" href="#" routerLink="/configuracion">Configuración</a>
                   <a class="dropdown-item" href="#" (click)="logout()">Cerrar sesión</a>
                 </div>
               </ng-template>
