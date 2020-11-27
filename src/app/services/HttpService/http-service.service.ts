@@ -29,6 +29,12 @@ export class HttpService {
     this.rsl = this.Client.get('http://localhost:3000/' + url);
     return this.rsl;
   }
+
+  getProdxDept(url: String) { 
+    this.rsl = this.Client.get('http://localhost:3000/' + url);
+    return this.rsl;
+  }
+
   postQuery(user,url: String){
     return this.request('POST','http://localhost:3000/'+url,user);
   }

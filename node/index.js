@@ -29,8 +29,22 @@ app.get("/", (req, res) => {
     res.send('Conectado!');
 });
 
+//CONSIGUE LOS DEPARTAMENTOS
 app.get("/dept", (req, res) => {
     connect.query('SELECT id, nombre FROM departamentos', (err, rows) => {
+        if (err) {
+            throw err;
+        } else {
+            res.send(rows);
+        }
+    });
+});
+
+//CONSIGUE LOS PRODUCTOS DE UN DEPARTAMENTO DADO
+app.get("/prodxdept/:dept", (req, res) => {
+    console.log("Params: " + req.params.dept);
+    var dept = req.params.dept;
+    connect.query('SELECT codigo, nombre, descr, precio_unidad, existencias, imgen, departamento, proveedor from productos where departamento=?', [dept], (err, rows) => {
         if (err) {
             throw err;
         } else {
