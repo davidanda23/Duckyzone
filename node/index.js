@@ -29,11 +29,7 @@ app.get("/", (req, res) => {
     res.send('Conectado!');
 });
 
-<<<<<<< HEAD
 //CONSIGUE LOS DEPARTAMENTOS
-=======
-//API PARA RETORNAR DEPAS
->>>>>>> ee8a0fc2fdc7100faf28ed47b9a85e8215d42c9d
 app.get("/dept", (req, res) => {
     connect.query('SELECT id, nombre FROM departamentos', (err, rows) => {
         if (err) {
