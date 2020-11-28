@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/HttpService/http-service.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
@@ -20,8 +21,10 @@ export class DashboardComponent implements OnInit {
   public providers: any = [];
   public products: any = [];
   public users: any = [];
+  public entryDelete: any;
+
   
-  constructor(public httpService : HttpService, public modalService: NgbModal) { }
+  constructor(public httpService : HttpService, public modalService: NgbModal, private router: Router) { }
 
   ngOnInit(): void {
     this.isEmployees=true;
@@ -32,24 +35,35 @@ export class DashboardComponent implements OnInit {
     this.isUsers=false;
     this.httpService.getAllEmployees().subscribe( (Empleados) => {
       this.employees = Empleados;
-      console.log(this.employees);
     } );
   }
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  deleteModal(targetModal,record: any){
+    this.entryDelete = record;
+    this.modalService.open(targetModal, {
+      backdrop: 'static',
+      size: 'lg'
     });
   }
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
+  deleteEmployeeDB(){
+    this.httpService.deleteEmployee(this.entryDelete).subscribe(()=>{});
+    this.httpService.deleteUser(this.entryDelete).subscribe(()=>{});
+    window.location.reload();
+  }
+  deleteDeptDB(){
+    this.httpService.deleteDept(this.entryDelete).subscribe(()=>{});
+    window.location.reload();
+  }
+  deleteProviderDB(){
+    this.httpService.deleteProvider(this.entryDelete).subscribe(()=>{});
+    window.location.reload();
+  }
+  deleteProductDB(){
+    this.httpService.deleteProduct(this.entryDelete).subscribe(()=>{});
+    window.location.reload();
+  }
+  deleteUserDB(){
+    this.httpService.deleteUser(this.entryDelete).subscribe(()=>{});
+    window.location.reload();
   }
 
   toggleConfig(property: String){

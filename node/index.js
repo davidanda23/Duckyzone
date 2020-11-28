@@ -36,6 +36,7 @@ app.get("/dept", (req, res) => {
             throw err;
         } else {
             res.send(rows);
+            res.end();
         }
     });
 });
@@ -46,6 +47,7 @@ app.get("/getDeptsAdmin", (req, res) => {
             throw err;
         } else {
             res.send(rows);
+            res.end();
         }
     });
 });
@@ -56,6 +58,7 @@ app.get("/getProviders", (req, res) => {
             throw err;
         } else {
             res.send(rows);
+            res.end();
         }
     });
 });
@@ -66,6 +69,7 @@ app.get("/getProducts", (req, res) => {
             throw err;
         } else {
             res.send(rows);
+            res.end();
         }
     });
 });
@@ -76,6 +80,7 @@ app.get("/getUsers", (req, res) => {
             throw err;
         } else {
             res.send(rows);
+            res.end();
         }
     });
 });
@@ -106,7 +111,6 @@ app.get("/prodxdept/:dept", (req, res) => {
 
 //API REGISTRO DE USUARIO EN LA BASE DE DATOS
 app.post('/register', (req, res) => {
-    console.log('entro a register');
     connect.query('INSERT INTO usuario(nombreusuario, correo, contrseña) VALUES (?,?,?)',
         [req.body.username, req.body.email, req.body.password], (error) => {
             if (error) {
@@ -153,6 +157,56 @@ app.get('/role/:id', function (req, res) {
         //console.log('llenar todos los campos!!');
         res.end();
     }
+});
+//API QUE BORRA EMPLEADOS
+app.get("/deleteEmployee/:id", function (req, res) {
+    connect.query('DELETE FROM empleado WHERE  empleado.id_usuario=?',
+        [Number(req.params.id)], (error) => {
+            if (error) {
+                throw error;
+            }
+        });
+    
+});
+//API QUE BORRA USUARIOS
+app.get("/deleteUser/:id", function (req, res) {
+    connect.query('DELETE FROM usuario WHERE  usuario.id=?',
+        [Number(req.params.id)], (error) => {
+            if (error) {
+                throw error;
+            }
+        });
+    
+});
+//API QUE BORRA DEPAS
+app.get("/deleteDept/:id", function (req, res) {
+    connect.query('DELETE FROM departamentos WHERE departamentos.id=?',
+        [Number(req.params.id)], (error) => {
+            if (error) {
+                throw error;
+            }
+        });
+    
+});
+//API QUE BORRA PROVEEDORES
+app.get("/deleteProvider/:id", function (req, res) {
+    connect.query('DELETE FROM proveedores WHERE  proveedores.ID=?',
+        [Number(req.params.id)], (error) => {
+            if (error) {
+                throw error;
+            }
+        });
+    
+});
+//API QUE BORRA PRODUCTOS
+app.get("/deleteProduct/:id", function (req, res) {
+    connect.query('DELETE FROM productos WHERE  productos.codigo=?',
+        [Number(req.params.id)], (error) => {
+            if (error) {
+                throw error;
+            }
+        });
+    
 });
 
 app.listen(3000, () => {

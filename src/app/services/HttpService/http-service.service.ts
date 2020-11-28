@@ -61,5 +61,19 @@ export class HttpService {
   getUsers(){
     return this.Client.get('http://localhost:3000/getUsers');
   }
-  
+  deleteEmployee(usuario){
+    return this.Client.get('http://localhost:3000/deleteEmployee/'+usuario.id);
+  }
+  deleteUser(usuario){
+    return this.Client.get('http://localhost:3000/deleteUser/'+usuario.id);
+  }
+  deleteDept(dept){
+    return this.Client.get('http://localhost:3000/deleteDept/'+dept.id);
+  }
+  deleteProvider(provider){
+    return this.Client.get('http://localhost:3000/deleteProvider/'+provider.ID);
+  }
+  deleteProduct(product){
+    return this.Client.get('http://localhost:3000/deleteProduct/'+product.codigo);
+  }
 }
