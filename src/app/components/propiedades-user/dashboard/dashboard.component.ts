@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/HttpService/http-service.service';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,6 +8,7 @@ import { HttpService } from 'src/app/services/HttpService/http-service.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  closeResult = '';
   isEmployees: boolean;
   isDepts: boolean;
   isProviders: boolean;
@@ -19,7 +21,7 @@ export class DashboardComponent implements OnInit {
   public products: any = [];
   public users: any = [];
   
-  constructor(public httpService : HttpService) { }
+  constructor(public httpService : HttpService, public modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.isEmployees=true;
@@ -32,6 +34,22 @@ export class DashboardComponent implements OnInit {
       this.employees = Empleados;
       console.log(this.employees);
     } );
+  }
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
   toggleConfig(property: String){
