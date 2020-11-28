@@ -44,4 +44,22 @@ export class HttpService {
   getRole(user,url:String){
     return this.Client.get('http://localhost:3000/'+url+'/'+user,user);
   }
+
+  getAllEmployees(){
+    return this.Client.get('http://localhost:3000/getAllEmployees');
+  }
+  
+  getDeptsAdmin(){
+    return this.Client.get('http://localhost:3000/getDeptsAdmin');
+  }
+  getProviders(){
+    return this.Client.get('http://localhost:3000/getProviders');
+  }
+  getProducts(){
+    return this.Client.get('http://localhost:3000/getProducts');
+  }
+  getUsers(){
+    return this.Client.get('http://localhost:3000/getUsers');
+  }
+  
 }

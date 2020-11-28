@@ -39,6 +39,57 @@ app.get("/dept", (req, res) => {
         }
     });
 });
+//API QUE RETORNA DEPAS EN ADMIN
+app.get("/getDeptsAdmin", (req, res) => {
+    connect.query('SELECT id, nombre FROM departamentos', (err, rows) => {
+        if (err) {
+            throw err;
+        } else {
+            res.send(rows);
+        }
+    });
+});
+//API QUE RETORNA PROVEEDORES
+app.get("/getProviders", (req, res) => {
+    connect.query('SELECT * FROM proveedores', (err, rows) => {
+        if (err) {
+            throw err;
+        } else {
+            res.send(rows);
+        }
+    });
+});
+//API QUE RETORNA PRODUCTOS
+app.get("/getProducts", (req, res) => {
+    connect.query('SELECT * FROM productos', (err, rows) => {
+        if (err) {
+            throw err;
+        } else {
+            res.send(rows);
+        }
+    });
+});
+//API QUE RETORNA USUARIOS
+app.get("/getUsers", (req, res) => {
+    connect.query('SELECT * FROM usuario', (err, rows) => {
+        if (err) {
+            throw err;
+        } else {
+            res.send(rows);
+        }
+    });
+});
+
+//API QUE RETORNA EMPLEADOS
+app.get("/getAllEmployees", (req, res) => {
+    connect.query('SELECT a.id,a.nombreusuario,a.correo,b.puesto,b.salario, c.nombre as departamento FROM usuario a, empleado b, departamento_interno c WHERE b.id_usuario=a.id AND c.id=b.id_departamento ORDER BY a.id', (err, rows) => {
+        if (err) {
+            throw err;
+        } else {
+            res.send(rows);
+        }
+    });
+});
 
 //CONSIGUE LOS PRODUCTOS DE UN DEPARTAMENTO DADO
 app.get("/prodxdept/:dept", (req, res) => {

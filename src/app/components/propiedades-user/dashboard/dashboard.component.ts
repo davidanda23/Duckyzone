@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from 'src/app/services/HttpService/http-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,8 +13,13 @@ export class DashboardComponent implements OnInit {
   isProducts: boolean;
   isSales: boolean;
   isUsers: boolean;
+  public employees: any = [];
+  public depts: any = [];
+  public providers: any = [];
+  public products: any = [];
+  public users: any = [];
   
-  constructor() { }
+  constructor(public httpService : HttpService) { }
 
   ngOnInit(): void {
     this.isEmployees=true;
@@ -22,6 +28,10 @@ export class DashboardComponent implements OnInit {
     this.isProducts=false;
     this.isSales=false;
     this.isUsers=false;
+    this.httpService.getAllEmployees().subscribe( (Empleados) => {
+      this.employees = Empleados;
+      console.log(this.employees);
+    } );
   }
 
   toggleConfig(property: String){
@@ -33,6 +43,9 @@ export class DashboardComponent implements OnInit {
         this.isProducts=false;
         this.isSales=false;
         this.isUsers=false;
+        this.httpService.getAllEmployees().subscribe( (Empleados) => {
+          this.employees = Empleados;
+        } );
         break;
       case "depts":
         this.isEmployees=false;
@@ -41,6 +54,9 @@ export class DashboardComponent implements OnInit {
         this.isProducts=false;
         this.isSales=false;
         this.isUsers=false;
+        this.httpService.getDeptsAdmin().subscribe( (Departamentos) => {
+          this.depts = Departamentos;
+        } );
         break;
       case "providers":
         this.isEmployees=false;
@@ -49,6 +65,9 @@ export class DashboardComponent implements OnInit {
         this.isProducts=false;
         this.isSales=false;
         this.isUsers=false;
+        this.httpService.getProviders().subscribe( (Proveedores) => {
+          this.providers = Proveedores;
+        } );
         break;
       case "products":
         this.isEmployees=false;
@@ -57,6 +76,9 @@ export class DashboardComponent implements OnInit {
         this.isProducts=true;
         this.isSales=false;
         this.isUsers=false;
+        this.httpService.getProducts().subscribe( (Productos) => {
+          this.products = Productos;
+        } );
         break;
       case "sales":
         this.isEmployees=false;
@@ -73,7 +95,11 @@ export class DashboardComponent implements OnInit {
         this.isProducts=false;
         this.isSales=false;
         this.isUsers=true;
+        this.httpService.getUsers().subscribe( (Usuarios) => {
+          this.users = Usuarios;
+        } );
         break;
     }
   }
+  
 }
