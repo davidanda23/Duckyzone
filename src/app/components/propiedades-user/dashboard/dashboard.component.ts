@@ -24,7 +24,8 @@ export class DashboardComponent implements OnInit {
   public entryDelete: any;
 
   
-  constructor(public httpService : HttpService, public modalService: NgbModal, private router: Router) { }
+  constructor(public httpService : HttpService,
+              public modalService: NgbModal, private router: Router) { }
 
   ngOnInit(): void {
     this.isEmployees=true;
@@ -37,12 +38,20 @@ export class DashboardComponent implements OnInit {
       this.employees = Empleados;
     } );
   }
-  deleteModal(targetModal,record: any){
+  configModal(targetModal,record: any){
     this.entryDelete = record;
     this.modalService.open(targetModal, {
       backdrop: 'static',
       size: 'lg'
     });
+    
+  }
+  editEmployee(){
+    this.entryDelete.nombreusuario = (<HTMLInputElement>document.getElementById("usernameEditEmp")).value;
+    this.entryDelete.correo = (<HTMLInputElement>document.getElementById("emailEditEmp")).value;
+    this.httpService.postEditEmp(this.entryDelete);
+    window.location.reload();
+    
   }
   deleteEmployeeDB(){
     this.httpService.deleteEmployee(this.entryDelete).subscribe(()=>{});

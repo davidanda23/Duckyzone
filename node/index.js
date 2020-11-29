@@ -118,6 +118,16 @@ app.post('/register', (req, res) => {
             }
         });
 });
+//API EDITAR EMPLEADOS
+app.post('/editEmployee', (req, res) => {
+    connect.query('UPDATE usuario SET nombreusuario=?, correo=? WHERE id=?',
+        [req.body.nombreusuario, req.body.correo,req.body.id], (error) => {
+            if (error) {
+                throw error;
+            }
+        });
+});
+
 
 //API LOGIN
 app.get('/login/:email&:password', function (req, res) {

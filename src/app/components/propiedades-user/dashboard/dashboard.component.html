@@ -35,8 +35,8 @@
                     <td>{{this.employee.puesto}}</td>
                     <td>{{this.employee.departamento}}</td>
                     <td>{{this.employee.salario}}</td>
-                    <td><button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></td>
-                    <td><button type="button" class="btn btn-danger" (click)="deleteModal(eliminarEmployee,this.employee)">X</button></td>
+                    <td><button type="button" class="btn btn-warning" (click)="configModal(editarEmployee,this.employee)"><i class="fas fa-pencil-alt"></i></button></td>
+                    <td><button type="button" class="btn btn-danger" (click)="configModal(eliminarEmployee,this.employee)">X</button></td>
                 </tr>
                 </tbody>
             </table>
@@ -60,7 +60,7 @@
                     <th scope="row">{{this.dept.id}}</th>
                     <td>{{this.dept.nombre}}</td>
                     <td><button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></td>
-                    <td><button type="button" class="btn btn-danger" (click)="deleteModal(eliminarDept,this.dept)">X</button></td>
+                    <td><button type="button" class="btn btn-danger" (click)="configModal(eliminarDept,this.dept)">X</button></td>
                 </tr>
                 </tbody>
             </table>
@@ -102,7 +102,7 @@
                     <td>{{this.provider.ciudad}}</td>
                     <td>{{this.provider.pais}}</td>
                     <td><button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></td>
-                    <td><button type="button" class="btn btn-danger"(click)="deleteModal(eliminarProveedor,this.provider)">X</button></td>
+                    <td><button type="button" class="btn btn-danger"(click)="configModal(eliminarProveedor,this.provider)">X</button></td>
                 </tr>
                 </tbody>
             </table>
@@ -138,7 +138,7 @@
                     <td>{{this.product.departamento}}</td>
                     <td>{{this.product.proveedor}}</td>
                     <td><button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></td>
-                    <td><button type="button" class="btn btn-danger" (click)="deleteModal(eliminarProducto,this.product)">X</button></td>
+                    <td><button type="button" class="btn btn-danger" (click)="configModal(eliminarProducto,this.product)">X</button></td>
                 </tr>
                 </tbody>
             </table>
@@ -174,13 +174,42 @@
                     <td>{{this.user.apelli_mat}}</td>
                     <td>{{this.user.correo}}</td>
                     <td><button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></td>
-                    <td><button type="button" class="btn btn-danger"(click)="deleteModal(eliminarUsuario,this.user)">X</button></td>
+                    <td><button type="button" class="btn btn-danger"(click)="configModal(eliminarUsuario,this.user)">X</button></td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div> 
+
+<ng-template #editarEmployee let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Edit Attributes</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="username">Nombre de Usuario: <b>{{this.entryDelete.nombreusuario}}</b></label>
+                <div class="input-group">
+                  <input id="usernameEditEmp" name="username" class="form-control" ngModel> 
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Correo: <b>{{this.entryDelete.correo}}</b></label>
+                <div class="input-group">
+                  <input id="emailEditEmp" name="email" class="form-control" ngModel>
+                </div>
+              </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-success" (click)="editEmployee()">Aceptar</button> 
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+      </div>
+</ng-template>
 
 <ng-template #eliminarEmployee let-modal>
     <div class="modal-header">
