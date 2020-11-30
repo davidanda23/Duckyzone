@@ -18,6 +18,8 @@ export class DashboardComponent implements OnInit {
   isProducts: boolean;
   isSales: boolean;
   isUsers: boolean;
+  isPurchases: boolean;
+  isShipping: boolean;
   public employees: any = [];
   public depts: any = [];
   public providers: any = [];
@@ -36,6 +38,7 @@ export class DashboardComponent implements OnInit {
     this.isProducts=false;
     this.isSales=false;
     this.isUsers=false;
+    this.isShipping=false;
     this.httpService.getAllEmployees().subscribe( (Empleados) => {
       this.employees = Empleados;
     } );
@@ -99,14 +102,96 @@ export class DashboardComponent implements OnInit {
     this.httpService.deleteDept(this.entryDelete).subscribe(()=>{});
     window.location.reload();
   }
+
+  addProvider(){
+    const newProvider = {
+      nombre : (<HTMLInputElement>document.getElementById("nombreAddPrv")).value,
+      tel : (<HTMLInputElement>document.getElementById("telAddPrv")).value,
+      calle : (<HTMLInputElement>document.getElementById("calleAddPrv")).value,
+      colonia : (<HTMLInputElement>document.getElementById("coloniaAddPrv")).value,
+      num_int : (<HTMLInputElement>document.getElementById("nintAddPrv")).value,
+      num_ext : (<HTMLInputElement>document.getElementById("nextAddPrv")).value,
+      cod_postal : (<HTMLInputElement>document.getElementById("codAddPrv")).value,
+      correo : (<HTMLInputElement>document.getElementById("correoAddPrv")).value,
+      ciudad : (<HTMLInputElement>document.getElementById("ciudadAddPrv")).value,
+      pais : (<HTMLInputElement>document.getElementById("paisAddPrv")).value
+    }
+    this.httpService.postAddProvider(newProvider);
+    window.location.reload();
+  }
+
+  editProvider(){
+    this.entryDelete.nombre = (<HTMLInputElement>document.getElementById("nombreEditPrv")).value;
+    this.entryDelete.tel = (<HTMLInputElement>document.getElementById("telEditPrv")).value;
+    this.entryDelete.calle = (<HTMLInputElement>document.getElementById("calleEditPrv")).value;
+    this.entryDelete.colonia = (<HTMLInputElement>document.getElementById("coloniaEditPrv")).value;
+    this.entryDelete.num_int = (<HTMLInputElement>document.getElementById("nintEditPrv")).value;
+    this.entryDelete.num_ext = (<HTMLInputElement>document.getElementById("nextEditPrv")).value;
+    this.entryDelete.cod_postal = (<HTMLInputElement>document.getElementById("codEditPrv")).value;
+    this.entryDelete.correo = (<HTMLInputElement>document.getElementById("correoEditPrv")).value;
+    this.entryDelete.ciudad = (<HTMLInputElement>document.getElementById("ciudadEditPrv")).value;
+    this.entryDelete.pais = (<HTMLInputElement>document.getElementById("paisEditPrv")).value;
+    this.httpService.postEditProvider(this.entryDelete);
+    window.location.reload();
+  }
   deleteProviderDB(){
     this.httpService.deleteProvider(this.entryDelete).subscribe(()=>{});
+    window.location.reload();
+  }
+  addProduct(){
+    const newProduct = {
+      nombre: (<HTMLInputElement>document.getElementById("nombreAddPrd")).value,
+      descr: (<HTMLInputElement>document.getElementById("descrAddPrd")).value,
+      precio_unidad: (<HTMLInputElement>document.getElementById("precioAddPrd")).value,
+      existencias: (<HTMLInputElement>document.getElementById("existenciasAddPrd")).value,
+      imgen: (<HTMLInputElement>document.getElementById("imgAddPrd")).value,
+      departamento: (<HTMLInputElement>document.getElementById("deptAddPrd")).value,
+      proveedor: (<HTMLInputElement>document.getElementById("prvAddPrd")).value
+    }
+    this.httpService.postAddProduct(newProduct);
+    window.location.reload();
+  }
+  editProduct(){
+    this.entryDelete.nombre = (<HTMLInputElement>document.getElementById("nombreEditPrd")).value;
+    this.entryDelete.descr = (<HTMLInputElement>document.getElementById("descrEditPrd")).value;
+    this.entryDelete.precio_unidad = (<HTMLInputElement>document.getElementById("precioEditPrd")).value;
+    this.entryDelete.existencias = (<HTMLInputElement>document.getElementById("existenciasEditPrd")).value;
+    this.entryDelete.imgen = (<HTMLInputElement>document.getElementById("imgEditPrd")).value;
+    this.entryDelete.departamento = (<HTMLInputElement>document.getElementById("deptEditPrd")).value;
+    this.entryDelete.proveedor = (<HTMLInputElement>document.getElementById("prvEditPrd")).value;
+    this.httpService.postEditProduct(this.entryDelete);
     window.location.reload();
   }
   deleteProductDB(){
     this.httpService.deleteProduct(this.entryDelete).subscribe(()=>{});
     window.location.reload();
   }
+
+  addUser(){
+    const newUser = {
+      nombreusuario : (<HTMLInputElement>document.getElementById("usernameAddUser")).value,
+      correo: (<HTMLInputElement>document.getElementById("emailAddUser")).value,
+      contraseña: (<HTMLInputElement>document.getElementById("passAddUser")).value,
+      nombre: (<HTMLInputElement>document.getElementById("nameAddUser")).value,
+      apelli_pat: (<HTMLInputElement>document.getElementById("apepatAddUser")).value,
+      apelli_mat: (<HTMLInputElement>document.getElementById("apematAddUser")).value,
+      tel: (<HTMLInputElement>document.getElementById("telAddUser")).value
+    }
+    this.httpService.postAddUser(newUser);
+    window.location.reload();
+  }
+
+  editUser(){
+    this.entryDelete.nombreusuario = (<HTMLInputElement>document.getElementById("usernameEditUser")).value;
+    this.entryDelete.correo = (<HTMLInputElement>document.getElementById("emailEditUser")).value;
+    this.entryDelete.nombre = (<HTMLInputElement>document.getElementById("nameEditUser")).value;
+    this.entryDelete.apelli_pat = (<HTMLInputElement>document.getElementById("apepatEditUser")).value;
+    this.entryDelete.apelli_mat = (<HTMLInputElement>document.getElementById("apematEditUser")).value;
+    this.entryDelete.tel = (<HTMLInputElement>document.getElementById("telEditUser")).value;
+    this.httpService.postEditUser(this.entryDelete);
+    window.location.reload();
+  }
+
   deleteUserDB(){
     this.httpService.deleteUser(this.entryDelete).subscribe(()=>{});
     window.location.reload();
@@ -121,6 +206,8 @@ export class DashboardComponent implements OnInit {
         this.isProducts=false;
         this.isSales=false;
         this.isUsers=false;
+        this.isPurchases=false;
+        this.isShipping=false;
         this.httpService.getAllEmployees().subscribe( (Empleados) => {
           this.employees = Empleados;
         } );
@@ -132,6 +219,8 @@ export class DashboardComponent implements OnInit {
         this.isProducts=false;
         this.isSales=false;
         this.isUsers=false;
+        this.isPurchases=false;
+        this.isShipping=false;
         this.httpService.getDeptsAdmin().subscribe( (Departamentos) => {
           this.depts = Departamentos;
         } );
@@ -143,6 +232,8 @@ export class DashboardComponent implements OnInit {
         this.isProducts=false;
         this.isSales=false;
         this.isUsers=false;
+        this.isPurchases=false;
+        this.isShipping=false;
         this.httpService.getProviders().subscribe( (Proveedores) => {
           this.providers = Proveedores;
         } );
@@ -154,6 +245,8 @@ export class DashboardComponent implements OnInit {
         this.isProducts=true;
         this.isSales=false;
         this.isUsers=false;
+        this.isPurchases=false;
+        this.isShipping=false;
         this.httpService.getProducts().subscribe( (Productos) => {
           this.products = Productos;
         } );
@@ -165,14 +258,38 @@ export class DashboardComponent implements OnInit {
         this.isProducts=false;
         this.isSales=true;
         this.isUsers=false;
+        this.isPurchases=false;
+        this.isShipping=false;
+        break;
+      case "purchases":
+        this.isEmployees=false;
+        this.isDepts=false;
+        this.isProviders=false;
+        this.isProducts=false;
+        this.isSales=false;
+        this.isUsers=false;
+        this.isPurchases=true;
+        this.isShipping=false;
+        break;
+      case "shipping":
+        this.isEmployees=false;
+        this.isDepts=false;
+        this.isProviders=false;
+        this.isProducts=false;
+        this.isSales=false;
+        this.isUsers=false;
+        this.isPurchases=false;
+        this.isShipping=true;
         break;
       case "users":
+        this.isShipping=false;
         this.isEmployees=false;
         this.isDepts=false;
         this.isProviders=false;
         this.isProducts=false;
         this.isSales=false;
         this.isUsers=true;
+        this.isPurchases=false;
         this.httpService.getUsers().subscribe( (Usuarios) => {
           this.users = Usuarios;
         } );

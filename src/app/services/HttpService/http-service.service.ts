@@ -70,6 +70,12 @@ export class HttpService {
   deleteEmployee(usuario){
     return this.Client.get('http://localhost:3000/deleteEmployee/'+usuario.id);
   }
+  postAddUser(usuario){
+    return this.request('POST','http://localhost:3000/addUsers',usuario);
+  }
+  postEditUser(usuario){
+    return this.request('POST','http://localhost:3000/editUsers',usuario);
+  }
   deleteUser(usuario){
     return this.Client.get('http://localhost:3000/deleteUser/'+usuario.id);
   }
@@ -82,8 +88,20 @@ export class HttpService {
   deleteDept(dept){
     return this.Client.get('http://localhost:3000/deleteDept/'+dept.id);
   }
+  postAddProvider(provider){
+    return this.request('POST','http://localhost:3000/addProvider',provider);
+  }
+  postEditProvider(provider){
+    return this.request('POST','http://localhost:3000/editProvider',provider);
+  }
   deleteProvider(provider){
     return this.Client.get('http://localhost:3000/deleteProvider/'+provider.ID);
+  }
+  postAddProduct(product){
+    return this.request('POST','http://localhost:3000/addProduct',product);
+  }
+  postEditProduct(product){
+    return this.request('POST','http://localhost:3000/editProduct',product);
   }
   deleteProduct(product){
     return this.Client.get('http://localhost:3000/deleteProduct/'+product.codigo);

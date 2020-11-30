@@ -7,6 +7,8 @@
             <li><a (click)="toggleConfig('providers')"><i class="fas fa-shopping-bag"></i>Proveedores</a></li>
             <li><a (click)="toggleConfig('products')"><i class="fas fa-cart-arrow-down"></i>Productos</a></li>
             <li><a (click)="toggleConfig('sales')"><i class="fas fa-piggy-bank"></i>Ventas</a></li>
+            <li><a (click)="toggleConfig('purchases')"><i class="fas fa-tags"></i>Compras</a></li>
+            <li><a (click)="toggleConfig('shipping')"><i class="fas fa-shipping-fast"></i>Pedidos</a></li>
             <li><a (click)="toggleConfig('users')"><i class="fas fa-users"></i>Usuarios</a></li>
         </ul>
     </div>
@@ -69,7 +71,7 @@
     <div class="dashboard-providers" *ngIf="isProviders===true">
         <h2>Proveedores</h2>
         <div class="table-box">
-            <button class="btn-add">+</button>
+            <button class="btn-add" (click)="this.modalService.open(agregarProveedor)">+</button>
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
@@ -101,7 +103,7 @@
                     <td>{{this.provider.correo}}</td>
                     <td>{{this.provider.ciudad}}</td>
                     <td>{{this.provider.pais}}</td>
-                    <td><button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></td>
+                    <td><button type="button" class="btn btn-warning"(click)="configModal(editarProveedor,this.provider)"><i class="fas fa-pencil-alt"></i></button></td>
                     <td><button type="button" class="btn btn-danger"(click)="configModal(eliminarProveedor,this.provider)">X</button></td>
                 </tr>
                 </tbody>
@@ -111,7 +113,7 @@
     <div class="dashboard-products" *ngIf="isProducts===true">
         <h2>Productos</h2>
         <div class="table-box">
-            <button class="btn-add">+</button>
+            <button class="btn-add" (click)="this.modalService.open(agregarProducto)">+</button>
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
@@ -137,7 +139,7 @@
                     <td>{{this.product.imgen}}</td>
                     <td>{{this.product.departamento}}</td>
                     <td>{{this.product.proveedor}}</td>
-                    <td><button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></td>
+                    <td><button type="button" class="btn btn-warning" (click)="configModal(editarProducto,this.product)"><i class="fas fa-pencil-alt"></i></button></td>
                     <td><button type="button" class="btn btn-danger" (click)="configModal(eliminarProducto,this.product)">X</button></td>
                 </tr>
                 </tbody>
@@ -148,10 +150,18 @@
         <h2>Ventas</h2>
         <button>+</button>
     </div>
+    <div class="dashboard-purchases" *ngIf="isPurchases===true">
+        <h2>Compras</h2>
+        <button>+</button>
+    </div>
+    <div class="dashboard-shipping" *ngIf="isShipping===true">
+        <h2>Pedidos</h2>
+        <button>+</button>
+    </div>
     <div class="dashboard-users" *ngIf="isUsers===true">
         <h2>Usuarios</h2>
         <div class="table-box">
-            <button class="btn-add">+</button>
+            <button class="btn-add" (click)="this.modalService.open(agregarUsuario)">+</button>
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
@@ -173,7 +183,7 @@
                     <td>{{this.user.apelli_pat}}</td>
                     <td>{{this.user.apelli_mat}}</td>
                     <td>{{this.user.correo}}</td>
-                    <td><button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></td>
+                    <td><button type="button" class="btn btn-warning" (click)="configModal(editarUsuario,this.user)"><i class="fas fa-pencil-alt"></i></button></td>
                     <td><button type="button" class="btn btn-danger"(click)="configModal(eliminarUsuario,this.user)">X</button></td>
                 </tr>
                 </tbody>
@@ -403,6 +413,164 @@
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
       </div>
 </ng-template>
+
+<ng-template #agregarProveedor let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Agregar Proveedor</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form >
+            <div class="form-group">
+                <label for="email">Nombre: </label>
+                <div class="input-group">
+                  <input id="nombreAddPrv" value=""  class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Telefono: </label>
+                <div class="input-group">
+                  <input id="telAddPrv" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Calle: </label>
+                <div class="input-group">
+                  <input id="calleAddPrv" value=""  class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Colonia: </label>
+                <div class="input-group">
+                  <input id="coloniaAddPrv" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Numero interno: </label>
+                <div class="input-group">
+                  <input id="nintAddPrv" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Numero externo: </label>
+                <div class="input-group">
+                  <input id="nextAddPrv" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Codigo Postal: </label>
+                <div class="input-group">
+                  <input id="codAddPrv" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Correo: </label>
+                <div class="input-group">
+                  <input id="correoAddPrv" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Ciudad: </label>
+                <div class="input-group">
+                  <input id="ciudadAddPrv" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Pais: </label>
+                <div class="input-group">
+                  <input id="paisAddPrv" value="" class="form-control" > 
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-success" (click)="addProvider()" >Aceptar</button> 
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+      </div>
+    
+</ng-template>
+
+
+<ng-template #editarProveedor let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Edit Attributes</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form >
+            <div class="form-group">
+                <label for="email">Nombre: </label>
+                <div class="input-group">
+                  <input id="nombreEditPrv" value="{{this.entryDelete.nombre}}"  class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Telefono: </label>
+                <div class="input-group">
+                  <input id="telEditPrv" value="{{this.entryDelete.tel}}" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Calle: </label>
+                <div class="input-group">
+                  <input id="calleEditPrv" value="{{this.entryDelete.calle}}"  class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Apellido Paterno: </label>
+                <div class="input-group">
+                  <input id="coloniaEditPrv" value="{{this.entryDelete.colonia}}" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Numero interno: </label>
+                <div class="input-group">
+                  <input id="nintEditPrv" value="{{this.entryDelete.num_int}}" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Numero externo: </label>
+                <div class="input-group">
+                  <input id="nextEditPrv" value="{{this.entryDelete.num_ext}}" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Codigo Postal: </label>
+                <div class="input-group">
+                  <input id="codEditPrv" value="{{this.entryDelete.cod_postal}}" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Correo: </label>
+                <div class="input-group">
+                  <input id="correoEditPrv" value="{{this.entryDelete.correo}}" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Ciudad: </label>
+                <div class="input-group">
+                  <input id="ciudadEditPrv" value="{{this.entryDelete.ciudad}}" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Pais: </label>
+                <div class="input-group">
+                  <input id="paisEditPrv" value="{{this.entryDelete.pais}}" class="form-control" > 
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-success" (click)="editProvider()" >Aceptar</button> 
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+      </div>
+</ng-template>
+
+
 <ng-template #eliminarProveedor let-modal>
     <div class="modal-header">
         <h4 class="modal-title">Confirm Delete</h4>
@@ -418,6 +586,128 @@
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
       </div>
 </ng-template>
+
+<ng-template #agregarProducto let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Agregar Producto</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form >
+            <div class="form-group">
+                <label for="email">Nombre: </label>
+                <div class="input-group">
+                  <input id="nombreAddPrd" value=""  class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Descripción: </label>
+                <div class="input-group">
+                  <input id="descrAddPrd" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Precio por unidad: </label>
+                <div class="input-group">
+                  <input id="precioAddPrd" value=""  class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Existencias: </label>
+                <div class="input-group">
+                  <input id="existenciasAddPrd" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Imagen: </label>
+                <div class="input-group">
+                  <input id="imgAddPrd" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Departamento: </label>
+                <div class="input-group">
+                  <input id="deptAddPrd" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Proveedor: </label>
+                <div class="input-group">
+                  <input id="prvAddPrd" value="" class="form-control" > 
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-success" (click)="addProduct()" >Aceptar</button> 
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+      </div>
+</ng-template>
+
+
+<ng-template #editarProducto let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Edit Attributes</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form >
+            <div class="form-group">
+                <label for="email">Nombre: </label>
+                <div class="input-group">
+                  <input id="nombreEditPrd" value="{{this.entryDelete.nombre}}"  class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Descripción: </label>
+                <div class="input-group">
+                  <input id="descrEditPrd" value="{{this.entryDelete.descr}}" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Precio por unidad: </label>
+                <div class="input-group">
+                  <input id="precioEditPrd" value="{{this.entryDelete.precio_unidad}}"  class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Existencias: </label>
+                <div class="input-group">
+                  <input id="existenciasEditPrd" value="{{this.entryDelete.existencias}}" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Imagen: </label>
+                <div class="input-group">
+                  <input id="imgEditPrd" value="{{this.entryDelete.imgen}}" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Departamento: </label>
+                <div class="input-group">
+                  <input id="deptEditPrd" value="{{this.entryDelete.departamento}}" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Proveedor: </label>
+                <div class="input-group">
+                  <input id="prvEditPrd" value="{{this.entryDelete.proveedor}}" class="form-control" > 
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-success" (click)="editProduct()" >Aceptar</button> 
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+      </div>
+
+</ng-template>
+
+
 <ng-template #eliminarProducto let-modal>
     <div class="modal-header">
         <h4 class="modal-title">Confirm Delete</h4>
@@ -433,6 +723,121 @@
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
       </div>
 </ng-template>
+
+<ng-template #agregarUsuario let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Agregar Usuario</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form >
+            <div class="form-group">
+                <label for="email">Correo: </label>
+                <div class="input-group">
+                  <input id="emailAddUser" value=""  class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Contraseña: </label>
+                <div class="input-group">
+                  <input id="passAddUser" type="password" value=""  class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Nombre de Usuario: </label>
+                <div class="input-group">
+                  <input id="usernameAddUser" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Nombre: </label>
+                <div class="input-group">
+                  <input id="nameAddUser" value=""  class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Apellido Paterno: </label>
+                <div class="input-group">
+                  <input id="apepatAddUser" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Apellido Materno: </label>
+                <div class="input-group">
+                  <input id="apematAddUser" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Telefono: </label>
+                <div class="input-group">
+                  <input id="telAddUser" value="" class="form-control" > 
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-success" (click)="addUser()">Aceptar</button> 
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+      </div>
+</ng-template>
+<ng-template #editarUsuario let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Edit Attributes</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form >
+            <div class="form-group">
+                <label for="email">Correo: </label>
+                <div class="input-group">
+                  <input id="emailEditUser" value="{{this.entryDelete.correo}}"  class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Nombre de Usuario: </label>
+                <div class="input-group">
+                  <input id="usernameEditUser" value="{{this.entryDelete.nombreusuario}}" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Nombre: </label>
+                <div class="input-group">
+                  <input id="nameEditUser" value="{{this.entryDelete.nombre}}"  class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Apellido Paterno: </label>
+                <div class="input-group">
+                  <input id="apepatEditUser" value="{{this.entryDelete.apelli_pat}}" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Apellido Materno: </label>
+                <div class="input-group">
+                  <input id="apematEditUser" value="{{this.entryDelete.apelli_mat}}" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Telefono: </label>
+                <div class="input-group">
+                  <input id="telEditUser" value="{{this.entryDelete.tel}}" class="form-control" > 
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-success" (click)="editUser()">Aceptar</button> 
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+      </div>
+
+</ng-template>
+
+
+
 <ng-template #eliminarUsuario let-modal>
     <div class="modal-header">
         <h4 class="modal-title">Confirm Delete</h4>

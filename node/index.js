@@ -81,6 +81,43 @@ app.get("/getProviders", (req, res) => {
         }
     });
 });
+//API QUE AGREGA PROVEEDORES
+app.post('/addProvider', (req, res) => {
+    connect.query('CALL add_providers(?,?,?,?,?,?,?,?,?,?)',
+        [req.body.nombre,Number(req.body.tel),req.body.calle,req.body.colonia,Number(req.body.num_int),Number(req.body.num_ext),Number(req.body.cod_postal),req.body.correo,req.body.ciudad,req.body.pais], (error) => {
+            if (error) {
+                throw error;
+            }
+        });
+});
+//API QUE EDITA PROVEEDORES
+app.post('/editProvider', (req, res) => {
+    connect.query('CALL edit_providers(?,?,?,?,?,?,?,?,?,?,?)',
+        [req.body.nombre,Number(req.body.tel),req.body.calle,req.body.colonia,Number(req.body.num_int),Number(req.body.num_ext),Number(req.body.cod_postal),req.body.correo,req.body.ciudad,req.body.pais,Number(req.body.ID)], (error) => {
+            if (error) {
+                throw error;
+            }
+        });
+});
+//API QUE AGREGA PRODUCTOS
+app.post('/addProduct', (req, res) => {
+    connect.query('CALL add_products(?,?,?,?,?,?,?)',
+        [req.body.nombre,req.body.descr,Number(req.body.precio_unidad),Number(req.body.existencias),(req.body.imgen),Number(req.body.departamento),Number(req.body.proveedor)], (error) => {
+            if (error) {
+                throw error;
+            }
+        });
+});
+//API QUE EDITA PRODUCTOS
+app.post('/editProduct', (req, res) => {
+    connect.query('CALL edit_products(?,?,?,?,?,?,?,?)',
+        [req.body.nombre,req.body.descr,Number(req.body.precio_unidad),Number(req.body.existencias),(req.body.imgen),Number(req.body.departamento),Number(req.body.proveedor),Number(req.body.codigo)], (error) => {
+            if (error) {
+                throw error;
+            }
+        });
+});
+
 //API QUE RETORNA PRODUCTOS
 app.get("/getProducts", (req, res) => {
     connect.query('SELECT * FROM productos', (err, rows) => {
@@ -104,6 +141,25 @@ app.get("/getUsers", (req, res) => {
     });
 });
 
+//API QUE AGREGA USUARIOS
+app.post('/addUsers', (req, res) => {
+    connect.query('CALL add_users(?,?,?,?,?,?,?)',
+        [req.body.correo,req.body.contrseña,req.body.nombre,Number(req.body.tel),req.body.apelli_pat,req.body.apelli_mat,req.body.nombreusuario], (error) => {
+            if (error) {
+                throw error;
+            }
+        });
+});
+
+//API QUE EDITA USUARIOS
+app.post('/editUsers', (req, res) => {
+    connect.query('UPDATE usuario a SET a.correo=?, a.nombreusuario=?, a.nombre=?,a.apelli_pat=?,a.apelli_mat=?,a.tel=? WHERE a.id=? ',
+        [req.body.correo, req.body.nombreusuario,req.body.nombre,req.body.apelli_pat,req.body.apelli_mat,req.body.tel,req.body.id], (error) => {
+            if (error) {
+                throw error;
+            }
+        });
+});
 //API QUE RETORNA EMPLEADOS
 app.get("/getAllEmployees", (req, res) => {
     connect.query('SELECT a.id,a.nombreusuario,a.nombre,a.tel,a.apelli_pat,a.apelli_mat,a.correo,b.puesto,b.salario,b.id_departamento, c.nombre as departamento FROM usuario a, empleado b, departamento_interno c WHERE b.id_usuario=a.id AND c.id=b.id_departamento ORDER BY a.id', (err, rows) => {
@@ -140,7 +196,7 @@ app.post('/register', (req, res) => {
 //API AGREGAR EMPLEADOS
 app.post('/addEmployee', (req, res) => {
     connect.query('CALL add_employees(?,?,?,?,?,?,?,?,?)',
-        [req.body.correo,req.body.nombre,Number(req.body.tel),req.body.apelli_pat,req.body.mat,req.body.nombreusuario,Number(req.body.salario),req.body.puesto,Number(req.body.id_departamento)], (error) => {
+        [req.body.correo,req.body.nombre,Number(req.body.tel),req.body.apelli_pat,req.body.apelli_mat,req.body.nombreusuario,Number(req.body.salario),req.body.puesto,Number(req.body.id_departamento)], (error) => {
             if (error) {
                 throw error;
             }
@@ -208,7 +264,7 @@ app.get("/deleteEmployee/:id", function (req, res) {
 });
 //API QUE BORRA USUARIOS
 app.get("/deleteUser/:id", function (req, res) {
-    connect.query('DELETE FROM usuario WHERE  usuario.id=?',
+    connect.query('CALL delete_users(?)',
         [Number(req.params.id)], (error) => {
             if (error) {
                 throw error;
