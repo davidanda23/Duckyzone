@@ -1,9 +1,8 @@
-import { FormControl, FormGroup } from '@angular/forms';
-import { EmployeeModel } from './../../models/employee-model';
+import { FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/HttpService/http-service.service';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-dashboard',
