@@ -51,6 +51,25 @@ app.get("/getDeptsAdmin", (req, res) => {
         }
     });
 });
+//API QUE AGREGA DEPAS
+app.post('/addDept', (req, res) => {
+    connect.query('CALL add_depts(?)',
+        [req.body.nombre], (error) => {
+            if (error) {
+                throw error;
+            }
+        });
+});
+//API QUE EDITA DEPAS
+app.post('/editDept', (req, res) => {
+    connect.query('UPDATE departamentos SET nombre=? WHERE id=? ',
+        [req.body.nombre, req.body.id], (error) => {
+            if (error) {
+                throw error;
+            }
+        });
+});
+
 //API QUE RETORNA PROVEEDORES
 app.get("/getProviders", (req, res) => {
     connect.query('SELECT * FROM proveedores', (err, rows) => {
@@ -113,6 +132,15 @@ app.get("/prodxdept/:dept", (req, res) => {
 app.post('/register', (req, res) => {
     connect.query('INSERT INTO usuario(nombreusuario, correo, contrseña) VALUES (?,?,?)',
         [req.body.username, req.body.email, req.body.password], (error) => {
+            if (error) {
+                throw error;
+            }
+        });
+});
+//API AGREGAR EMPLEADOS
+app.post('/addEmployee', (req, res) => {
+    connect.query('CALL add_employees(?,?,?,?,?,?,?,?,?)',
+        [req.body.correo,req.body.nombre,Number(req.body.tel),req.body.apelli_pat,req.body.mat,req.body.nombreusuario,Number(req.body.salario),req.body.puesto,Number(req.body.id_departamento)], (error) => {
             if (error) {
                 throw error;
             }

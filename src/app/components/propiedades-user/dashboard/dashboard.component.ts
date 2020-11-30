@@ -49,6 +49,22 @@ export class DashboardComponent implements OnInit {
     });
     
   }
+  addEmployee(){
+    const newEmployee = {
+      nombreusuario: (<HTMLInputElement>document.getElementById("usernameAddEmp")).value,
+      correo: (<HTMLInputElement>document.getElementById("emailAddEmp")).value,
+      nombre: (<HTMLInputElement>document.getElementById("nameAddEmp")).value,
+      apelli_pat: (<HTMLInputElement>document.getElementById("apepatAddEmp")).value,
+      apelli_mat: (<HTMLInputElement>document.getElementById("apematAddEmp")).value,
+      tel: (<HTMLInputElement>document.getElementById("telAddEmp")).value,
+      puesto: (<HTMLInputElement>document.getElementById("puestoAddEmp")).value,
+      salario: (<HTMLInputElement>document.getElementById("salarioAddEmp")).value,
+      id_departamento: (<HTMLInputElement>document.getElementById("id_depaAddEmp")).value
+    }
+
+    this.httpService.postAddEmp(newEmployee);
+    window.location.reload();
+  }
   editEmployee(){
     this.entryDelete.nombreusuario = (<HTMLInputElement>document.getElementById("usernameEditEmp")).value;
     this.entryDelete.correo = (<HTMLInputElement>document.getElementById("emailEditEmp")).value;
@@ -65,6 +81,19 @@ export class DashboardComponent implements OnInit {
   deleteEmployeeDB(){
     this.httpService.deleteEmployee(this.entryDelete).subscribe(()=>{});
     this.httpService.deleteUser(this.entryDelete).subscribe(()=>{});
+    window.location.reload();
+  }
+
+  addDept(){
+    const newDept = {
+      nombre: (<HTMLInputElement>document.getElementById("nombreAddDept")).value,
+    }
+    this.httpService.postAddDept(newDept);
+    window.location.reload();
+  }
+  editDept(){
+    this.entryDelete.nombre = (<HTMLInputElement>document.getElementById("nameEditDept")).value;
+    this.httpService.postEditDept(this.entryDelete);
     window.location.reload();
   }
   deleteDeptDB(){

@@ -61,6 +61,9 @@ export class HttpService {
   getUsers(){
     return this.Client.get('http://localhost:3000/getUsers');
   }
+  postAddEmp(user){
+    return this.request('POST','http://localhost:3000/addEmployee',user);
+  }
   postEditEmp(user){
     return this.request('POST','http://localhost:3000/editEmployee',user);
   }
@@ -69,6 +72,12 @@ export class HttpService {
   }
   deleteUser(usuario){
     return this.Client.get('http://localhost:3000/deleteUser/'+usuario.id);
+  }
+  postAddDept(dept){
+    return this.request('POST','http://localhost:3000/addDept',dept);
+  }
+  postEditDept(dept){
+    return this.request('POST','http://localhost:3000/editDept',dept);
   }
   deleteDept(dept){
     return this.Client.get('http://localhost:3000/deleteDept/'+dept.id);

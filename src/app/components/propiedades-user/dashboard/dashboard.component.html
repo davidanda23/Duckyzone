@@ -13,7 +13,7 @@
     <div  *ngIf="isEmployees===true">
         <h2>Empleados</h2>
         <div class="table-box">
-            <button class="btn-add">+</button>
+            <button class="btn-add" (click)="this.modalService.open(agregarEmployee)">+</button>
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
@@ -45,7 +45,7 @@
     <div class="dashboard-depts" *ngIf="isDepts===true">
         <h2>Departamentos</h2>
         <div class="table-box">
-            <button class="btn-add">+</button>
+            <button class="btn-add" (click)="this.modalService.open(agregarDept)">+</button>
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
@@ -59,7 +59,7 @@
                 <tr *ngFor="let dept of depts">
                     <th scope="row">{{this.dept.id}}</th>
                     <td>{{this.dept.nombre}}</td>
-                    <td><button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></td>
+                    <td><button type="button" class="btn btn-warning" (click)="configModal(editarDept,this.dept)"><i class="fas fa-pencil-alt"></i></button></td>
                     <td><button type="button" class="btn btn-danger" (click)="configModal(eliminarDept,this.dept)">X</button></td>
                 </tr>
                 </tbody>
@@ -182,6 +182,78 @@
     </div>
 </div> 
 
+<ng-template #agregarEmployee let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Agregar Empleado</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form >
+            <div class="form-group">
+                <label for="email">Correo: </label>
+                <div class="input-group">
+                  <input id="emailAddEmp" value=""  class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Nombre de Usuario: </label>
+                <div class="input-group">
+                  <input id="usernameAddEmp"  class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Nombre: </label>
+                <div class="input-group">
+                  <input id="nameAddEmp" value=""  class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Apellido Paterno: </label>
+                <div class="input-group">
+                  <input id="apepatAddEmp" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Apellido Materno: </label>
+                <div class="input-group">
+                  <input id="apematAddEmp" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Telefono: </label>
+                <div class="input-group">
+                  <input id="telAddEmp" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Puesto: </label>
+                <div class="input-group">
+                  <input id="puestoAddEmp" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Salario: </label>
+                <div class="input-group">
+                  <input id="salarioAddEmp" value="" class="form-control" > 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">ID departamento: </label>
+                <div class="input-group">
+                  <input id="id_depaAddEmp" value="" class="form-control" > 
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-success" (click)="addEmployee()">Aceptar</button> 
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+      </div>
+</ng-template>
+
+
 <ng-template #editarEmployee let-modal>
     <div class="modal-header">
         <h4 class="modal-title">Edit Attributes</h4>
@@ -268,6 +340,54 @@
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
       </div>
 </ng-template>
+
+<ng-template #agregarDept let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Agregar Departamento</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form >
+            <div class="form-group">
+                <label for="nombre">Nombre del Departamento: </label>
+                <div class="input-group">
+                  <input id="nombreAddDept" value=""  class="form-control">
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-success" (click)="addDept()">Aceptar</button> 
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+      </div>
+</ng-template>
+
+<ng-template #editarDept let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Edit Attributes</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form >
+            <div class="form-group">
+                <label for="email">Nombre de Departamento: </label>
+                <div class="input-group">
+                  <input id="nameEditDept" value="{{this.entryDelete.nombre}}"  class="form-control">
+                </div>
+            </div>
+            
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-success" (click)="editDept()" >Aceptar</button> 
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+      </div>
+</ng-template>
+
 <ng-template #eliminarDept let-modal>
     <div class="modal-header">
         <h4 class="modal-title">Confirm Delete</h4>
