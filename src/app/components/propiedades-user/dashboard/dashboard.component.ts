@@ -59,10 +59,8 @@ export class DashboardComponent implements OnInit {
     this.entryDelete.puesto = (<HTMLInputElement>document.getElementById("puestoEditEmp")).value;
     this.entryDelete.salario = (<HTMLInputElement>document.getElementById("salarioEditEmp")).value;
     this.entryDelete.id_departamento = (<HTMLInputElement>document.getElementById("id_depaEditEmp")).value;
-    /*this.httpService.postEditEmp(this.entryDelete);
-    window.location.reload();*/
-    console.log(this.entryDelete);
-    
+    this.httpService.postEditEmp(this.entryDelete);
+    window.location.reload();
   }
   deleteEmployeeDB(){
     this.httpService.deleteEmployee(this.entryDelete).subscribe(()=>{});

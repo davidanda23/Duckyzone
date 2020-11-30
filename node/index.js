@@ -120,8 +120,8 @@ app.post('/register', (req, res) => {
 });
 //API EDITAR EMPLEADOS
 app.post('/editEmployee', (req, res) => {
-    connect.query('UPDATE usuario SET nombreusuario=?, correo=? WHERE id=?',
-        [req.body.nombreusuario, req.body.correo,req.body.id], (error) => {
+    connect.query('UPDATE usuario a, empleado b SET a.correo=?, a.nombreusuario=?, a.nombre=?,a.apelli_pat=?,a.apelli_mat=?,a.tel=?,b.puesto=?,b.salario=?,b.id_departamento=? WHERE a.id=? AND b.id_usuario=?',
+        [req.body.correo, req.body.nombreusuario,req.body.nombre,req.body.apelli_pat,req.body.apelli_mat,req.body.tel,req.body.puesto,req.body.salario,req.body.id_departamento,req.body.id,req.body.id], (error) => {
             if (error) {
                 throw error;
             }
