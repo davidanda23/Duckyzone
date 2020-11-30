@@ -1,3 +1,5 @@
+import { FormControl, FormGroup } from '@angular/forms';
+import { EmployeeModel } from './../../models/employee-model';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/HttpService/http-service.service';
@@ -9,6 +11,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  select = new FormControl();
   closeResult = '';
   isEmployees: boolean;
   isDepts: boolean;
@@ -49,8 +52,16 @@ export class DashboardComponent implements OnInit {
   editEmployee(){
     this.entryDelete.nombreusuario = (<HTMLInputElement>document.getElementById("usernameEditEmp")).value;
     this.entryDelete.correo = (<HTMLInputElement>document.getElementById("emailEditEmp")).value;
-    this.httpService.postEditEmp(this.entryDelete);
-    window.location.reload();
+    this.entryDelete.nombre = (<HTMLInputElement>document.getElementById("nameEditEmp")).value;
+    this.entryDelete.apelli_pat = (<HTMLInputElement>document.getElementById("apepatEditEmp")).value;
+    this.entryDelete.apelli_mat = (<HTMLInputElement>document.getElementById("apematEditEmp")).value;
+    this.entryDelete.tel = (<HTMLInputElement>document.getElementById("telEditEmp")).value;
+    this.entryDelete.puesto = (<HTMLInputElement>document.getElementById("puestoEditEmp")).value;
+    this.entryDelete.salario = (<HTMLInputElement>document.getElementById("salarioEditEmp")).value;
+    this.entryDelete.id_departamento = (<HTMLInputElement>document.getElementById("id_depaEditEmp")).value;
+    /*this.httpService.postEditEmp(this.entryDelete);
+    window.location.reload();*/
+    console.log(this.entryDelete);
     
   }
   deleteEmployeeDB(){

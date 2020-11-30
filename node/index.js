@@ -87,7 +87,7 @@ app.get("/getUsers", (req, res) => {
 
 //API QUE RETORNA EMPLEADOS
 app.get("/getAllEmployees", (req, res) => {
-    connect.query('SELECT a.id,a.nombreusuario,a.correo,b.puesto,b.salario, c.nombre as departamento FROM usuario a, empleado b, departamento_interno c WHERE b.id_usuario=a.id AND c.id=b.id_departamento ORDER BY a.id', (err, rows) => {
+    connect.query('SELECT a.id,a.nombreusuario,a.nombre,a.tel,a.apelli_pat,a.apelli_mat,a.correo,b.puesto,b.salario,b.id_departamento, c.nombre as departamento FROM usuario a, empleado b, departamento_interno c WHERE b.id_usuario=a.id AND c.id=b.id_departamento ORDER BY a.id', (err, rows) => {
         if (err) {
             throw err;
         } else {
