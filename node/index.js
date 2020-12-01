@@ -219,7 +219,7 @@ app.get('/login/:email&:password', function (req, res) {
     var password = req.params.password;
     if (email && password) {
         // check if user exists
-        connect.query('SELECT * FROM usuario WHERE correo = ? AND contrseña = ?', [email, password], function (error, results, fields) {
+        connect.query('SELECT * FROM usuario a WHERE correo = ? AND contrseña = ?', [email, password], function (error, results, fields) {
             if (results.length > 0) {
                 res.send(results);
             } else {
@@ -232,6 +232,16 @@ app.get('/login/:email&:password', function (req, res) {
         //console.log('llenar todos los campos!!');
         res.end();
     }
+});
+
+//API QUE OBTIENE AL CLIENTE
+app.get('/getClient/:id', function (req, res) {
+    connect.query('SELECT a.*,b.* FROM usuario a, cliente b WHERE a.id=? AND b.id=?',
+        [Number(req.params.id),Number(req.params.id)], (error) => {
+            if (error) {
+                throw error;
+            }
+        });
 });
 
 //API ROl

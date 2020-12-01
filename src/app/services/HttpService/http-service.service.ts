@@ -22,7 +22,9 @@ export class HttpService {
       result.subscribe(resolve, reject);
     });
   }
-  
+  getClient(id){
+    return this.Client.get('http://localhost:3000/getClient/'+id);
+  }
   getQuery(url: String) { 
     this.rsl = this.Client.get('http://localhost:3000/' + url);
     return this.rsl;
