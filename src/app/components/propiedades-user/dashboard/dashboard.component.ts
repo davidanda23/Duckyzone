@@ -171,7 +171,7 @@ export class DashboardComponent implements OnInit {
     const newUser = {
       nombreusuario : (<HTMLInputElement>document.getElementById("usernameAddUser")).value,
       correo: (<HTMLInputElement>document.getElementById("emailAddUser")).value,
-      contraseña: (<HTMLInputElement>document.getElementById("passAddUser")).value,
+      contrseña: (<HTMLInputElement>document.getElementById("passAddUser")).value,
       nombre: (<HTMLInputElement>document.getElementById("nameAddUser")).value,
       apelli_pat: (<HTMLInputElement>document.getElementById("apepatAddUser")).value,
       apelli_mat: (<HTMLInputElement>document.getElementById("apematAddUser")).value,
