@@ -40,6 +40,17 @@ app.get("/dept", (req, res) => {
         }
     });
 });
+//API QUE RETORNA DEPAS INTERNOS
+app.get("/dept_int", (req, res) => {
+    connect.query('SELECT * FROM departamento_interno', (err, rows) => {
+        if (err) {
+            throw err;
+        } else {
+            res.send(rows);
+            res.end();
+        }
+    });
+});
 //API QUE RETORNA DEPAS EN ADMIN
 app.get("/getDeptsAdmin", (req, res) => {
     connect.query('SELECT id, nombre FROM departamentos', (err, rows) => {
