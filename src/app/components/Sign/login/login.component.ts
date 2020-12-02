@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
       email: this.user.email,
       password: this.user.password,
     });
+
   }
 
   loginUsuario(){
@@ -49,5 +50,8 @@ export class LoginComponent implements OnInit {
       }
     });
     
+    /*var tu_id = sessionStorage.getItem('idUsuario');
+    this.tu_cliente = this.httpService.getClient(tu_id);
+    console.log(this.tu_cliente.cod_postal);*/
   }
 }
