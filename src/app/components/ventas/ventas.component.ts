@@ -37,7 +37,10 @@ export class VentasComponent implements OnInit {
     console.log(this.producto.nombre);
     console.log(this.ProductoService.producto_Vendido.precio_unidad);
     console.log(this.cant.value);
-    this.http.GenerarVenta(this.cant, this.producto);
+    this.http.GenerarVenta(this.cant.value, this.producto.codigo,this.ProductoService.producto_Vendido.precio_unidad,this.cliente[0]);
+    this.http.prueba().subscribe((respuesta) => {
+      console.log(respuesta);
+    });
   }
 
 }

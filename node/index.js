@@ -215,24 +215,29 @@ app.post('/editEmployee', (req, res) => {
 
 //API para realizar una venta
 app.post('/generarVenta/:numArticulos&:producto', (req, res) =>{
-    var id_prod = req.params.producto;
-    console.log("nArticulo: "+req.params.numArticulos);
-    console.log("Codigo: "+ id_prod);
-
-    connect.query('SELECT onHandleProduct(?, ?)'),
-    [req.params.numArticulos, id_prod],function (error, results, fields){
+    
+    connect.query('SELECT onHandleProduct('+req.params.numArticulos+','+req.params.producto+')' ),
+    [Number(req.params.numArticulos),Number(req.params.producto)],function (error, results, fields){
         if(error){
-            //console.log("Articulo: "+req.params.numArticulos);
-            //console.log("Precio: "+req.params.producto.precio_unidad);
             throw error;
         }else{
-            //console.log(req.params.numArticulos);
-            //console.log(req.params.precio_unidad);
+            res.send(results);
         }
     }
 
 });
-
+///////7PRUEBA!!!
+app.get('/prueba', function (req, res) {
+    connect.query('SELECT @n_vendidos',
+        [], (error, results) => {
+            if (error) {
+                throw error;
+            }else{
+                res.send(results);
+                res.end();
+            }
+        });
+});
 
 //API LOGIN
 app.get('/login/:email&:password', function (req, res) {
