@@ -49,9 +49,5 @@ export class LoginComponent implements OnInit {
         console.log("Ingrese correctamente sus credenciales");
       }
     });
-    
-    /*var tu_id = sessionStorage.getItem('idUsuario');
-    this.tu_cliente = this.httpService.getClient(tu_id);
-    console.log(this.tu_cliente.cod_postal);*/
   }
 }

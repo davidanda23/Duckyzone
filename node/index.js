@@ -175,7 +175,6 @@ app.get("/getAllEmployees", (req, res) => {
 
 //CONSIGUE LOS PRODUCTOS DE UN DEPARTAMENTO DADO
 app.get("/prodxdept/:dept", (req, res) => {
-    console.log("Params: " + req.params.dept);
     var dept = req.params.dept;
     connect.query('SELECT codigo, nombre, descr, precio_unidad, existencias, imgen, departamento, proveedor from productos where departamento=?', [dept], (err, rows) => {
         if (err) {
@@ -231,7 +230,6 @@ app.get('/login/:email&:password', function (req, res) {
         });
     } else {
         res.send('Please enter Username and Password!');
-        //console.log('llenar todos los campos!!');
         res.end();
     }
 });
@@ -243,7 +241,6 @@ app.get('/getClient/:id', function (req, res) {
             if (error) {
                 throw error;
             }else{
-                console.log(results);
                 res.send(results);
                 res.end();
             }
@@ -264,7 +261,6 @@ app.get('/role/:id', function (req, res) {
         });
     } else {
         res.send('Please enter Username and Password!');
-        //console.log('llenar todos los campos!!');
         res.end();
     }
 });
