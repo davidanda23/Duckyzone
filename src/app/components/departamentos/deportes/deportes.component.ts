@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpService } from 'src/app/services/HttpService/http-service.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class DeportesComponent implements OnInit {
   public res: any = [];
   public id_cliente: any;
 
-  constructor(public http : HttpService) { }
+  constructor(public http : HttpService, public router: Router) { }
 
   ngOnInit(): void {
     this.http.getProdxDept('prodxdept/1').subscribe( (Productos) => {
@@ -25,6 +26,6 @@ export class DeportesComponent implements OnInit {
       this.res = clientes;
       console.log(this.res[0],codigoProducto);
     }); 
-    
+    this.router.navigate(['/confirmarVenta']);
   }
 }

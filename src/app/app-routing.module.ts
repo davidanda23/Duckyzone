@@ -12,6 +12,7 @@ import { LibrosComponent } from './components/departamentos/libros/libros.compon
 import { VideojuegosComponent } from './components/departamentos/videojuegos/videojuegos.component';
 import { ConfiguracionComponent } from './components/propiedades-user/configuracion/configuracion.component';
 import { DashboardComponent } from './components/propiedades-user/dashboard/dashboard.component';
+import { VentasComponent } from './components/ventas/ventas.component';
 
 const routes: Routes = [
   {
@@ -34,8 +35,8 @@ const routes: Routes = [
   { path: 'libros', component: LibrosComponent },
   { path: 'videojuegos', component: VideojuegosComponent },
   { path: 'configuracion', component: ConfiguracionComponent },
-  { path: 'dashboard', component: DashboardComponent }
-  
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'confirmarVenta', component: VentasComponent}
 
 ];
 

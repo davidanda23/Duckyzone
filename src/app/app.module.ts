@@ -22,6 +22,7 @@ import { SearchComponent } from './components/search/search.component';
 import { VideojuegosComponent } from './components/departamentos/videojuegos/videojuegos.component';
 import { ConfiguracionComponent } from './components/propiedades-user/configuracion/configuracion.component';
 import { DashboardComponent } from './components/propiedades-user/dashboard/dashboard.component';
+import { VentasComponent } from './components/ventas/ventas.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { DashboardComponent } from './components/propiedades-user/dashboard/dash
     LibrosComponent,
     VideojuegosComponent,
     ConfiguracionComponent,
-    DashboardComponent
+    DashboardComponent,
+    VentasComponent
   ],
   imports: [
     BrowserModule,
