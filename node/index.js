@@ -214,9 +214,9 @@ app.post('/editEmployee', (req, res) => {
 });
 
 //API para realizar una venta
-app.post('/generarVenta/:numArticulos&:producto', (req, res) =>{
+app.post('/generarVenta/:numArticulos&:producto&:precio', (req, res) =>{
     
-    connect.query('SELECT onHandleProduct('+req.params.numArticulos+','+req.params.producto+')' ),
+    connect.query('CALL onHandlePrdFunct(?' ),
     [Number(req.params.numArticulos),Number(req.params.producto)],function (error, results, fields){
         if(error){
             throw error;
@@ -226,7 +226,7 @@ app.post('/generarVenta/:numArticulos&:producto', (req, res) =>{
     }
 
 });
-///////7PRUEBA!!!
+///////7PRUEBA!!!!!!!!!!!!!!!!
 app.get('/prueba', function (req, res) {
     connect.query('SELECT @n_vendidos',
         [], (error, results) => {
