@@ -243,6 +243,7 @@ app.get('/getClient/:id', function (req, res) {
             if (error) {
                 throw error;
             }else{
+                console.log(results);
                 res.send(results);
                 res.end();
             }

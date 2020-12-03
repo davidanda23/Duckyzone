@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from 'src/app/services/HttpService/http-service.service';
+import { VentaProductoService } from 'src/app/services/ventaProducto/venta-producto.service';
 
 @Component({
   selector: 'app-deportes',
@@ -12,7 +13,7 @@ export class DeportesComponent implements OnInit {
   public res: any = [];
   public id_cliente: any;
 
-  constructor(public http : HttpService, public router: Router) { }
+  constructor(public http : HttpService, public router: Router, public productoService: VentaProductoService) { }
 
   ngOnInit(): void {
     this.http.getProdxDept('prodxdept/1').subscribe( (Productos) => {
@@ -20,12 +21,15 @@ export class DeportesComponent implements OnInit {
     } );    
   }
 
-  generar_compra( codigoProducto: any){
+  generar_compra( producto: any){
     this.id_cliente = sessionStorage.getItem('idUsuario');
-    this.http.getClient(this.id_cliente).subscribe((clientes) => {
-      this.res = clientes;
-      console.log(this.res[0],codigoProducto);
+    this.http.getClient(this.id_cliente).subscribe((cliente) => {
+      //this.productoService.cliente_venta = cliente;
+      this.res = cliente;
+      //console.log(this.productoService.cliente_venta);
     }); 
+    this.productoService.cliente_venta = this.res;
+    this.productoService.producto_Vendido = producto;
     this.router.navigate(['/confirmarVenta']);
   }
 }
