@@ -213,6 +213,20 @@ app.post('/editEmployee', (req, res) => {
         });
 });
 
+//API para realizar una venta
+app.post('/generarVenta/:numArticulos&:producto', (req, res) =>{
+    connect.query('SELECT onHandleProduct(?,?)'),
+    [req.params.numArticulos, req.params.precio_unidad],function (error, results, fields){
+        if(error){
+            console.log(req.params.numArticulos + req.params.precio_unidad);
+            throw error;
+        }else{
+            console.log(req.params.numArticulos + req.params.precio_unidad);
+        }
+    }
+
+});
+
 
 //API LOGIN
 app.get('/login/:email&:password', function (req, res) {

@@ -109,4 +109,7 @@ export class HttpService {
   deleteProduct(product){
     return this.Client.get('http://localhost:3000/deleteProduct/'+product.codigo);
   }
+  GenerarVenta(numArticulos, producto){
+    return this.request('POST','http://localhost:3000/generarVenta',numArticulos + producto);
+  }
 }
