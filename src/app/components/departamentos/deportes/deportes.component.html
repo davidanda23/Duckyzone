@@ -17,7 +17,7 @@
     <div class="card-body">
       <h5 class="card-title">{{prod.nombre}}</h5>
       <p class="card-text">{{prod.descr}} <br>$ {{prod.precio_unidad}}</p>
-      <a href="#" class="btn btn-primary generar_compra"> Comprar</a>
+      <button type="submit" (click)="generar_compra(prod.codigo)" class="btn" >Comprar</button>
     </div>
   </div>
 </div>

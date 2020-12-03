@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class HttpService {
   rsl: any;
   res: any;
+  public producto_vendido: any;
 
   constructor(private Client: HttpClient) {
 

@@ -16,11 +16,15 @@ export class DeportesComponent implements OnInit {
   ngOnInit(): void {
     this.http.getProdxDept('prodxdept/1').subscribe( (Productos) => {
       this.prods = Productos;
-    } );
+    } );    
+  }
+
+  generar_compra( codigoProducto: any){
     this.id_cliente = sessionStorage.getItem('idUsuario');
     this.http.getClient(this.id_cliente).subscribe((clientes) => {
       this.res = clientes;
-      console.log(this.res[0]);
-    });     
+      console.log(this.res[0],codigoProducto);
+    }); 
+    
   }
 }
