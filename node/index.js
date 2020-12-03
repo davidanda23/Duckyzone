@@ -215,13 +215,19 @@ app.post('/editEmployee', (req, res) => {
 
 //API para realizar una venta
 app.post('/generarVenta/:numArticulos&:producto', (req, res) =>{
-    connect.query('SELECT onHandleProduct(?,?)'),
-    [req.params.numArticulos, req.params.precio_unidad],function (error, results, fields){
+    var id_prod = req.params.producto;
+    console.log("nArticulo: "+req.params.numArticulos);
+    console.log("Codigo: "+ id_prod);
+
+    connect.query('SELECT onHandleProduct(?, ?)'),
+    [req.params.numArticulos, id_prod],function (error, results, fields){
         if(error){
-            console.log(req.params.numArticulos + req.params.precio_unidad);
+            //console.log("Articulo: "+req.params.numArticulos);
+            //console.log("Precio: "+req.params.producto.precio_unidad);
             throw error;
         }else{
-            console.log(req.params.numArticulos + req.params.precio_unidad);
+            //console.log(req.params.numArticulos);
+            //console.log(req.params.precio_unidad);
         }
     }
 
