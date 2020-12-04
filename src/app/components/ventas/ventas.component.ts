@@ -33,14 +33,15 @@ export class VentasComponent implements OnInit {
   }
 
   confirmaVenta(){
-    console.log(this.cliente[0]);
-    console.log(this.producto.nombre);
-    console.log(this.ProductoService.producto_Vendido.precio_unidad);
-    console.log(this.cant.value);
+
+    if(this.cliente[0].num_interno === null) this.cliente[0].num_interno = 0;
+    if(this.cliente[0].num_externo === null) this.cliente[0].num_externo = 0;
+
     this.http.GenerarVenta(this.cant.value, this.producto.codigo,this.ProductoService.producto_Vendido.precio_unidad,this.cliente[0]);
-    this.http.prueba().subscribe((respuesta) => {
+
+    /*this.http.prueba().subscribe((respuesta) => {
       console.log(respuesta);
-    });
+    });*/
   }
 
 }

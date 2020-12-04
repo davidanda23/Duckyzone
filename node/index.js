@@ -216,12 +216,12 @@ app.post('/editEmployee', (req, res) => {
 //API para realizar una venta
 app.post('/generarVenta/:numArticulos&:producto&:precio', (req, res) =>{
 
-    req.body.num_int=0;
-    req.body.num_ext=0;
+
+    console.log(req.body.num_interno + req.body.num_externo);
     
     connect.query('CALL onHandlePrdFunct(?,?,?,?,?,?,?,?,?,?,?,?,?)',
     [req.params.precio,req.params.numArticulos,req.body.calle,req.body.colonia,
-    req.body.num_int,req.body.num_ext,req.body.cod_postal,req.body.ciudad,req.body.pais,
+    req.body.num_interno,req.body.num_externo,req.body.cod_postal,req.body.ciudad,req.body.pais,
     req.body.id_usuario,req.body.correo,req.body.nombreusuario,req.params.producto],
      (error, results, fields) =>{
         if(error){
