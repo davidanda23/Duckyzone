@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { DeportesComponent } from './components/departamentos/deportes/deportes.component';
 import { ModaComponent } from './components/departamentos/moda/moda.component';
@@ -23,6 +23,7 @@ import { VideojuegosComponent } from './components/departamentos/videojuegos/vid
 import { ConfiguracionComponent } from './components/propiedades-user/configuracion/configuracion.component';
 import { DashboardComponent } from './components/propiedades-user/dashboard/dashboard.component';
 import { VentasComponent } from './components/ventas/ventas.component';
+
 
 
 @NgModule({

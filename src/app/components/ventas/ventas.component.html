@@ -35,27 +35,24 @@
     </div>
   </div>
 
+  <p><button (click)="mostrarModalConf()">Modal de confirmacion</button></p>
+
+  <ng-template #myModalConf let-modal >
   
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">!Gracias por su compra!</h2>
+          <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.close('Cerrado desde la ventana')"> 
+            <span aria-hidden="true">&times;</span>
+          </button>-->
+      </div>
+      <div class="modal-body">
+        Regresar a la página principal
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modal.close()">Volver</button>
+      </div>
+    </div>
   
-  <!--
-  <style>
-  .container {
-    background: #e0e0e0;
-    margin: 0 0 1rem;
-    height: 10rem;
-    display: flex;
-    align-items: stretch;
-  }
-  .center-h {
-    justify-content: space-evenly;
-  }
-  .center-v {
-    align-items: center;
-  }
-  .child {
-    background: #60e0b0;
-    padding: .2rem;
-  }
-  </style>
--->
+  </ng-template>
 
