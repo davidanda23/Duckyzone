@@ -253,7 +253,11 @@
                 <label for="username">ID departamento: </label>
                 <div class="input-group">
                   <input id="id_depaAddEmp" value="" class="form-control" > 
+                 
                 </div>
+                <!--<select class="input-group" [(ngModel)]="selectedValue" id="id_depaAddEmp" name="id_depaAddEmp">
+                    <option *ngFor="let dept of depts_dpd" value="{{this.dept.id}}">{{this.dept.id}} - {{this.dept.nombre}}</option>
+                </select>-->
             </div>
         </form>
       </div>
@@ -782,6 +786,7 @@
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
       </div>
 </ng-template>
+
 <ng-template #editarUsuario let-modal>
     <div class="modal-header">
         <h4 class="modal-title">Edit Attributes</h4>
@@ -835,8 +840,6 @@
       </div>
 
 </ng-template>
-
-
 
 <ng-template #eliminarUsuario let-modal>
     <div class="modal-header">

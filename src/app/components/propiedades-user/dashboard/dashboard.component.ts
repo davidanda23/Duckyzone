@@ -26,7 +26,8 @@ export class DashboardComponent implements OnInit {
   public products: any = [];
   public users: any = [];
   public entryDelete: any;
-
+  public depts_dpd = [];
+  public depts_int = [];
   
   constructor(public httpService : HttpService,
               public modalService: NgbModal, private router: Router) { }
@@ -41,6 +42,9 @@ export class DashboardComponent implements OnInit {
     this.isShipping=false;
     this.httpService.getAllEmployees().subscribe( (Empleados) => {
       this.employees = Empleados;
+    } );
+    this.httpService.getQuery('dept_int').subscribe( (Departamentos) => {
+      this.depts_dpd = Departamentos;
     } );
   }
   configModal(targetModal,record: any){
@@ -61,9 +65,8 @@ export class DashboardComponent implements OnInit {
       tel: (<HTMLInputElement>document.getElementById("telAddEmp")).value,
       puesto: (<HTMLInputElement>document.getElementById("puestoAddEmp")).value,
       salario: (<HTMLInputElement>document.getElementById("salarioAddEmp")).value,
-      id_departamento: (<HTMLInputElement>document.getElementById("id_depaAddEmp")).value
+      id_departamento: (<HTMLInputElement>document.getElementById("id_depaAddEmp")).value,
     }
-
     this.httpService.postAddEmp(newEmployee);
     window.location.reload();
   }
@@ -79,6 +82,7 @@ export class DashboardComponent implements OnInit {
     this.entryDelete.id_departamento = (<HTMLInputElement>document.getElementById("id_depaEditEmp")).value;
     this.httpService.postEditEmp(this.entryDelete);
     window.location.reload();
+
   }
   deleteEmployeeDB(){
     this.httpService.deleteEmployee(this.entryDelete).subscribe(()=>{});

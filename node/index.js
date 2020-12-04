@@ -40,6 +40,17 @@ app.get("/dept", (req, res) => {
         }
     });
 });
+//API QUE RETORNA DEPAS INTERNOS
+app.get("/dept_int", (req, res) => {
+    connect.query('SELECT * FROM departamento_interno', (err, rows) => {
+        if (err) {
+            throw err;
+        } else {
+            res.send(rows);
+            res.end();
+        }
+    });
+});
 //API QUE RETORNA DEPAS EN ADMIN
 app.get("/getDeptsAdmin", (req, res) => {
     connect.query('SELECT id, nombre FROM departamentos', (err, rows) => {
@@ -186,7 +197,6 @@ app.get("/getAllEmployees", (req, res) => {
 
 //CONSIGUE LOS PRODUCTOS DE UN DEPARTAMENTO DADO
 app.get("/prodxdept/:dept", (req, res) => {
-    console.log("Params: " + req.params.dept);
     var dept = req.params.dept;
     connect.query('SELECT codigo, nombre, descr, precio_unidad, existencias, imgen, departamento, proveedor from productos where departamento=?', [dept], (err, rows) => {
         if (err) {
@@ -256,10 +266,14 @@ app.get('/login/:email&:password', function (req, res) {
 
 //API QUE OBTIENE AL CLIENTE
 app.get('/getClient/:id', function (req, res) {
-    connect.query('SELECT a.*,b.* FROM usuario a, cliente b WHERE a.id=? AND b.id=?',
-        [Number(req.params.id),Number(req.params.id)], (error) => {
+    connect.query('SELECT a.*,b.* FROM usuario a, cliente b WHERE a.id=? AND b.id_usuario=?',
+        [Number(req.params.id),Number(req.params.id)], function(error,results,fields) {
             if (error) {
                 throw error;
+            }else{
+                console.log(results);
+                res.send(results);
+                res.end();
             }
         });
 });
