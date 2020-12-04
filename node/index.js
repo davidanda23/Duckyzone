@@ -141,6 +141,18 @@ app.get("/getUsers", (req, res) => {
     });
 });
 
+//API QUE RETORNA UN SOLO USUARIO
+app.get("/getUser/:id", (req, res) => {
+    connect.query('SELECT * FROM usuario where id=?', [req.params.id], (err, rows) => {
+        if (err) {
+            throw err;
+        } else {
+            res.send(rows);
+            res.end();
+        }
+    });
+});
+
 //API QUE AGREGA USUARIOS
 app.post('/addUsers', (req, res) => {
     connect.query('CALL add_users(?,?,?,?,?,?,?)',
@@ -154,10 +166,11 @@ app.post('/addUsers', (req, res) => {
 //API QUE EDITA USUARIOS
 app.post('/editUsers', (req, res) => {
     connect.query('UPDATE usuario a SET a.correo=?, a.nombreusuario=?, a.nombre=?,a.apelli_pat=?,a.apelli_mat=?,a.tel=? WHERE a.id=? ',
-        [req.body.correo, req.body.nombreusuario,req.body.nombre,req.body.apelli_pat,req.body.apelli_mat,req.body.tel,req.body.id], (error) => {
+        [req.body.email, req.body.username, req.body.name, req.body.lastf, req.body.lastm, req.body.tel, req.body.id], (error) => {
             if (error) {
                 throw error;
             }
+            console.log(req.body.tel);
         });
 });
 //API QUE RETORNA EMPLEADOS
@@ -186,8 +199,15 @@ app.get("/prodxdept/:dept", (req, res) => {
 
 //API REGISTRO DE USUARIO EN LA BASE DE DATOS
 app.post('/register', (req, res) => {
-    connect.query('INSERT INTO usuario(nombreusuario, correo, contrseña) VALUES (?,?,?)',
-        [req.body.username, req.body.email, req.body.password], (error) => {
+    console.log(req.body.username);
+    console.log(req.body.email);
+    console.log(req.body.password);
+    console.log(req.body.name); 
+    console.log(req.body.tel);
+    console.log(req.body.apepat);
+    console.log(req.body.apemat);
+    connect.query('INSERT INTO usuario(nombreusuario, correo, contrseña, nombre, tel, apelli_pat, apelli_mat) VALUES (?,?,?,?,?,?,?)',
+        [req.body.username, req.body.email, req.body.password, req.body.name, Number.parseInt(req.body.tel), req.body.apepat, req.body.apemat], (error) => {
             if (error) {
                 throw error;
             }

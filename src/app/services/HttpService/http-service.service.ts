@@ -63,6 +63,9 @@ export class HttpService {
   getUsers(){
     return this.Client.get('http://localhost:3000/getUsers');
   }
+  getUser(id){
+    return this.Client.get('http://localhost:3000/getUser/' + id)
+  }
   postAddEmp(user){
     return this.request('POST','http://localhost:3000/addEmployee',user);
   }
