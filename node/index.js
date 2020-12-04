@@ -215,10 +215,6 @@ app.post('/editEmployee', (req, res) => {
 
 //API para realizar una venta
 app.post('/generarVenta/:numArticulos&:producto&:precio', (req, res) =>{
-
-
-    console.log(req.body.num_interno + req.body.num_externo);
-    
     connect.query('CALL onHandlePrdFunct(?,?,?,?,?,?,?,?,?,?,?,?,?)',
     [req.params.precio,req.params.numArticulos,req.body.calle,req.body.colonia,
     req.body.num_interno,req.body.num_externo,req.body.cod_postal,req.body.ciudad,req.body.pais,

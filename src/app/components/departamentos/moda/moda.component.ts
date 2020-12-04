@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/HttpService/http-service.service';
+import { Router } from '@angular/router';
+import { VentaProductoService } from 'src/app/services/ventaProducto/venta-producto.service';
 
 
 @Component({
@@ -10,7 +12,7 @@ import { HttpService } from 'src/app/services/HttpService/http-service.service';
 export class ModaComponent implements OnInit {
   prods ;
 
-  constructor(public http : HttpService) { }
+  constructor(public http : HttpService, public router: Router, public productoService: VentaProductoService) { }
 
   ngOnInit(): void {
     this.http.getProdxDept('prodxdept/2').subscribe( (Productos) => {
@@ -19,4 +21,8 @@ export class ModaComponent implements OnInit {
     } );
   }
 
+  generar_compra( producto: any,){
+    this.productoService.producto_Vendido = producto;
+    this.router.navigate(['/confirmarVenta']);
+  }
 }
