@@ -18,6 +18,7 @@ export class SearchComponent implements OnInit {
     this.busqueda = this.VentaService.busqueda_producto.value;
     this.http.GenerarBusqueda(this.busqueda).subscribe( (Productos) => {
       this.prod = Productos;
+      console.log(this.prod.value);
     } ); 
   }
 

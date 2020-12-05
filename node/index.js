@@ -343,10 +343,12 @@ app.get("/deleteProduct/:id", function (req, res) {
 });
 
 //API que realiza una búsqueda en los productos
-app.get("/search/:ingresoBusqueda", function (req, res) {
-    console.log(req.params.ingresoBusqueda);
-    connect.query('select * FROM productos WHERE productos.nombre=?',
-        [req.params.ingresoBusqueda], (error) => {
+app.get("/searchProduct/:ingresoBusqueda", function (req, res) {
+    var buscarP = JSON.parse(req.params.ingresoBusqueda);
+    console.log("Api: " + buscarP +" "+req.params.ingresoBusqueda);
+
+    connect.query('SELECT * FROM productos WHERE productos.nombre=?',
+        [buscarP], (error) => {
             if (error) {
                 throw error;
             }else{
