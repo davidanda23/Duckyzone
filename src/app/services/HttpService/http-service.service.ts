@@ -113,7 +113,6 @@ export class HttpService {
     return this.request('POST','http://localhost:3000/generarVenta/'+numArticulos+'&' + producto+'&'+precio_unidad,cliente);
   }
   GenerarBusqueda(textoBusqueda){
-    console.log("HTTP service" + textoBusqueda);
     return this.Client.get('http://localhost:3000/searchProduct/'+textoBusqueda);
   }
   prueba(){

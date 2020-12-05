@@ -39,9 +39,6 @@ export class NavbarComponent implements OnInit {
   }
 
   buscar(){
-    this.VentaService.busqueda_producto = <Input> document.getElementById('prodSearch');
-    console.log(this.VentaService.busqueda_producto.value);
-
-    //this.VentaService.busqueda_producto=
+    this.VentaService.busqueda_producto = (<HTMLInputElement>document.getElementById('prodSearch')).value;
   }
 }

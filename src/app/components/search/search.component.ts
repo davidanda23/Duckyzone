@@ -9,16 +9,16 @@ import { HttpService } from 'src/app/services/HttpService/http-service.service';
 })
 export class SearchComponent implements OnInit {
 
-  prod: any;
+  prods: any;
   busqueda: any;
 
   constructor(public VentaService: VentaProductoService, public http: HttpService) { }
 
   ngOnInit(): void {
-    this.busqueda = this.VentaService.busqueda_producto.value;
+    this.busqueda = this.VentaService.busqueda_producto;
     this.http.GenerarBusqueda(this.busqueda).subscribe( (Productos) => {
-      this.prod = Productos;
-      console.log(this.prod.value);
+      this.prods = Productos;
+      console.log(this.prods);
     } ); 
   }
 

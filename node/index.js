@@ -228,18 +228,7 @@ app.post('/generarVenta/:numArticulos&:producto&:precio', (req, res) =>{
     });
 
 });
-///////7PRUEBA!!!!!!!!!!!!!!!!
-app.get('/prueba', function (req, res) {
-    connect.query('SELECT @n_vendidos',
-        [], (error, results) => {
-            if (error) {
-                throw error;
-            }else{
-                res.send(results);
-                res.end();
-            }
-        });
-});
+
 
 //API LOGIN
 app.get('/login/:email&:password', function (req, res) {
@@ -344,19 +333,20 @@ app.get("/deleteProduct/:id", function (req, res) {
 
 //API que realiza una búsqueda en los productos
 app.get("/searchProduct/:ingresoBusqueda", function (req, res) {
-    var buscarP = JSON.parse(req.params.ingresoBusqueda);
-    console.log("Api: " + buscarP +" "+req.params.ingresoBusqueda);
-
+    var buscarP = (req.params.ingresoBusqueda);
+    console.log("Api: " + buscarP);
+    
     connect.query('SELECT * FROM productos WHERE productos.nombre=?',
-        [buscarP], (error) => {
-            if (error) {
+        [buscarP], (error,results) => {
+            if (results.length > 0) {
+                res.send(results);
+            }else if (error){
                 throw error;
             }else{
-                res.send(res);
-                res.end();
+                console.log("No hay productos");
             }
+            res.end();
         });
-    
 });
 
 
