@@ -107,6 +107,8 @@ export class ConfiguracionComponent implements OnInit {
         console.log("Entra else");
         this.userN.password = this.userO.password;
       }
+      this.http.postEditUser(this.userN);
+      this.disableInput();
   }
 
   enableInput(){
@@ -117,7 +119,16 @@ export class ConfiguracionComponent implements OnInit {
     this.form.get('lastf').enable();
     this.form.get('tel').enable();
     this.form.get('password').enable();
-    
+  }
+
+  disableInput(){
+    this.form.get('username').disable();
+    this.form.get('email').disable();
+    this.form.get('name').disable();
+    this.form.get('lastm').disable();
+    this.form.get('lastf').disable();
+    this.form.get('tel').disable();
+    this.form.get('password').disable();
   }
 
 }
