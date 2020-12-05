@@ -23,6 +23,7 @@ import { VideojuegosComponent } from './components/departamentos/videojuegos/vid
 import { ConfiguracionComponent } from './components/propiedades-user/configuracion/configuracion.component';
 import { DashboardComponent } from './components/propiedades-user/dashboard/dashboard.component';
 import { VentasComponent } from './components/ventas/ventas.component';
+import { BusquedaComponent } from './components/busqueda/busqueda/busqueda.component';
 
 
 
@@ -42,7 +43,8 @@ import { VentasComponent } from './components/ventas/ventas.component';
     VideojuegosComponent,
     ConfiguracionComponent,
     DashboardComponent,
-    VentasComponent
+    VentasComponent,
+    BusquedaComponent
   ],
   imports: [
     BrowserModule,

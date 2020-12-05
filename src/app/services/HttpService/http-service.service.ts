@@ -112,6 +112,9 @@ export class HttpService {
   GenerarVenta(numArticulos, producto,precio_unidad,cliente){
     return this.request('POST','http://localhost:3000/generarVenta/'+numArticulos+'&' + producto+'&'+precio_unidad,cliente);
   }
+  GenerarBusqueda(textoBusqueda){
+    return this.Client.get('http://localhost:3000/search/'+textoBusqueda);
+  }
   prueba(){
     return this.Client.get('http://localhost:3000/prueba');
   }

@@ -25,9 +25,10 @@
         </ul>
         
         <form class="form-inline my-2 my-lg-0" style="width: auto;" >
-            <input class="form-control mr-sm-2" style="width: 350px;" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-2" routerLink="/search" type="submit">Search</button>
+            <input class="form-control mr-sm-2" id="prodSearch" style="width: 350px;" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-2" routerLink="/busqueda" (click)="buscar()" type="submit">Search</button>
         </form>
+
         <ul class="navbar-nav ml-auto" *ngIf="checkStorage()!=null;else login">
             <li ngbDropdown class="nav-item dropdown">
               <a ngbDropdownToggle class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

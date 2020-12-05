@@ -16,7 +16,6 @@ export class DeportesComponent implements OnInit {
   constructor(public http : HttpService, public router: Router, public productoService: VentaProductoService) { }
 
   ngOnInit(): void {
-    
     this.http.getProdxDept('prodxdept/1').subscribe( (Productos) => {
       this.prods = Productos;
     } );    

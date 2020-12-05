@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from 'src/app/services/HttpService/http-service.service';
+import { VentaProductoService } from 'src/app/services/ventaProducto/venta-producto.service';
 
 @Component({
   selector: 'navbar',
@@ -13,7 +14,8 @@ export class NavbarComponent implements OnInit {
   public role: String;
   @Input() correo:string;
 
-  constructor(private router: Router, public httpService : HttpService) {
+
+  constructor(private router: Router, public httpService : HttpService, public VentaService: VentaProductoService) {
       
    }
 
@@ -34,5 +36,12 @@ export class NavbarComponent implements OnInit {
     sessionStorage.removeItem('nombreUsuario');
     sessionStorage.removeItem('Admin');
     this.router.navigate(['/']);
+  }
+
+  buscar(){
+    this.VentaService.busqueda_producto = document.getElementById('prodSearch');
+    console.log(this.VentaService.busqueda_producto.value);
+
+    //this.VentaService.busqueda_producto=
   }
 }
