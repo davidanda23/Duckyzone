@@ -346,11 +346,11 @@ app.get("/deleteProduct/:id", function (req, res) {
 app.get("/search/:ingresoBusqueda", function (req, res) {
     console.log(req.params.ingresoBusqueda);
     connect.query('select * FROM productos WHERE productos.nombre=?',
-        [Number(req.params.ingresoBusqueda)], (error) => {
+        [req.params.ingresoBusqueda], (error) => {
             if (error) {
                 throw error;
             }else{
-                res.send(results);
+                res.send(res);
                 res.end();
             }
         });
