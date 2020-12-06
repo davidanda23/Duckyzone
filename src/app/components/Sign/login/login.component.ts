@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { HttpService } from 'src/app/services/HttpService/http-service.service';
 import { SessionStorageService } from 'ngx-webstorage';
 
-@Component({
+@Component({ 
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
   user: any = {id: null, username: '', email: '', password: ''};
   public res = [];
   public rol = [];
-  
 
   constructor(private fb: FormBuilder,private httpService : HttpService,
               private router: Router) { }
@@ -43,8 +42,9 @@ export class LoginComponent implements OnInit {
       });
       if(this.res!==null){
         sessionStorage.setItem('nombreUsuario',this.res[0].nombreusuario);
+        sessionStorage.setItem('idUsuario',this.res[0].id);
         this.router.navigate(['/home']);
-      }else{
+      }else{ 
         console.log("Ingrese correctamente sus credenciales");
       }
     });

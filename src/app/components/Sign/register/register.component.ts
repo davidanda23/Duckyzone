@@ -10,7 +10,7 @@ import { HttpService } from 'src/app/services/HttpService/http-service.service';
 })
 export class RegisterComponent implements OnInit {
   form = new FormGroup({});
-  user: any = {id: null, username: '', email: '', password: ''};
+  user: any = {id: null, username: '', email: '', password: '', name: '', apepat: '', apemat: '', tel: 0};
 
   constructor(private fb: FormBuilder,private httpService : HttpService,private router: Router) { }
 
@@ -19,6 +19,10 @@ export class RegisterComponent implements OnInit {
       username: this.user.username,
       email: this.user.email,
       password: this.user.password,
+      name: this.user.name,
+      apepat: this.user.apepat,
+      apemat: this.user.apemat,
+      tel: this.user.tel
     });
   }
   //crear usuario
@@ -27,6 +31,10 @@ export class RegisterComponent implements OnInit {
       username: this.form.get('username').value,
       email: this.form.get('email').value,
       password: this.form.get('password').value,
+      name: this.form.get('name').value,
+      apepat: this.form.get('apepat').value,
+      apemat: this.form.get('apemat').value,
+      tel: this.form.get('tel').value
     };
     this.httpService.postQuery(newUser,'register');
     this.router.navigate(['/home']);

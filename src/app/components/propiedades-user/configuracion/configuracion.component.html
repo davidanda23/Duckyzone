@@ -1,1 +1,51 @@
-<p>configuracion works!</p>
+<div class="config">
+<div class="container">
+    <div class="base-container">
+        <div class="header">
+            <a routerLink="/home">Duckyzone</a>
+        </div>
+        <div class="content">
+            <h3>Configuracion</h3>
+            <form class="form" [formGroup]="form" (ngSubmit)="modifyUser()">
+                <div class="form-group">
+                    <p>Nombre de Usuario: </p>
+                    <input type="text" formControlName="username" name="username" placeholder="{{this.userO.username}}" disabled/>
+                </div>
+                <div class="form-group">
+                    <p>Correo: </p>
+                    <input type="text" formControlName="email"name="email" placeholder="{{this.userO.email}}" disabled/>
+                </div>
+                <div class="form-group">
+                    <p>Nombre: </p>
+                    <input type="text" formControlName="name" name="name" placeholder="{{this.userO.name}}" disabled/>
+                </div>
+                <div class="form-group">
+                    <p>Apellido Paterno: </p>
+                    <input type="text" formControlName="lastm"name="lastm" placeholder="{{this.userO.lastm}}" disabled/>
+                </div>
+                <div class="form-group">
+                    <p>Apellido Materno: </p>
+                    <input type="text" formControlName="lastf"name="lastf" placeholder="{{this.userO.lastf}}" disabled/>
+                </div>
+                <div class="form-group">
+                    <p>Telefono: </p>
+                    <input type="text" formControlName="tel"name="tel" placeholder="{{this.userO.tel}}" disabled/>
+                </div>
+                <div class="form-group">
+                    <p>Contraseña: </p>
+                    <input type="password" formControlName="password" name="password" placeholder="{{this.userO.password}}" disabled/>
+                </div>
+                <div class="footer">
+                    <button type="button" class="btn" (click)="enableInput()">
+                        Modificar
+                    </button>
+                    <br>
+                    <button type="submit" class="btn">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div> 
+</div>
+</div>

@@ -22,7 +22,9 @@ export class HttpService {
       result.subscribe(resolve, reject);
     });
   }
-  
+  getClient(id){
+    return this.Client.get('http://localhost:3000/getClient/'+id);
+  }
   getQuery(url: String) { 
     this.rsl = this.Client.get('http://localhost:3000/' + url);
     return this.rsl;
@@ -61,5 +63,52 @@ export class HttpService {
   getUsers(){
     return this.Client.get('http://localhost:3000/getUsers');
   }
-  
+  getUser(id){
+    return this.Client.get('http://localhost:3000/getUser/' + id)
+  }
+  postAddEmp(user){
+    return this.request('POST','http://localhost:3000/addEmployee',user);
+  }
+  postEditEmp(user){
+    return this.request('POST','http://localhost:3000/editEmployee',user);
+  }
+  deleteEmployee(usuario){
+    return this.Client.get('http://localhost:3000/deleteEmployee/'+usuario.id);
+  }
+  postAddUser(usuario){
+    return this.request('POST','http://localhost:3000/addUsers',usuario);
+  }
+  postEditUser(usuario){
+    return this.request('POST','http://localhost:3000/editUsers',usuario);
+  }
+  deleteUser(usuario){
+    return this.Client.get('http://localhost:3000/deleteUser/'+usuario.id);
+  }
+  postAddDept(dept){
+    return this.request('POST','http://localhost:3000/addDept',dept);
+  }
+  postEditDept(dept){
+    return this.request('POST','http://localhost:3000/editDept',dept);
+  }
+  deleteDept(dept){
+    return this.Client.get('http://localhost:3000/deleteDept/'+dept.id);
+  }
+  postAddProvider(provider){
+    return this.request('POST','http://localhost:3000/addProvider',provider);
+  }
+  postEditProvider(provider){
+    return this.request('POST','http://localhost:3000/editProvider',provider);
+  }
+  deleteProvider(provider){
+    return this.Client.get('http://localhost:3000/deleteProvider/'+provider.ID);
+  }
+  postAddProduct(product){
+    return this.request('POST','http://localhost:3000/addProduct',product);
+  }
+  postEditProduct(product){
+    return this.request('POST','http://localhost:3000/editProduct',product);
+  }
+  deleteProduct(product){
+    return this.Client.get('http://localhost:3000/deleteProduct/'+product.codigo);
+  }
 }
