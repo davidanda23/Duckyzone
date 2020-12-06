@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
       email: this.user.email,
       password: this.user.password,
     });
+
   }
 
   loginUsuario(){
@@ -48,6 +49,5 @@ export class LoginComponent implements OnInit {
         console.log("Ingrese correctamente sus credenciales");
       }
     });
-    
   }
 }

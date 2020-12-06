@@ -358,6 +358,41 @@ app.get("/deleteProduct/:id", function (req, res) {
     
 });
 
+//API que realiza una búsqueda en los productos
+app.get("/searchProduct/:ingresoBusqueda", function (req, res) {
+    var buscarP = (req.params.ingresoBusqueda);
+    console.log("Api: " + buscarP);
+    
+    connect.query('SELECT * FROM productos WHERE productos.nombre=?',
+        [buscarP], (error,results) => {
+            if (results.length > 0) {
+                res.send(results);
+            }else if (error){
+                throw error;
+            }else{
+                console.log("No hay productos");
+            }
+            res.end();
+        });
+});
+
+//API que genera una venta
+app.post('/generarVenta/:numArticulos&:producto&:precio', (req, res) =>{
+    connect.query('CALL onHandlePrdFunct(?,?,?,?,?,?,?,?,?,?,?,?,?)',
+    [req.params.precio,req.params.numArticulos,req.body.calle,req.body.colonia,
+    req.body.num_interno,req.body.num_externo,req.body.cod_postal,req.body.ciudad,req.body.pais,
+    req.body.id_usuario,req.body.correo,req.body.nombreusuario,req.params.producto],
+     (error, results, fields) =>{
+        if(error){
+            throw error;
+        }else{
+            res.send(results);
+        }
+    });
+
+});  
+
+
 app.listen(3000, () => {
     console.log('Server puerto 3000');
 })

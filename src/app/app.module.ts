@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { DeportesComponent } from './components/departamentos/deportes/deportes.component';
 import { ModaComponent } from './components/departamentos/moda/moda.component';
@@ -22,6 +22,9 @@ import { SearchComponent } from './components/search/search.component';
 import { VideojuegosComponent } from './components/departamentos/videojuegos/videojuegos.component';
 import { ConfiguracionComponent } from './components/propiedades-user/configuracion/configuracion.component';
 import { DashboardComponent } from './components/propiedades-user/dashboard/dashboard.component';
+import { VentasComponent } from './components/ventas/ventas.component';
+import { BusquedaComponent } from './components/busqueda/busqueda/busqueda.component';
+
 
 
 @NgModule({
@@ -39,7 +42,9 @@ import { DashboardComponent } from './components/propiedades-user/dashboard/dash
     LibrosComponent,
     VideojuegosComponent,
     ConfiguracionComponent,
-    DashboardComponent
+    DashboardComponent,
+    VentasComponent,
+    BusquedaComponent
   ],
   imports: [
     BrowserModule,
