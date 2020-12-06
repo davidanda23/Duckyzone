@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
     } );
     //COMPROBAMOS SI EL USUARIO ES ADMIN
 
-  }
+  } 
   checkStorage(){
     this.user=sessionStorage.getItem('nombreUsuario');
     this.role=sessionStorage.getItem('Admin');
