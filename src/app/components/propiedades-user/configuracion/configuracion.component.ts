@@ -107,7 +107,7 @@ export class ConfiguracionComponent implements OnInit {
         console.log("Entra else");
         this.userN.password = this.userO.password;
       }
-      this.http.postEditUser(this.userN);
+      this.http.postPersonalUser(this.userN);
       this.disableInput();
   }
 

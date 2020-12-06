@@ -82,6 +82,9 @@ export class HttpService {
   postEditUser(usuario){
     return this.request('POST','http://localhost:3000/editUsers',usuario);
   }
+  postPersonalUser(usuario){
+    return this.request('POST','http://localhost:3000/editPersonalUser',usuario);
+  }
   deleteUser(usuario){
     return this.Client.get('http://localhost:3000/deleteUser/'+usuario.id);
   }
