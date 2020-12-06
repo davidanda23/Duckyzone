@@ -181,13 +181,6 @@ app.post('/editUsers', (req, res) => {
             if (error) {
                 throw error;
             }
-            console.log(req.body.email);
-            console.log(req.body.username);
-            console.log(req.body.name);
-            console.log(req.body.lastf);
-            console.log(req.body.lastm);
-            console.log(req.body.tel);
-            console.log(req.body.id);
         });
 });
 //API QUE RETORNA EMPLEADOS
