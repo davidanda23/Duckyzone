@@ -28,7 +28,8 @@ export class DashboardComponent implements OnInit {
   public entryDelete: any;
   public depts_dpd = [];
   public depts_int = [];
-  
+  public compras = [];
+
   constructor(public httpService : HttpService,
               public modalService: NgbModal, private router: Router) { }
 

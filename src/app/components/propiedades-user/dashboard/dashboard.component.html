@@ -152,7 +152,31 @@
     </div>
     <div class="dashboard-purchases" *ngIf="isPurchases===true">
         <h2>Compras</h2>
-        <button>+</button>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">ID de Compra</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Total</th>
+              <th scope="col">Producto</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">ID de Proveedor</th>
+              <th scope="col">ID de Departamento</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let compra of compras">
+              <th>{{this.compra.id}}</th>
+              <td>{{this.compra.fecha</td>
+              <td>{{this.compra.total</td>
+              <td>{{this.compra.producto</td>
+              <td>{{this.compra.cantidad</td>
+              <td>{{this.compra.ID_proveedor</td>
+              <td>{{this.compra.ID_departamento</td>
+            </tr>
+          </tbody>
+        </table>
     </div>
     <div class="dashboard-shipping" *ngIf="isShipping===true">
         <h2>Pedidos</h2>

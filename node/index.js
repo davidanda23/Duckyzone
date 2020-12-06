@@ -181,6 +181,7 @@ app.post('/editPersonalUser', (req, res) => {
             if (error) {
                 throw error;
             }
+<<<<<<< HEAD
         });
 });
 //API QUE EDITA USUARIOS
@@ -190,6 +191,8 @@ app.post('/editUsers', (req, res) => {
             if (error) {
                 throw error;
             }
+=======
+>>>>>>> 32830172919e61fb5863dbc5fc32f562a0f48200
         });
 });
 //API QUE RETORNA EMPLEADOS
