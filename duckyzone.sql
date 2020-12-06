@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2020 a las 00:03:10
+-- Tiempo de generación: 27-11-2020 a las 10:00:12
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.9
 
@@ -80,7 +80,8 @@ INSERT INTO `departamentos` (`id`, `nombre`) VALUES
 (6, 'Hogar'),
 (7, 'Niños'),
 (8, 'Comida'),
-(9, 'Libros');
+(9, 'Libros'),
+(10, 'Videojuegos');
 
 -- --------------------------------------------------------
 
@@ -103,7 +104,8 @@ CREATE TABLE `empleado` (
   `id` int(11) NOT NULL,
   `salario` double DEFAULT NULL,
   `puesto` varchar(30) DEFAULT NULL,
-  `id_departamento` int(11) DEFAULT NULL
+  `id_departamento` int(11) DEFAULT NULL,
+  `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -146,6 +148,62 @@ CREATE TABLE `productos` (
   `departamento` int(11) DEFAULT NULL,
   `proveedor` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`codigo`, `nombre`, `descr`, `precio_unidad`, `existencias`, `imgen`, `departamento`, `proveedor`) VALUES
+(1, 'Balon de futbol', 'Balon de futbol profesional', 200, 99, './../../../../assets/balonfutbol.jpg', 1, NULL),
+(2, 'Pesas de 30kg', 'Pesas para entrenamiento profecional de 30kg', 320, 99, './../../../../assets/30kg.jpg', 1, NULL),
+(3, 'Raquetas de Tenis', 'Paquete de dos raquetas de tenis, viene incluido con dos pelotas', 125, 99, './../../../../assets/raqueta.jpg', 1, NULL),
+(4, 'Casco de futbol americano', 'Casco de futbol americano con logotipo de equipo', 400, 99, './../../../../assets/casco.jpg', 1, NULL),
+(5, 'Palos de Hockey', 'Paquete que contiene seis palos de Hockey', 1000, 99, './../../../../assets/palos.jpg', 1, NULL),
+(6, 'Bolso para mujer', 'Bolso rosa para mujer de ultima temporada', 1500, 99, './../../../../assets/bolso.jpg', 2, NULL),
+(7, 'Abrigo de piel', 'Chamarra de piel genuina para Hombre', 2400, 99, './../../../../assets/abrigopiel.jpg', 2, NULL),
+(8, 'Zapatos de tacon', 'Zapatos de tacon de diseñador', 4000, 99, './../../../../assets/tacon.jpg', 2, NULL),
+(9, 'Chamarra de piel', 'Chamarra de piel genuina para hombres', 5000, 99, './../../../../assets/piel.jpg', 2, NULL),
+(10, 'Aretes de diamante', 'Par de aretes de diamente para mujeres', 10000, 99, './../../../../assets/diamante.jpg', 2, NULL),
+(11, 'Audifonos', 'Par de audifonos para escuchar musica', 1500, 99, './../../../../assets/audifonos.jpg', 3, NULL),
+(12, 'Microfono', 'Microfono USB para grabar', 1000, 99, './../../../../assets/microfono.jpg', 3, NULL),
+(13, 'Mouse + Teclado', 'Paquete que contiene un mouse y un teclado para computadora, ambos usan coneccion USB', 600, 99, './../../../../assets/mouse.jpg', 3, NULL),
+(14, 'Television con pantalla LSD 55\'\'', 'Pantalla LSD inteligente de 55\'\'', 3500, 99, './../../../../assets/lsd.jpg', 3, NULL),
+(15, 'Gaming laptop', 'Laptop para gaming con AMD T1800, 2TB SSD', 9500, 99, './../../../../assets/gaming.jpg', 3, NULL),
+(16, 'Guitarra cuerdas de nylon', 'Guitarra con cuerdas de nylon, tambien conocida como guitarra española o clasica', 700, 99, './../../../../assets/nylon.jpg', 4, NULL),
+(17, 'Guitarra electrica', 'Guitarra electrica', 1400, 99, './../../../../assets/electrica.jpg', 4, NULL),
+(18, 'Bajo electrico', 'Bajo electrico', 1300, 99, './../../../../assets/bajo.jpg', 4, NULL),
+(19, 'Bateria', 'Bateria basica con las baquetas incluidas, un platillo, un tom de piso, toms 1 y 2, un bombo, 1 caja y 1 hi hat', 3200, 99, './../../../../assets/bateria.png', 4, NULL),
+(20, 'Viloin de 4/4', 'Violin de 4/4, paitititi incluido', 800, 99, './../../../../assets/violin.jpg', 4, NULL),
+(21, 'Lapiz labial', 'Lapiz labial para mujer rojo carmesi de diseñador', 850, 99, './../../../../assets/lapiz.png', 5, NULL),
+(22, 'Rimel', 'Rimel para los ojos para mujer de diseñador', 760, 99, './../../../../assets/rimel.jpg', 5, NULL),
+(23, 'Pintura para uñas', 'Pintura para uñas para mujer de diseñador', 680, 99, './../../../../assets/unas.jpg', 5, NULL),
+(24, 'Blush', 'Polvo para belleza tipo blush', 740, 99, './../../../../assets/blush.jpg', 5, NULL),
+(25, 'Kit de pestañas postisas', 'Contiene hasta quince pares de pestañas postizas faciles de poner y sacar para maxima belleza', 200, 99, './../../../../assets/pestanas.jpg', 5, NULL),
+(26, 'Sala de estar', 'Sala completa con tres sofas y pieza central', 250000, 99, './../../../../assets/sala.png', 6, NULL),
+(27, 'Aspiradora robot', 'Aspiradora robot de ultima generacion IA avanzado', 800, 99, './../../../../assets/aspiradora.jpg', 6, NULL),
+(28, 'Refrigerador', 'Refrigerador con panel inteligente con coneccion de internet', 7000, 99, './../../../../assets/refri.jpg', 6, NULL),
+(29, 'Estufa electrica', 'Estufa electrica pequeña facil de mover', 650, 99, './../../../../assets/estufae.jpg', 6, NULL),
+(30, 'Estufa de gas', 'Estufa de gas para cocinar', 3700, 99, './../../../../assets/estufag.jpg', 6, NULL),
+(31, 'Sable de luz Jedi', 'Juguete de sable de luz jedi verde', 420, 99, './../../../../assets/jedi.jpg', 7, NULL),
+(32, 'Sable de luz Sith', 'Juguete de sable de luz sith rojo', 420, 99, './../../../../assets/sith.jpg', 7, NULL),
+(33, 'Desatornillador sonico de Doctor Who', 'Desatornillador sonico de la serie Doctor Who', 2500, 99, './../../../../assets/sonic.jpg', 7, NULL),
+(34, 'Set de lego Jurasic Park', 'Set de ladrillos lego basado en las peliculas de Jurasic Park', 970, 99, './../../../../assets/lego.jpg', 7, NULL),
+(35, 'Peluche de Bob Esponja', 'Muñeco de Bob Esponja para niños', 760, 99, './../../../../assets/bob.jpg', 7, NULL),
+(36, 'Salsa valentina 1L', 'Bote de vidrio salsa valentina con: 1L', 50, 99, './../../../../assets/valentina.jpg', 8, NULL),
+(37, '10kg de Tomates', 'Bolsa de tomates frescos directo para tu casa con: 1kg', 600, 99, './../../../../assets/tomates.jpg', 8, NULL),
+(38, 'Bote de helado de vainilla 3L', 'Bote de helado de 3L sabor vainilla', 320, 99, './../../../../assets/vainilla.jpg', 8, NULL),
+(39, 'Caja de zucaritas 760g', 'Caja de cereal marca zucaritas 780g', 60, 99, './../../../../assets/zucaritas.jpg', 8, NULL),
+(40, 'pay de queso', 'Delicioso pai de queso directo hasta tu casa, 1 pieza', 250, 99, './../../../../assets/pay.jpg', 8, NULL),
+(41, 'Trilogia de Los Juegos del Hambre', 'Tres libros best sellers que inspiraron las peliculas del mismo nombre', 800, 99, './../../../../assets/hambre.jpg', 9, NULL),
+(42, 'Saga completa de Harry Potter', 'Los libros de fantasia mas famosos de la historia en una sola coleccion', 1200, 99, './../../../../assets/harry.jpg', 9, NULL),
+(43, 'El Resplandor', 'El clasico del horror de Stephen King que dio vida a la famosa pelicula', 400, 99, './../../../../assets/resplando.jpg', 9, NULL),
+(44, 'Coleccion de historias cortas de Edgar Allen Poe', 'El cuervo, El corazon delator, La mascara de la muerte roja y otros inolvidables cuentos de terror del legendario escritor', 620, 99, './../../../../assets/poe.jpg', 9, NULL),
+(45, 'La obra completa de H. P. Lovecraft', 'Coleccion imperdible del autor del horror cosmico', 1200, 99, './../../../../assets/lovecraft.jpg', 9, NULL),
+(46, 'Play Station 5', 'Lo mas nuevo en entretenimiento interactivo de Sony', 11500, 99, './../../../../assets/ps5.jpg', 10, NULL),
+(47, 'Xbox Serie S', 'Lo mas nuevo en entretenimiento interactivo de Microsoft', 11500, 99, './../../../../assets/xbox.jpg', 10, NULL),
+(48, 'Nintendo Switch', 'Juega con tus amigos en donde sea, cuando sea con lo mas nuevo de nintendo', 8000, 99, './../../../../assets/switch.jpg', 10, NULL),
+(49, 'The Legend of Zelda Breath of the Wild', 'Explora un mundo entero cuando y donde quieras, solo para Nintendo Switch', 1500, 99, './../../../../assets/breath.jpg', 10, NULL),
+(50, 'Spiderman Miles Morales', 'Explora y salva Nueva York como un nuevo hombre araña', 1500, 99, './../../../../assets/miles.jpg', 10, NULL);
 
 -- --------------------------------------------------------
 
@@ -256,7 +314,8 @@ ALTER TABLE `departamento_interno`
 --
 ALTER TABLE `empleado`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_departamento` (`id_departamento`);
+  ADD KEY `id_departamento` (`id_departamento`),
+  ADD KEY `id_usuario` (`id_usuario`);
 
 --
 -- Indices de la tabla `envios`
@@ -326,7 +385,7 @@ ALTER TABLE `compras`
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `departamento_interno`
@@ -350,7 +409,7 @@ ALTER TABLE `envios`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
@@ -391,7 +450,8 @@ ALTER TABLE `compras`
 -- Filtros para la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  ADD CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`id_departamento`) REFERENCES `departamento_interno` (`id`);
+  ADD CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`id_departamento`) REFERENCES `departamento_interno` (`id`),
+  ADD CONSTRAINT `empleado_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`);
 
 --
 -- Filtros para la tabla `envios`

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +7,6 @@ import { Observable } from 'rxjs';
 export class HttpService {
   rsl: any;
   res: any;
-  nombreUsuario:string='';
 
   constructor(private Client: HttpClient) {
 
@@ -29,13 +27,39 @@ export class HttpService {
     this.rsl = this.Client.get('http://localhost:3000/' + url);
     return this.rsl;
   }
+
+  getProdxDept(url: String) { 
+    this.rsl = this.Client.get('http://localhost:3000/' + url);
+    return this.rsl;
+  }
+
   postQuery(user,url: String){
     return this.request('POST','http://localhost:3000/'+url,user);
   }
 
   getUserAuth(user,url: String){
     this.res=this.Client.get('http://localhost:3000/'+url+'/'+user.email+'&'+user.password,user);
-    //console.log(this.res);
     return this.res;
   }
+  getRole(user,url:String){
+    return this.Client.get('http://localhost:3000/'+url+'/'+user,user);
+  }
+
+  getAllEmployees(){
+    return this.Client.get('http://localhost:3000/getAllEmployees');
+  }
+  
+  getDeptsAdmin(){
+    return this.Client.get('http://localhost:3000/getDeptsAdmin');
+  }
+  getProviders(){
+    return this.Client.get('http://localhost:3000/getProviders');
+  }
+  getProducts(){
+    return this.Client.get('http://localhost:3000/getProducts');
+  }
+  getUsers(){
+    return this.Client.get('http://localhost:3000/getUsers');
+  }
+  
 }

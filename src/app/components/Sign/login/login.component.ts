@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpService } from 'src/app/services/HttpService/http-service.service';
+import { SessionStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,11 @@ export class LoginComponent implements OnInit {
   form = new FormGroup({});
   user: any = {id: null, username: '', email: '', password: ''};
   public res = [];
+  public rol = [];
   
 
-  constructor(private fb: FormBuilder,private httpService : HttpService,private router: Router) { }
+  constructor(private fb: FormBuilder,private httpService : HttpService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -31,13 +34,20 @@ export class LoginComponent implements OnInit {
     };
     this.httpService.getUserAuth(User,'login').subscribe((respuesta)=>{
       this.res=respuesta;
-      console.log(this.res[0].nombreusuario);
+      this.httpService.getRole(this.res[0].id,'role').subscribe((rol)=>{
+        if(rol){
+          sessionStorage.setItem('Admin','Yes');
+        }else{
+          sessionStorage.setItem('Admin','No');
+        }
+      });
       if(this.res!==null){
-        this.httpService.nombreUsuario=this.res[0].nombreusuario;
+        sessionStorage.setItem('nombreUsuario',this.res[0].nombreusuario);
         this.router.navigate(['/home']);
       }else{
         console.log("Ingrese correctamente sus credenciales");
       }
     });
+    
   }
 }

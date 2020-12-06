@@ -1,0 +1,23 @@
+<div class="container">
+    <div id="carouselExampleSlidesOnly" class="carousel slide mt-4" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="./../../../../assets/ninos.jpg" alt="First slide">
+            </div>
+        </div>
+        <div class="carousel-caption d-none d-md-block">
+            <h5>Niños</h5>
+            <p>Que tus mas pequeños aprendan jugando</p>
+        </div>
+    </div>
+
+<div class="card-group">
+  <div class="card" *ngFor="let prod of prods">
+    <img class="card-img-top" src={{prod.imgen}} alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{prod.nombre}}</h5>
+      <p class="card-text">{{prod.descr}} <br>$ {{prod.precio_unidad}}</p>
+      <a href="#" class="btn btn-primary">Comprar</a>
+    </div>
+  </div>
+</div>

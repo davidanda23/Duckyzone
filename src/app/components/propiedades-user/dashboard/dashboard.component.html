@@ -1,0 +1,183 @@
+<div class="dashboard-box">   
+    <div class="sidebar">
+        <header>Panel de control</header>
+        <ul>
+            <li><a (click)="toggleConfig('employees')"><i class="fas fa-user-shield"></i>Empleados</a></li>
+            <li><a (click)="toggleConfig('depts')"><i class="fas fa-building"></i>Departamentos</a></li>
+            <li><a (click)="toggleConfig('providers')"><i class="fas fa-shopping-bag"></i>Proveedores</a></li>
+            <li><a (click)="toggleConfig('products')"><i class="fas fa-cart-arrow-down"></i>Productos</a></li>
+            <li><a (click)="toggleConfig('sales')"><i class="fas fa-piggy-bank"></i>Ventas</a></li>
+            <li><a (click)="toggleConfig('users')"><i class="fas fa-users"></i>Usuarios</a></li>
+        </ul>
+    </div>
+    <div  *ngIf="isEmployees===true">
+        <h2>Empleados</h2>
+        <div class="table-box">
+            <button class="btn-add">+</button>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre de Usuario</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Puesto</th>
+                    <th scope="col">Departamento</th>
+                    <th scope="col">Salario</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let employee of employees">
+                    <th scope="row">{{this.employee.id}}</th>
+                    <td>{{this.employee.nombreusuario}}</td>
+                    <td>{{this.employee.correo}}</td>
+                    <td>{{this.employee.puesto}}</td>
+                    <td>{{this.employee.departamento}}</td>
+                    <td>{{this.employee.salario}}</td>
+                    <td><button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></td>
+                    <td><button type="button" class="btn btn-danger">X</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="dashboard-depts" *ngIf="isDepts===true">
+        <h2>Departamentos</h2>
+        <div class="table-box">
+            <button class="btn-add">+</button>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre de Departamento</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let dept of depts">
+                    <th scope="row">{{this.dept.id}}</th>
+                    <td>{{this.dept.nombre}}</td>
+                    <td><button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></td>
+                    <td><button type="button" class="btn btn-danger">X</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="dashboard-providers" *ngIf="isProviders===true">
+        <h2>Proveedores</h2>
+        <div class="table-box">
+            <button class="btn-add">+</button>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Tel</th>
+                    <th scope="col">Calle</th>
+                    <th scope="col">Colonia</th>
+                    <th scope="col">Num. Interno</th>
+                    <th scope="col">Num. Externo</th>
+                    <th scope="col">Codigo Postal</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Ciudad</th>
+                    <th scope="col">País</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let provider of providers">
+                    <th scope="row">{{this.provider.ID}}</th>
+                    <td>{{this.provider.nombre}}</td>
+                    <td>{{this.provider.tel}}</td>
+                    <td>{{this.provider.calle}}</td>
+                    <td>{{this.provider.colonia}}</td>
+                    <td>{{this.provider.num_int}}</td>
+                    <td>{{this.provider.num_ext}}</td>
+                    <td>{{this.provider.cod_postal}}</td>
+                    <td>{{this.provider.correo}}</td>
+                    <td>{{this.provider.ciudad}}</td>
+                    <td>{{this.provider.pais}}</td>
+                    <td><button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></td>
+                    <td><button type="button" class="btn btn-danger">X</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="dashboard-products" *ngIf="isProducts===true">
+        <h2>Productos</h2>
+        <div class="table-box">
+            <button class="btn-add">+</button>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Precio*unidad</th>
+                    <th scope="col">Existencias</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Departamento</th>
+                    <th scope="col">Proveedor</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let product of products">
+                    <th scope="row">{{this.product.codigo}}</th>
+                    <td>{{this.product.nombre}}</td>
+                    <td>{{this.product.descr}}</td>
+                    <td>{{this.product.precio_unidad}}</td>
+                    <td>{{this.product.existencias}}</td>
+                    <td>{{this.product.imgen}}</td>
+                    <td>{{this.product.departamento}}</td>
+                    <td>{{this.product.proveedor}}</td>
+                    <td><button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></td>
+                    <td><button type="button" class="btn btn-danger">X</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="dashboard-sales" *ngIf="isSales===true">
+        <h2>Ventas</h2>
+        <button>+</button>
+    </div>
+    <div class="dashboard-users" *ngIf="isUsers===true">
+        <h2>Usuarios</h2>
+        <div class="table-box">
+            <button class="btn-add">+</button>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre de Usuario</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido Paterno</th>
+                    <th scope="col">Apellido Materno</th>
+                    <th scope="col">Correo</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let user of users">
+                    <th scope="row">{{this.user.id}}</th>
+                    <td>{{this.user.nombreusuario}}</td>
+                    <td>{{this.user.nombre}}</td>
+                    <td>{{this.user.apelli_pat}}</td>
+                    <td>{{this.user.apelli_mat}}</td>
+                    <td>{{this.user.correo}}</td>
+                    <td><button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></td>
+                    <td><button type="button" class="btn btn-danger">X</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
