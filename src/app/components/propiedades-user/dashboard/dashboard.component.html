@@ -314,6 +314,12 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="email">Contraseña: </label>
+                <div class="input-group">
+                  <input id="passAddEmp" type="password"   class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="username">Nombre de Usuario: </label>
                 <div class="input-group">
                   <input id="usernameAddEmp"  class="form-control" > 
@@ -358,7 +364,7 @@
             <div class="form-group">
                 <label for="username">ID departamento: </label>
                 <div class="input-group">
-                  <input id="id_depaAddEmp" value="" class="form-control" > 
+                  <input id="id_depaAddEmp" type="number" placeholder="1" max="12" min="1"  class="form-control" > 
                  
                 </div>
                 <!--<select class="input-group" [(ngModel)]="selectedValue" id="id_depaAddEmp" name="id_depaAddEmp">
@@ -1002,7 +1008,7 @@
             <div class="form-group">
                 <label for="email">Contraseña: </label>
                 <div class="input-group">
-                  <input id="passAddUser" type="password" value=""  class="form-control">
+                  <input id="passAddUser" type="password"  class="form-control">
                 </div>
             </div>
             <div class="form-group">

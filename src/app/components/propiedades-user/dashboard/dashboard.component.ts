@@ -66,6 +66,7 @@ export class DashboardComponent implements OnInit {
     const newEmployee = {
       nombreusuario: (<HTMLInputElement>document.getElementById("usernameAddEmp")).value,
       correo: (<HTMLInputElement>document.getElementById("emailAddEmp")).value,
+      contrseña: (<HTMLInputElement>document.getElementById("passAddEmp")).value,
       nombre: (<HTMLInputElement>document.getElementById("nameAddEmp")).value,
       apelli_pat: (<HTMLInputElement>document.getElementById("apepatAddEmp")).value,
       apelli_mat: (<HTMLInputElement>document.getElementById("apematAddEmp")).value,
@@ -74,6 +75,7 @@ export class DashboardComponent implements OnInit {
       salario: (<HTMLInputElement>document.getElementById("salarioAddEmp")).value,
       id_departamento: (<HTMLInputElement>document.getElementById("id_depaAddEmp")).value,
     }
+    console.log(newEmployee.contrseña);
     this.httpService.postAddEmp(newEmployee);
     window.location.reload();
   }
@@ -188,6 +190,7 @@ export class DashboardComponent implements OnInit {
       apelli_mat: (<HTMLInputElement>document.getElementById("apematAddUser")).value,
       tel: (<HTMLInputElement>document.getElementById("telAddUser")).value
     }
+    console.log(newUser.contrseña);
     this.httpService.postAddUser(newUser);
     window.location.reload();
   }

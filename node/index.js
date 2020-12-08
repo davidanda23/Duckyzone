@@ -166,7 +166,8 @@ app.get("/getUser/:id", (req, res) => {
 
 //API QUE AGREGA USUARIOS
 app.post('/addUsers', (req, res) => {
-    connect.query('CALL add_users(?,?,?,?,?,?,?)',
+    console.log(req.body.contrseña);
+    connect.query('CALL add_users(?,(?),?,?,?,?,?)',
         [req.body.correo,req.body.contrseña,req.body.nombre,Number(req.body.tel),req.body.apelli_pat,req.body.apelli_mat,req.body.nombreusuario], (error) => {
             if (error) {
                 throw error;
@@ -226,8 +227,9 @@ app.post('/register', (req, res) => {
 });
 //API AGREGAR EMPLEADOS
 app.post('/addEmployee', (req, res) => {
-    connect.query('CALL add_employees(?,?,?,?,?,?,?,?,?)',
-        [req.body.correo,req.body.nombre,Number(req.body.tel),req.body.apelli_pat,req.body.apelli_mat,req.body.nombreusuario,Number(req.body.salario),req.body.puesto,Number(req.body.id_departamento)], (error) => {
+    console.log(req.body.contrseña);
+    connect.query('CALL add_employees(?,(?),?,?,?,?,?,?,?,?)',
+        [req.body.correo,req.body.contrseña,req.body.nombre,Number(req.body.tel),req.body.apelli_pat,req.body.apelli_mat,req.body.nombreusuario,Number(req.body.salario),req.body.puesto,Number(req.body.id_departamento)], (error) => {
             if (error) {
                 throw error;
             }
@@ -255,6 +257,7 @@ app.get('/login/:email&:password', function (req, res) {
                 res.send(results);
             } else {
                 //CREAR UN ERROR AL TENER CREDENCIALES INCORRECTAS
+                console.log("No hay");
             }
             res.end();
         });
