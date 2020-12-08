@@ -1,50 +1,41 @@
-<div class="container center-h center-v">
-    <div class="img">
-        <img src="{{producto.imgen}}" width="200" height="140">
-    </div>
-    <div class="desc">
-        <code><h1>{{producto.nombre}}</h1></code>
-    </div>
-    <div class="desc">
-        <div class="container2 center-h center-v">
-            <div class="desc">
-                <code>
-                    <h2>${{producto.precio_unidad}}</h2>
-                </code>
-            </div>
-            <div class="desc">
-                <code>
-                    <p>Cantidad: </p><input type="number" name="cantidad" id="cantidad" (change)="value()" max="{{producto.existencias}}"> <br><br>
-                    <p>Existencias: {{producto.existencias}}</p>
-                </code>
-            </div>
-        </div>
-    </div>
-  </div>
-  <div class="container2 center-h center-v">
-    <div class="desc">
-        <code><p>Enviar a: # {{this.cliente[0].num_interno}}, {{this.cliente[0].calle}}, {{this.cliente[0].colonia}}, {{this.cliente[0].ciudad}}</p></code>
-    </div>
-    <div class="container center-h center-v">
-        <div class="desc">
-            <code><button (click)="confirmaVenta()" class="btn btn-warning" >Comprar</button></code>
-        </div>
-        <div class="desc">
-            <code><button (click)="confirmaVenta()" class="btn btn-danger">Regresar</button></code>
-        </div>
-    </div>
-  </div>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-  <p><button (click)="mostrarModalConf()">Modal de confirmacion</button></p>
+<div class="w3-container">
+  <h1>Confirme Su Compra</h1>
+
+  <div class="w3-display-container w3-green" style="height:300px; text-align: center; border-radius: 15px;">
+    <div class="w3-display-topleft"><img src="{{producto.imgen}}" style="width:140px; height: 140px;" ></div>
+    <div class="w3-display-topmiddle"><h2>{{producto.nombre}}</h2></div>
+    <div class="w3-display-middle"><h3>${{producto.precio_unidad}} MNMX</h3></div>
+    <div class="w3-display-topright" style="margin-right: 2%;"> <p>Cantidad: </p><input type="number" name="cantidad" id="cantidad" (change)="value()" max="{{producto.existencias}}"></div>
+    <div class="w3-display-left"><h4>Existencias: {{producto.existencias}}</h4></div>
+    <div class="w3-display-right" style="margin-right: 5%;"><button (click)="confirmaVenta()" class="btn btn-warning" >Comprar</button></div>
+    <div class="w3-display-bottomleft"><p>Enviar a: # {{this.cliente[0].num_interno}}, {{this.cliente[0].calle}}, {{this.cliente[0].colonia}}, {{this.cliente[0].ciudad}}</p></div>
+    <div class="w3-display-bottommiddle">
+      <label class="custom-radio-checkbox">
+        <!-- Input oculto -->
+        <input class="custom-radio-checkbox__input" type="checkbox" id="terminos" (change)="validar()">
+        <!--Imagen en sustitucion -->
+        <span class="custom-radio-checkbox__show custom-radio-checkbox__show--checkbox"></span>
+        <!-- Texto -->
+        <span class="custom-radio-checkbox__text">Acepto las condiciones de uso y privacidad</span>
+      </label>
+    </div>
+    <div class="w3-display-bottomright" style="margin-right: 5%; margin-bottom: 10px;">
+      <button (click)="regresar()" class="btn btn-danger">Regresar</button>
+    </div>
+    
+  </div>
+</div>
 
   <ng-template #myModalConf let-modal >
   
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title">!Gracias por su compra!</h2>
-          <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.close('Cerrado desde la ventana')"> 
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.close()"> 
             <span aria-hidden="true">&times;</span>
-          </button>-->
+          </button>
       </div>
       <div class="modal-body">
         Regresar a la página principal
@@ -56,3 +47,15 @@
   
   </ng-template>
 
+  <ng-template #validarTerminos let-modal >
+  
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Es necesario que acepte nuestros términos y condiciones</h2>
+      </div>
+      <div class="modal-body">
+        Por favor acepte los términos y condiciones
+      </div>
+    </div>
+  
+  </ng-template>

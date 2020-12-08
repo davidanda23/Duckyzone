@@ -1,4 +1,10 @@
 <div *ngFor="let prod of prods">
-    <img src='{{prod.imgen}}' width="200" height="140">
-           ./../../../../assets/microfono.jpg
+    <!-- <img src='{{prod.imgen}}' width="200" height="140"> -->
+    <div class="card">
+        <img src="{{prod.imgen}}" alt="Avatar" style="width:50%">
+        <div class="container">
+          <h4><b>{{prod.nombre}}</b></h4>
+          <p>${{prod.precio_unidad}}</p>
+        </div>
+      </div>
 </div>

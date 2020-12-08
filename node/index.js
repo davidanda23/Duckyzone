@@ -359,9 +359,10 @@ app.get("/deleteProduct/:id", function (req, res) {
 app.get("/searchProduct/:ingresoBusqueda", function (req, res) {
     var buscarP = (req.params.ingresoBusqueda);
     console.log("Api: " + buscarP);
+    var conc = '%';
     
-    connect.query('SELECT * FROM productos WHERE productos.nombre=?',
-        [buscarP], (error,results) => {
+    connect.query('SELECT * FROM productos where productos.nombre LIKE concat(?, ?, ?)',
+        [conc, buscarP, conc], (error,results) => {
             if (results.length > 0) {
                 res.send(results);
             }else if (error){
