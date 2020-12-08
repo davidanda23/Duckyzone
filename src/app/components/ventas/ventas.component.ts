@@ -35,7 +35,9 @@ export class VentasComponent implements OnInit {
     });
     this.producto = this.ProductoService.producto_Vendido; 
     this.cant = <HTMLInputElement> document.getElementById('cantidad');
-    this.checbox = <HTMLInputElement> document.getElementById('terminos');
+
+    this.cant.value = 1;
+    console.log(this.cant)
   }
 
   value(){

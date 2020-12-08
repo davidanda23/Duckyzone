@@ -166,7 +166,8 @@ app.get("/getUser/:id", (req, res) => {
 
 //API QUE AGREGA USUARIOS
 app.post('/addUsers', (req, res) => {
-    connect.query('CALL add_users(?,?,?,?,?,?,?)',
+    console.log(req.body.contrseña);
+    connect.query('CALL add_users(?,(?),?,?,?,?,?)',
         [req.body.correo,req.body.contrseña,req.body.nombre,Number(req.body.tel),req.body.apelli_pat,req.body.apelli_mat,req.body.nombreusuario], (error) => {
             if (error) {
                 throw error;
@@ -217,14 +218,7 @@ app.get("/prodxdept/:dept", (req, res) => {
 
 //API REGISTRO DE USUARIO EN LA BASE DE DATOS
 app.post('/register', (req, res) => {
-    console.log(req.body.username);
-    console.log(req.body.email);
-    console.log(req.body.password);
-    console.log(req.body.name); 
-    console.log(req.body.tel);
-    console.log(req.body.apepat);
-    console.log(req.body.apemat);
-    connect.query('INSERT INTO usuario(nombreusuario, correo, contrseña, nombre, tel, apelli_pat, apelli_mat) VALUES (?,?,?,?,?,?,?)',
+    connect.query('INSERT INTO usuario(nombreusuario, correo, contrseña, nombre, tel, apelli_pat, apelli_mat) VALUES (?,?,MD5(?),?,?,?,?)',
         [req.body.username, req.body.email, req.body.password, req.body.name, Number.parseInt(req.body.tel), req.body.apepat, req.body.apemat], (error) => {
             if (error) {
                 throw error;
@@ -233,8 +227,9 @@ app.post('/register', (req, res) => {
 });
 //API AGREGAR EMPLEADOS
 app.post('/addEmployee', (req, res) => {
-    connect.query('CALL add_employees(?,?,?,?,?,?,?,?,?)',
-        [req.body.correo,req.body.nombre,Number(req.body.tel),req.body.apelli_pat,req.body.apelli_mat,req.body.nombreusuario,Number(req.body.salario),req.body.puesto,Number(req.body.id_departamento)], (error) => {
+    console.log(req.body.contrseña);
+    connect.query('CALL add_employees(?,(?),?,?,?,?,?,?,?,?)',
+        [req.body.correo,req.body.contrseña,req.body.nombre,Number(req.body.tel),req.body.apelli_pat,req.body.apelli_mat,req.body.nombreusuario,Number(req.body.salario),req.body.puesto,Number(req.body.id_departamento)], (error) => {
             if (error) {
                 throw error;
             }
@@ -257,17 +252,17 @@ app.get('/login/:email&:password', function (req, res) {
     var password = req.params.password;
     if (email && password) {
         // check if user exists
-        connect.query('SELECT * FROM usuario a WHERE correo = ? AND contrseña = ?', [email, password], function (error, results, fields) {
+        connect.query('SELECT * FROM usuario a WHERE correo = ? AND contrseña = MD5(?)', [email, password], function (error, results, fields) {
             if (results.length > 0) {
                 res.send(results);
             } else {
                 //CREAR UN ERROR AL TENER CREDENCIALES INCORRECTAS
+                console.log("No hay");
             }
             res.end();
         });
     } else {
         res.send('Please enter Username and Password!');
-        //console.log('llenar todos los campos!!');
         res.end();
     }
 });
@@ -279,7 +274,6 @@ app.get('/getClient/:id', function (req, res) {
             if (error) {
                 throw error;
             }else{
-                console.log(results);
                 res.send(results);
                 res.end();
             }
@@ -300,7 +294,6 @@ app.get('/role/:id', function (req, res) {
         });
     } else {
         res.send('Please enter Username and Password!');
-        //console.log('llenar todos los campos!!');
         res.end();
     }
 });
@@ -388,7 +381,62 @@ app.post('/generarVenta/:numArticulos&:producto&:precio', (req, res) =>{
         }
     });
 
-});  
+});
+
+///API PARA RETORNAR VENTAS
+app.get("/getSales", function (req, res) {
+    connect.query('SELECT * FROM ventas',
+        [], (error,rows) => {
+            if (error) {
+                throw error;
+            }else{
+                res.send(rows);
+            }
+        });
+    
+});
+
+app.get("/deleteSale/:id", function (req, res) {
+    connect.query('CALL delete_sales(?)',
+        [Number(req.params.id)], (error) => {
+            if (error) {
+                throw error;
+            }
+        });
+    
+});
+
+app.get("/findShipping/:id", function (req, res) {
+    connect.query('SELECT a.*, b.*,d.* FROM envios a, observacionesenvios b, cliente c, usuario d WHERE (a.id_envio=? AND b.id_envio=?) AND (c.id=a.ClienteID AND c.id_usuario=d.id)',
+        [Number(req.params.id),Number(req.params.id)], (error,result) => {
+            if (error) {
+                throw error;
+            }else{
+                res.send(result);
+            }
+        });
+    
+});
+
+app.post("/editShipping", function (req, res) {
+    connect.query('CALL edit_ShipStatus(?,?)',
+        [Number(req.body.estado_entrega),Number(req.body.id_envio)], (error,result) => {
+            if (error) {
+                throw error;
+            }
+        });
+    
+});
+app.get("/getPurchases", (req, res) => {
+    connect.query('SELECT * FROM compras', (err, rows) => {
+        if (err) {
+            throw err;
+        } else {
+            res.send(rows);
+            res.end();
+        }
+    });
+});
 
 
 app.listen(3000, () => {

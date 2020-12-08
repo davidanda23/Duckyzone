@@ -3,8 +3,9 @@
     <div class="card">
         <img src="{{prod.imgen}}" alt="Avatar" style="width:50%">
         <div class="container">
-          <h4><b>{{prod.nombre}}</b></h4>
+          <h4 style="font-size: large; color: darkgray;"><b>{{prod.nombre}}</b></h4>
           <p>${{prod.precio_unidad}}</p>
+          <button (click)="generar_compra(prod)" class="btn btn-outline-success my-2 my-sm-2" >Compra Exprés</button>
         </div>
       </div>
 </div>

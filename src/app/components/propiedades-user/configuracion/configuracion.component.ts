@@ -46,25 +46,20 @@ export class ConfiguracionComponent implements OnInit {
 
       //CHECA SI SE CAMBIO EL CAMPO USERNAME
       if (this.form.get('username').value != ''){
-          console.log("Entra if");
           this.userN.username = this.form.get('username').value;
       }
       else {
-        console.log("Entra else");
         this.userN.username = this.userO.username;
       }
       //CHECA SI SE CAMBIO EL CAMPO EMAIL
       if (this.form.get('email').value != ''){
-        console.log("Entra if");
         this.userN.email = this.form.get('email').value;
       }
       else {
-        console.log("Entra else");
         this.userN.email = this.userO.email;
       }
       //CHECA SI SE CAMBIO EL CAMPO NAME
       if (this.form.get('name').value != ''){
-        console.log("Entra if");
         this.userN.name = this.form.get('name').value;
       }
       else {
@@ -73,38 +68,30 @@ export class ConfiguracionComponent implements OnInit {
       }
       //CHECA SI SE CAMBIO EL CAMPO LASTF
       if (this.form.get('lastf').value != ''){
-        console.log("Entra if");
         this.userN.lastf = this.form.get('lastf').value;
       }
       else {
-        console.log("Entra else");
         this.userN.lastf = this.userO.lastf;
       }
       //CHECA SI SE CAMBIO EL CAMPO LASTM
       if (this.form.get('lastm').value != ''){
-        console.log("Entra if");
         this.userN.lastm = this.form.get('lastm').value;
       }
       else {
-        console.log("Entra else");
         this.userN.lastm = this.userO.lastm;
       }
       //CHECA SI SE CAMBIO EL CAMPO TEL
       if (this.form.get('tel').value != ''){
-        console.log("Entra if");
         this.userN.tel = this.form.get('tel').value;
       }
       else {
-        console.log("Entra else");
         this.userN.tel = this.userO.tel;
       }
       //CHECA SI SE CAMBIO EL CAMPO PASSWORD
       if (this.form.get('password').value != ''){
-        console.log("Entra if");
         this.userN.password = this.form.get('password').value;
       }
       else {
-        console.log("Entra else");
         this.userN.password = this.userO.password;
       }
       this.http.postPersonalUser(this.userN);
