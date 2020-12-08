@@ -148,39 +148,121 @@
     </div>
     <div class="dashboard-sales" *ngIf="isSales===true">
         <h2>Ventas</h2>
-        <button>+</button>
+        <div class="table-box">
+          <table class="table">
+              <thead class="thead-dark">
+              <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">ID usuario</th>
+                  <th scope="col">Correo</th>
+                  <th scope="col">Nombre de Usuario</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Subtotal</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Pais</th>
+                  <th scope="col">Ciudad</th>
+                  <th scope="col">Calle</th>
+                  <th scope="col">Colonia</th>
+                  <th scope="col">Num. Interno</th>
+                  <th scope="col">Num. Externo</th>
+                  <th scope="col">Cod. Postal</th>
+                  <th></th>
+                  <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let sale of sales">
+                  <th scope="row">{{this.sale.id}}</th>
+                  <td>{{this.sale.id_user}}</td>
+                  <td>{{this.sale.usuariocorreo}}</td>
+                  <td>{{this.sale.nombreusuario}}</td>
+                  <td>{{this.sale.fecha}}</td>
+                  <td>{{this.sale.subtotal}}</td>
+                  <td>{{this.sale.total}}</td>
+                  <td>{{this.sale.pais}}</td>
+                  <td>{{this.sale.ciudad}}</td>
+                  <td>{{this.sale.calle}}</td>
+                  <td>{{this.sale.colonia}}</td>
+                  <td>{{this.sale.num_interno}}</td>
+                  <td>{{this.sale.num_externo}}</td>
+                  <td>{{this.sale.cod_postal}}</td>
+                  <!--<td><button type="button" class="btn btn-warning" (click)="configModal(editarVenta,this.sale)"><i class="fas fa-pencil-alt"></i></button></td>-->
+                  <td><button type="button" class="btn btn-danger" (click)="configModal(eliminarVenta,this.sale)" >X</button></td>
+              </tr>
+              </tbody>
+          </table>
+      </div>
     </div>
-    <div class="dashboard-purchases" *ngIf="isPurchases===true">
+    <div class="dashboard-shipping" *ngIf="isPurchases===true">
         <h2>Compras</h2>
-        <table class="table">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">ID de Compra</th>
-              <th scope="col">Fecha</th>
-              <th scope="col">Total</th>
-              <th scope="col">Producto</th>
-              <th scope="col">Cantidad</th>
-              <th scope="col">ID de Proveedor</th>
-              <th scope="col">ID de Departamento</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr *ngFor="let compra of compras">
-              <th>{{this.compra.id}}</th>
-              <td>{{this.compra.fecha</td>
-              <td>{{this.compra.total</td>
-              <td>{{this.compra.producto</td>
-              <td>{{this.compra.cantidad</td>
-              <td>{{this.compra.ID_proveedor</td>
-              <td>{{this.compra.ID_departamento</td>
-            </tr>
-          </tbody>
-        </table>
+        <!--<div class="search-shipping">
+          <select style="width: 300px; margin-right: 25px;"  id="estadoEditEnvio" name="id_depaAddEmp">
+              <option *ngFor="let provider of providers" value="{{this.provider.nombre}}">{{this.provider.nombre}}</option>
+          </select>
+          <button class="btn btn-success" (click)="this.modalService.open(agregarCompra)">Hacer compra</button>
+        </div>-->
+        <div class="table-box">
+          <table class="table">
+              <thead class="thead-dark">
+              <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Producto</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">ID Proveedor</th>
+                  <th scope="col">ID Departamento</th>
+                  <th></th>
+                  <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let compra of compras">
+                  <th scope="row">{{this.compra.id_compra}}</th>
+                  <td>{{this.compra.fecha}}</td>
+                  <td>{{this.compra.total}}</td>
+                  <td>{{this.compra.producto}}</td>
+                  <td>{{this.compra.cantidad}}</td>
+                  <td>{{this.compra.ID_proveedor}}</td>
+                  <td>{{this.compra.ID_departamento}}</td>
+              </tr>
+              </tbody>
+          </table>
+      </div>
     </div>
     <div class="dashboard-shipping" *ngIf="isShipping===true">
         <h2>Pedidos</h2>
-        <button>+</button>
+        <div class="search-shipping">
+          <input class="form-control mr-sm-2" id="envioSearch" style="width: 350px;" type="search" placeholder="Ingrese el ID de un pedido..." aria-label="Search">
+          <button class="btn btn-success" (click)="searchShipping()">Buscar</button>
+        </div>
+        <div class="table-box">
+          <table class="table">
+              <thead class="thead-dark">
+              <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Observación</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col"># Venta</th>
+                  <th scope="col">Nombre de Usuario</th>
+                  <th scope="col">Cliente</th>
+                  <th></th>
+                  <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let envio of shippings">
+                  <th scope="row">{{this.envio.id_envio}}</th>
+                  <td>{{this.envio.Observacion}}</td>
+                  <td>{{this.envio.estado_entrega}}</td>
+                  <td>{{this.envio.id_venta}}</td>
+                  <td>{{this.envio.nombreusuario}}</td>
+                  <td>{{this.envio.ClienteID}}</td>
+                  <td><button type="button" class="btn btn-warning" (click)="configModal(editarEnvio,this.envio)"><i class="fas fa-pencil-alt"></i></button></td>
+              </tr>
+              </tbody>
+          </table>
+      </div>
     </div>
     <div class="dashboard-users" *ngIf="isUsers===true">
         <h2>Usuarios</h2>
@@ -750,6 +832,156 @@
         <button data-dismiss="modal" class="btn btn-danger" (click)="deleteProductDB()">Aceptar</button> 
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
       </div>
+</ng-template>
+
+<ng-template #editarEnvio let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Edit Attributes</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form >
+        <div class="form-group">
+            <label for="email">Estado de la Entrega: <strong>{{this.entryDelete.estado_entrega}} - {{ this.entryDelete.Observacion}}</strong></label>
+            <div class="input-group">
+              <select class="input-group"  id="estadoEditEnvio" name="id_depaAddEmp">
+                    <option value="0">0 - Recogiendo en almacén</option>
+                    <option value="1">1 - En camino</option>
+                    <option value="2">2 - Entregado</option>
+                </select>
+            </div>
+        </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button data-dismiss="modal" class="btn btn-success" (click)="editShipping()" >Aceptar</button> 
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+  </div>
+</ng-template>
+
+<ng-template #agregarCompra let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Hacer Compra</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form >
+      <div class="form-group">
+            <label for="email">Producto: </label>
+            <div class="input-group">
+              <input id="emailAddUser" value=""  class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Cantidad Productos: </label>
+            <div class="input-group">
+              <input id="emailAddUser" type="number" placeholder="1" max="99" min="1" value=""  class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="email">ID Departamento: </label>
+          <div class="input-group">
+            <input id="emailAddUser" value=""  class="form-control">
+          </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button data-dismiss="modal" class="btn btn-success" >Aceptar</button> 
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+  </div>
+</ng-template>
+
+
+<ng-template #editarVenta let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Edit Attributes Venta: <strong>#{{this.entryDelete.id}}</strong></h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form >
+        <div class="form-group">
+            <label for="email">Subtotal: </label>
+            <div class="input-group">
+              <input id="subtEditSale" value="{{this.entryDelete.subtotal}}"  class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Total: </label>
+            <div class="input-group">
+              <input id="totalEditSale" value="{{this.entryDelete.total}}"  class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Pais: </label>
+            <div class="input-group">
+              <input id="paisEditSale" value="{{this.entryDelete.pais}}"  class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Ciudad: </label>
+            <div class="input-group">
+              <input id="ciudadEditSale" value="{{this.entryDelete.ciudad}}"  class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Calle: </label>
+            <div class="input-group">
+              <input id="calleEditSale" value="{{this.entryDelete.calle}}"  class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Colonia: </label>
+            <div class="input-group">
+              <input id="coloniaEditSale" value="{{this.entryDelete.colonia}}"  class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Numero interno: </label>
+            <div class="input-group">
+              <input id="nintEditSale" value="{{this.entryDelete.num_interno}}"  class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Numero Externo: </label>
+            <div class="input-group">
+              <input id="nextEditSale" value="{{this.entryDelete.num_externo}}"  class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Código Postal: </label>
+            <div class="input-group">
+              <input id="codPEditSale" value="{{this.entryDelete.cod_postal}}"  class="form-control">
+            </div>
+        </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button data-dismiss="modal" class="btn btn-success" (click)="editSale()" >Aceptar</button> 
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+  </div>
+</ng-template>
+
+<ng-template #eliminarVenta let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm Delete</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h5>¿Esta seguro que desea eliminar la venta<strong> "{{this.entryDelete.id}}"</strong>?</h5>
+  </div>
+  <div class="modal-footer">
+    <button data-dismiss="modal" class="btn btn-danger" (click)="deleteSale()" >Aceptar</button> 
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+  </div>
 </ng-template>
 
 <ng-template #agregarUsuario let-modal>

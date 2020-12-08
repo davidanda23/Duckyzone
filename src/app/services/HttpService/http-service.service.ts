@@ -61,6 +61,9 @@ export class HttpService {
   getProducts(){
     return this.Client.get('http://localhost:3000/getProducts');
   }
+  getSales(){
+    return this.Client.get('http://localhost:3000/getSales');
+  }
   getUsers(){
     return this.Client.get('http://localhost:3000/getUsers');
   }
@@ -85,6 +88,7 @@ export class HttpService {
   postPersonalUser(usuario){
     return this.request('POST','http://localhost:3000/editPersonalUser',usuario);
   }
+  
   deleteUser(usuario){
     return this.Client.get('http://localhost:3000/deleteUser/'+usuario.id);
   }
@@ -115,13 +119,25 @@ export class HttpService {
   deleteProduct(product){
     return this.Client.get('http://localhost:3000/deleteProduct/'+product.codigo);
   }
+  postEditSale(sale){
+    return this.request('POST','http://localhost:3000/editSale',sale);
+  }
+  deleteSale(sale){
+    return this.Client.get('http://localhost:3000/deleteSale/'+sale.id);
+  }
+  getPurchases(){
+    return this.Client.get('http://localhost:3000/getPurchases');
+  }
+  FindShipping(shipping){
+    return this.Client.get('http://localhost:3000/findShipping/'+shipping);
+  }
+  postEditShipping(shipping){
+    return this.request('POST','http://localhost:3000/editShipping',shipping);
+  }
   GenerarVenta(numArticulos, producto,precio_unidad,cliente){
     return this.request('POST','http://localhost:3000/generarVenta/'+numArticulos+'&' + producto+'&'+precio_unidad,cliente);
   }
   GenerarBusqueda(textoBusqueda){
     return this.Client.get('http://localhost:3000/searchProduct/'+textoBusqueda);
-  }
-  prueba(){
-    return this.Client.get('http://localhost:3000/prueba');
   }
 }

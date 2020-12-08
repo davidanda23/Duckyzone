@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/HttpService/http-service.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,10 +26,12 @@ export class DashboardComponent implements OnInit {
   public providers: any = [];
   public products: any = [];
   public users: any = [];
+  public sales: any = [];
   public entryDelete: any;
   public depts_dpd = [];
   public depts_int = [];
-  public compras = [];
+  public compras: any = [];
+  public shippings: any = [];
 
   constructor(public httpService : HttpService,
               public modalService: NgbModal, private router: Router) { }
@@ -46,6 +49,9 @@ export class DashboardComponent implements OnInit {
     } );
     this.httpService.getQuery('dept_int').subscribe( (Departamentos) => {
       this.depts_dpd = Departamentos;
+    } );
+    this.httpService.getProviders().subscribe( (Proveedores) => {
+      this.providers = Proveedores;
     } );
   }
   configModal(targetModal,record: any){
@@ -202,6 +208,36 @@ export class DashboardComponent implements OnInit {
     window.location.reload();
   }
 
+  ////NO ESTA INCORPORADO AUTOR: DAVID ANDA DIAZ
+  editSale(){
+    this.entryDelete.subtotal = (<HTMLInputElement>document.getElementById("subtEditSale")).value;
+    this.entryDelete.total = (<HTMLInputElement>document.getElementById("totalEditSale")).value;
+    this.entryDelete.pais = (<HTMLInputElement>document.getElementById("paisEditSale")).value;
+    this.entryDelete.ciudad = (<HTMLInputElement>document.getElementById("ciudadEditSale")).value;
+    this.entryDelete.calle = (<HTMLInputElement>document.getElementById("calleEditSale")).value;
+    this.entryDelete.colonia = (<HTMLInputElement>document.getElementById("coloniaEditSale")).value;
+    this.entryDelete.num_interno = (<HTMLInputElement>document.getElementById("nintEditSale")).value;
+    this.entryDelete.num_externo = (<HTMLInputElement>document.getElementById("nextEditSale")).value;
+    this.entryDelete.cod_postal = (<HTMLInputElement>document.getElementById("codPEditSale")).value;
+    this.httpService.postEditSale(this.entryDelete);///NO ESTA INCORPORADO
+  }
+
+  deleteSale(){
+    this.httpService.deleteSale(this.entryDelete).subscribe(()=>{});
+    window.location.reload();
+  }
+
+  searchShipping(){
+    var envio = (<HTMLInputElement>document.getElementById("envioSearch")).value;
+    this.httpService.FindShipping(envio).subscribe((envios)=>{
+      this.shippings = envios;
+    });
+  }
+  editShipping(){
+    this.entryDelete.estado_entrega = (<HTMLInputElement>document.getElementById("estadoEditEnvio")).value;
+    this.httpService.postEditShipping(this.entryDelete);
+    window.location.reload();
+  }
   toggleConfig(property: String){
     switch(property){
       case "employees":
@@ -265,6 +301,9 @@ export class DashboardComponent implements OnInit {
         this.isUsers=false;
         this.isPurchases=false;
         this.isShipping=false;
+        this.httpService.getSales().subscribe((Ventas)=>{
+          this.sales = Ventas;
+        });
         break;
       case "purchases":
         this.isEmployees=false;
@@ -275,6 +314,9 @@ export class DashboardComponent implements OnInit {
         this.isUsers=false;
         this.isPurchases=true;
         this.isShipping=false;
+        this.httpService.getPurchases().subscribe((Purchases)=>{
+          this.compras = Purchases;
+        });
         break;
       case "shipping":
         this.isEmployees=false;
