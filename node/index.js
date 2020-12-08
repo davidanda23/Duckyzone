@@ -217,7 +217,7 @@ app.get("/prodxdept/:dept", (req, res) => {
 
 //API REGISTRO DE USUARIO EN LA BASE DE DATOS
 app.post('/register', (req, res) => {
-    connect.query('INSERT INTO usuario(nombreusuario, correo, contrseña, nombre, tel, apelli_pat, apelli_mat) VALUES (?,?,?,?,?,?,?)',
+    connect.query('INSERT INTO usuario(nombreusuario, correo, contrseña, nombre, tel, apelli_pat, apelli_mat) VALUES (?,?,MD5(?),?,?,?,?)',
         [req.body.username, req.body.email, req.body.password, req.body.name, Number.parseInt(req.body.tel), req.body.apepat, req.body.apemat], (error) => {
             if (error) {
                 throw error;
@@ -250,7 +250,7 @@ app.get('/login/:email&:password', function (req, res) {
     var password = req.params.password;
     if (email && password) {
         // check if user exists
-        connect.query('SELECT * FROM usuario a WHERE correo = ? AND contrseña = ?', [email, password], function (error, results, fields) {
+        connect.query('SELECT * FROM usuario a WHERE correo = ? AND contrseña = MD5(?)', [email, password], function (error, results, fields) {
             if (results.length > 0) {
                 res.send(results);
             } else {
