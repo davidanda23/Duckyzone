@@ -44,6 +44,7 @@ export class HttpService {
     this.res=this.Client.get('http://localhost:3000/'+url+'/'+user.email+'&'+user.password,user);
     return this.res;
   }
+  
   getRole(user,url:String){
     return this.Client.get('http://localhost:3000/'+url+'/'+user,user);
   }
@@ -79,6 +80,9 @@ export class HttpService {
   }
   postEditEmp(user){
     return this.request('POST','http://localhost:3000/editEmployee',user);
+  }
+  postEditClient(user){
+    return this.request('POST','http://localhost:3000/editClient',user);
   }
   deleteEmployee(usuario){
     return this.Client.get('http://localhost:3000/deleteEmployee/'+usuario.id);

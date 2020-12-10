@@ -16,8 +16,16 @@ export class ConfiguracionComponent implements OnInit {
   //USER NEW, SACADO COMPARANDO USER OLD Y USER FORM
   userN: any = {username: '', email: '', name: '', lastm: '', lastf: '', tel: '', password: '', id: 0};
 
-  constructor(private fb: FormBuilder, private http: HttpService) { }
+  //CLIENT OLD
+  CliO: any = {in: '', ext: '', cod: '', calle: '', col: '', ciud: '', pais: ''};
+  //CLIENT FORM
+  CliF: any = {in: '', ext: '', cod: '', calle: '', col: '', ciud: '', pais: ''};
+  //CLIENT NEW
+  CliN: any = {in: '', ext: '', cod: '', calle: '', col: '', ciud: '', pais: '', id_usuario: 0};
 
+
+  constructor(private fb: FormBuilder, private http: HttpService) { }
+ 
   ngOnInit(): void {
     this.http.getUser(sessionStorage.getItem("idUsuario")).subscribe( (info) => {
       this.userO.email = info[0].correo;
@@ -29,6 +37,15 @@ export class ConfiguracionComponent implements OnInit {
       this.userO.username = info[0].nombreusuario;
       this.userN.id = info[0].id;
     });
+    this.http.getClient(sessionStorage.getItem("idUsuario")).subscribe( (info) => {
+      this.CliO.in = info[0].num_interno;
+      this.CliO.ext = info[0].num_externo;
+      this.CliO.cod = info[0].cod_postal;
+      this.CliO.calle = info[0].calle;
+      this.CliO.col = info[0].colonia;
+      this.CliO.ciud = info[0].ciudad;
+      this.CliO.pais = info[0].pais;
+    });
     this.form = this.fb.group({
       username: this.userF.username,
       email: this.userF.email,
@@ -37,9 +54,17 @@ export class ConfiguracionComponent implements OnInit {
       lastf: this.userF.lastf,
       tel: this.userF.tel,
       password: this.userF.password,
+      in: this.CliF.in,
+      ext: this.CliF.ext,
+      cod: this.CliF.cod,
+      call: this.CliF.calle,
+      col: this.CliF.col,
+      ciud: this.CliF.ciud,
+      pais: this.CliF.pais
     });
+    this.CliN.id_usuario=sessionStorage.getItem("idUsuario");
   }
-
+ 
   modifyUser(){
       //VA DE ATRIBUTO EN ATRIBUTO, SI SE CAMBIO EL VALOR ENTONCES USER NEW = USER FORM, SI NO SE CAMBIO
       //ENTONCES USER NEW = USER OLD
@@ -87,14 +112,59 @@ export class ConfiguracionComponent implements OnInit {
       else {
         this.userN.tel = this.userO.tel;
       }
-      //CHECA SI SE CAMBIO EL CAMPO PASSWORD
-      if (this.form.get('password').value != ''){
-        this.userN.password = this.form.get('password').value;
+      //////////////////////////////CLIENTE////////////////////////////////
+      //CHECA SI SE CAMBIO EL CAMPO num_int
+      if (this.form.get('in').value != ''){
+        this.CliN.in = this.form.get('in').value;
       }
       else {
-        this.userN.password = this.userO.password;
+        this.CliN.in = this.CliO.in;
       }
+      //CHECA SI SE CAMBIO EL CAMPO num_ext
+      if (this.form.get('ext').value != ''){
+        this.CliN.ext = this.form.get('ext').value;
+      }
+      else {
+        this.CliN.ext = this.CliO.ext;
+      }
+      //CHECA SI SE CAMBIO EL CAMPO cod_post
+      if (this.form.get('cod').value != ''){
+        this.CliN.cod = this.form.get('cod').value;
+      }
+      else {
+        this.CliN.cod = this.CliO.cod;
+      }
+      //CHECA SI SE CAMBIO EL CAMPO calle
+      if (this.form.get('call').value != ''){
+        this.CliN.calle = this.form.get('call').value;
+      }
+      else {
+        this.CliN.calle = this.CliO.calle;
+      }
+      //CHECA SI SE CAMBIO EL CAMPO colonia
+      if (this.form.get('col').value != ''){
+        this.CliN.col = this.form.get('col').value;
+      }
+      else {
+        this.CliN.col = this.CliO.col;
+      }
+      //CHECA SI SE CAMBIO EL CAMPO ciudad
+      if (this.form.get('ciud').value != ''){
+        this.CliN.ciud = this.form.get('ciud').value;
+      }
+      else {
+        this.CliN.ciud = this.CliO.ciud;
+      }
+      //CHECA SI SE CAMBIO EL CAMPO pais
+      if (this.form.get('pais').value != ''){
+        this.CliN.pais = this.form.get('pais').value;
+      }
+      else {
+        this.CliN.pais = this.CliO.pais;
+      }
+      console.log(this.CliN);
       this.http.postPersonalUser(this.userN);
+      this.http.postEditClient(this.CliN);
       this.disableInput();
   }
 
@@ -106,6 +176,13 @@ export class ConfiguracionComponent implements OnInit {
     this.form.get('lastf').enable();
     this.form.get('tel').enable();
     this.form.get('password').enable();
+    this.form.get('in').enable();
+    this.form.get('ext').enable();
+    this.form.get('cod').enable();
+    this.form.get('call').enable();
+    this.form.get('col').enable();
+    this.form.get('ciud').enable();
+    this.form.get('pais').enable();
   }
 
   disableInput(){
