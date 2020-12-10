@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
     this.httpService.getUserAuth(User,'login').subscribe((respuesta)=>{
       this.res=respuesta;
       this.httpService.getRole(this.res[0].id,'role').subscribe((rol)=>{
-        if(rol){
+        if(rol!==null){
+          console.log(rol);
           sessionStorage.setItem('Admin','Yes');
         }else{
           sessionStorage.setItem('Admin','No');

@@ -28,7 +28,7 @@ connect.connect(function (err) {
 app.get("/", (req, res) => {
     res.send('Conectado!');
 });
-/*
+
 //CONSIGUE LOS DEPARTAMENTOS
 app.get("/dept", (req, res) => {
     connect.query('SELECT * FROM v_departamentos', (err, rows) => {
@@ -40,7 +40,7 @@ app.get("/dept", (req, res) => {
         }
     });
 });
-*/
+
 //API QUE RETORNA DEPAS INTERNOS
 app.get("/dept_int", (req, res) => {
     connect.query('SELECT * FROM departamento_interno', (err, rows) => {
@@ -321,7 +321,7 @@ app.get('/role/:id', function (req, res) {
     if (id) {
         // check if user exists
         connect.query('SELECT * FROM empleado WHERE id_usuario=?', [id], function (error, results, fields) {
-            if (results.length >= 0) {
+            if (results.length > 0) {
                 res.send(results);
             }else{
                 res.end();
