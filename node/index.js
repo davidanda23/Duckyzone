@@ -28,7 +28,7 @@ connect.connect(function (err) {
 app.get("/", (req, res) => {
     res.send('Conectado!');
 });
-
+/*
 //CONSIGUE LOS DEPARTAMENTOS
 app.get("/dept", (req, res) => {
     connect.query('SELECT * FROM v_departamentos', (err, rows) => {
@@ -40,6 +40,7 @@ app.get("/dept", (req, res) => {
         }
     });
 });
+*/
 //API QUE RETORNA DEPAS INTERNOS
 app.get("/dept_int", (req, res) => {
     connect.query('SELECT * FROM departamento_interno', (err, rows) => {
@@ -164,6 +165,19 @@ app.get("/getUser/:id", (req, res) => {
     });
 });
 
+//API QUE RETORNA UN SOLO USUARIO BUSCANDO POR NOMBRE DE USUARIO
+app.get("/getUserByName/:username", (req, res) => {
+    console.log(req.params.username);
+    connect.query('SELECT * FROM usuario where nombreusuario=?', [req.params.username], (err, rows) => {
+        if (err) {
+            throw err;
+        } else {
+            res.send(rows);
+            res.end();
+        }
+    });
+});
+
 //API QUE AGREGA USUARIOS
 app.post('/addUsers', (req, res) => {
     console.log(req.body.contrseña);
@@ -279,6 +293,17 @@ app.get('/getClient/:id', function (req, res) {
             }
         });
 });
+
+//API QUE REGISTRA UN CLIENTE
+app.post('/addClient', (req, res) => {
+    connect.query('INSERT INTO cliente (num_interno, num_externo, cod_postal, calle, colonia, ciudad, pais, id_usuario) VALUES (?,?,?,?,?,?,?,?)',
+                                       [req.body.in, req.body.ext, req.body.cod, req.body.cal, req.body.col, req.body.ciu, req.body.pai, req.body.idu], 
+    (error) => {
+        if (error) {
+            throw error;
+        }
+    });
+})
 
 //API ROl
 app.get('/role/:id', function (req, res) {

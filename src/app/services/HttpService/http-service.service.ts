@@ -68,8 +68,12 @@ export class HttpService {
     return this.Client.get('http://localhost:3000/getUsers');
   }
   getUser(id){
-    return this.Client.get('http://localhost:3000/getUser/' + id)
+    return this.Client.get('http://localhost:3000/getUser/' + id);
   }
+  getUserByName(username: String){
+    return this.Client.get('http://localhost:3000/getUserByName/' + username);
+  }
+
   postAddEmp(user){
     return this.request('POST','http://localhost:3000/addEmployee',user);
   }

@@ -10,7 +10,7 @@ import { HttpService } from 'src/app/services/HttpService/http-service.service';
 })
 export class RegisterComponent implements OnInit {
   form = new FormGroup({});
-  user: any = {id: null, username: '', email: '', password: '', name: '', apepat: '', apemat: '', tel: 0};
+  user: any = {id: null, username: '', email: '', password: '', name: '', apepat: '', apemat: '', tel: 0, in: 0, ext: 0, cod: 0, calle: '', col: '', ciu: '', pais: ''};
 
   constructor(private fb: FormBuilder,private httpService : HttpService,private router: Router) { }
 
@@ -22,7 +22,14 @@ export class RegisterComponent implements OnInit {
       name: this.user.name,
       apepat: this.user.apepat,
       apemat: this.user.apemat,
-      tel: this.user.tel
+      tel: this.user.tel,
+      pais: this.user.pais,
+      ciudad: this.user.ciu,
+      colonia: this.user.col,
+      calle: this.user.calle,
+      post: this.user.cod,
+      in: this.user.in,
+      ext: this.user.ext
     });
   }
   //crear usuario
@@ -37,6 +44,23 @@ export class RegisterComponent implements OnInit {
       tel: this.form.get('tel').value
     };
     this.httpService.postQuery(newUser,'register');
+    console.log(newUser.username);
+    this.httpService.getUserByName(newUser.username).subscribe((NewU) => {
+      if (NewU){
+        const NewUID = NewU[0].id;
+        const newEmployee = {
+          in: this.form.get('in').value,
+          ext: this.form.get('ext').value,
+          cod: this.form.get('post').value,
+          cal: this.form.get('calle').value,
+          col: this.form.get('colonia').value,
+          ciu: this.form.get('ciudad').value,
+          pai: this.form.get('pais').value,
+          idu: NewUID
+        }
+      this.httpService.postQuery(newEmployee, 'addClient'); 
+      }
+    });
     this.router.navigate(['/home']);
   }
 }
