@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
 
 //CONSIGUE LOS DEPARTAMENTOS
 app.get("/dept", (req, res) => {
-    connect.query('SELECT id, nombre FROM departamentos', (err, rows) => {
+    connect.query('SELECT * FROM v_departamentos', (err, rows) => {
         if (err) {
             throw err;
         } else {
