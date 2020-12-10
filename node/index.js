@@ -308,7 +308,7 @@ app.post('/addClient', (req, res) => {
 //API QUE EDITA DEPAS
 app.post('/editClient', (req, res) => {
     connect.query('UPDATE cliente SET num_interno=?, num_externo=?, cod_postal=?, calle=?, colonia=?, ciudad=?, pais=? WHERE id_usuario=? ',
-                                      [req.body.in, req.body.ext, req.body.cod, req.body.calle, req.body.col, req.body.ciud, req.body.pais,, req.body.id_usuario], (error) => {
+                                      [req.body.in, req.body.ext, req.body.cod, req.body.calle, req.body.col, req.body.ciud, req.body.pais, req.body.id_usuario], (error) => {
             if (error) {
                 throw error;
             }
