@@ -191,8 +191,8 @@ app.post('/addUsers', (req, res) => {
 
 //API QUE EDITA USUARIOS
 app.post('/editPersonalUser', (req, res) => {
-    connect.query('UPDATE usuario a SET a.correo=?, a.nombreusuario=?, a.nombre=?,a.apelli_pat=?,a.apelli_mat=?,a.tel=?, a.contrseña=? WHERE a.id=? ',
-        [req.body.email, req.body.username, req.body.name, req.body.lastf, req.body.lastm, req.body.tel, req.body.password, req.body.id], (error) => {
+    connect.query('UPDATE usuario a SET a.correo=?, a.nombreusuario=?, a.nombre=?,a.apelli_pat=?,a.apelli_mat=?,a.tel=? WHERE a.id=? ',
+        [req.body.email, req.body.username, req.body.name, req.body.lastf, req.body.lastm, req.body.tel,  req.body.id], (error) => {
             if (error) {
                 throw error;
             }
